@@ -15,6 +15,7 @@ enum EnModelUpAxis {
 /// モデルの初期化データ
 /// </summary>
 struct ModelInitData {
+	TkmFile* m_tkmFile = nullptr;
 	const char* m_tkmFilePath = nullptr;							//tkmファイルパス。
 	const char* m_vsEntryPointFunc = "VSMain";						//頂点シェーダーのエントリーポイント。
 	const char* m_vsSkinEntryPointFunc = "VSMain";					//スキンありマテリアル用の頂点シェーダーのエントリーポイント。
@@ -25,6 +26,7 @@ struct ModelInitData {
 	IShaderResource* m_expandShaderResoruceView = nullptr;			//ユーザー拡張のシェーダーリソース。
 	Skeleton* m_skeleton = nullptr;									//スケルトン。
 	EnModelUpAxis m_modelUpAxis = enModelUpAxisZ;					//モデルの上方向。
+	DXGI_FORMAT m_colorBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;	//レンダリングするカラーバッファのフォーマット。
 };
 
 /// <summary>
@@ -46,7 +48,8 @@ public:
 	/// <param name="rot">回転</param>
 	/// <param name="scale">拡大率</param>
 	void UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale);
-
+	void UpdateWorldMatrix(Matrix world);
+	
 	/// <summary>
 	/// 描画
 	/// </summary>

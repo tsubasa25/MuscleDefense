@@ -49,10 +49,40 @@ void GameObjectManager::ExecuteUpdate()
 }
 void GameObjectManager::ExecuteRender(RenderContext& rc)
 {
+	//TODO:暫定処理、フラグ含め別の形にしたい
+	//影を先に描いてからモデルに描いた影を描き足すので先にシャドウマップをつくる。
+	nsMuscle::PostEffectManager::GetInstance()->ShadowRender(rc);
+
+	////shadow
+	if (nsMuscle::PostEffectManager::GetInstance()->GetShadowFlag())
+	{
+		rc.SetStep(RenderContext::eStep_RenderShadowMap);
+		//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+		for (auto& goList : m_gameObjectListArray) {
+			for (auto& go : goList) {
+				go->RenderWrapper(rc);
+			}
+		}
+	}
+	nsMuscle::PostEffectManager::GetInstance()->EndShadowRender(rc);
+
+	//ポストエフェクト用。Render前の処理
+	nsMuscle::PostEffectManager::GetInstance()->BeforeRender(rc);
+
 	//レンダラーを変更するならここを改造していくと良い。
+	
+	rc.SetStep(RenderContext::eStep_Render);
+	
+	//1P側の画面のカメラは1Pのカメラ(g_camera3D[0])
+	nsMuscle::LightManager::GetInstance()->UpdateEyePos();
+	
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
 			go->RenderWrapper(rc);
 		}
 	}
+
+	//ポストエフェクト用。Render後の処理
+	nsMuscle::PostEffectManager::GetInstance()->AfterRender(rc);
+	
 }

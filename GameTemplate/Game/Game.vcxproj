@@ -295,9 +295,13 @@
     <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAnimation.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
+    <ClCompile Include="Sky.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -374,10 +378,14 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAnimation.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SkinModelRender.h" />
+    <ClInclude Include="Sky.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
   </ItemGroup>

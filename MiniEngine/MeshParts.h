@@ -46,9 +46,10 @@ public:
 		const char* vsEntryPointFunc,
 		const char* vsSkinEntryPointFunc,
 		const char* psEntryPointFunc,
-		void* expandData,
-		int expandDataSize,
-		IShaderResource* expandShaderResourceView
+		void* const expandData[2],
+		const int expandDataSize[2],
+		IShaderResource* expandShaderResourceView,
+		DXGI_FORMAT m_colorBufferFormat
 	);
 	/// <summary>
 	/// 描画。
@@ -118,11 +119,11 @@ private:
 		Matrix mProj;		//プロジェクション行列。
 	};
 	ConstantBuffer m_commonConstantBuffer;					//メッシュ共通の定数バッファ。
-	ConstantBuffer m_expandConstantBuffer;					//ユーザー拡張用の定数バッファ
+	ConstantBuffer m_expandConstantBuffer[2];					//ユーザー拡張用の定数バッファ
 	IShaderResource* m_expandShaderResourceView = nullptr;	//ユーザー拡張シェーダーリソースビュー。
 	StructuredBuffer m_boneMatricesStructureBuffer;	//ボーン行列の構造化バッファ。
 	std::vector< SMesh* > m_meshs;							//メッシュ。
 	std::vector< DescriptorHeap > m_descriptorHeap;		//ディスクリプタヒープ。
 	Skeleton* m_skeleton = nullptr;								//スケルトン。
-	void* m_expandData = nullptr;						//ユーザー拡張データ。
+	void* m_expandData[2] = { nullptr,nullptr };						//ユーザー拡張データ。
 };

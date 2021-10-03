@@ -50,6 +50,7 @@ public: //静的メンバ関数
 	{
 		return m_instance;
 	}
+
 public:
 	/// <summary>
 	/// 更新処理を実行
@@ -60,7 +61,12 @@ public:
 	/// </summary>
 	/// <param name="rc"></param>
 	void ExecuteRender(RenderContext& rc);
-	
+	/// <summary>
+	/// ポストレンダーの描画処理を実行。
+	/// </summary>
+	/// <param name="rc"></param>
+	void ExecutePostRender(RenderContext& rc);
+
 	
 	/*!
 	*@brief	ゲームオブジェクトのnew
@@ -131,6 +137,7 @@ private:
 	typedef std::list<IGameObject*>	 GameObjectList;
 	std::array<GameObjectList, GAME_OBJECT_PRIO_MAX>	m_gameObjectListArray;							//!<ゲームオブジェクトの優先度付きリスト。
 	static GameObjectManager* m_instance;		//唯一のインスタンスのアドレスを記録する変数。
+	RenderContext* m_rc = nullptr;
 };
 
 

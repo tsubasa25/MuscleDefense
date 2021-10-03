@@ -24,9 +24,10 @@ void MeshParts::InitFromTkmFile(
 	const char* vsEntryPointFunc,
 	const char* vsSkinEntryPointFunc,
 	const char* psEntryPointFunc,
-	void* expandData,
-	int expandDataSize,
-	IShaderResource* expandShaderResourceView
+	void* const expandData[2],
+	const int expandDataSize[2],
+	IShaderResource* expandShaderResourceView,
+	DXGI_FORMAT colorBufferFormat
 )
 {
 	m_meshs.resize(tkmFile.GetNumMesh());
@@ -39,9 +40,12 @@ void MeshParts::InitFromTkmFile(
 	//共通定数バッファの作成。
 	m_commonConstantBuffer.Init(sizeof(SConstantBuffer), nullptr);
 	//ユーザー拡張用の定数バッファを作成。
-	if (expandData) {
-		m_expandConstantBuffer.Init(expandDataSize, nullptr);
-		m_expandData = expandData;
+	for (int i = 0; i < 2; i++)
+	{
+		if (expandData[i]) {
+			m_expandConstantBuffer[i].Init(expandDataSize[i], nullptr);
+			m_expandData[i] = expandData[i];
+		}
 	}
 	m_expandShaderResourceView = expandShaderResourceView;
 	//ディスクリプタヒープを作成。
@@ -73,8 +77,11 @@ void MeshParts::CreateDescriptorHeaps()
 				descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 			}
 			descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);
-			if (m_expandConstantBuffer.IsValid()) {
-				descriptorHeap.RegistConstantBuffer(1, m_expandConstantBuffer);
+			for (int i = 0; i < 2; i++)
+			{
+				if (m_expandConstantBuffer[i].IsValid()) {
+					descriptorHeap.RegistConstantBuffer(i + 1, m_expandConstantBuffer[i]);
+				}
 			}
 			//ディスクリプタヒープへの登録を確定させる。
 			descriptorHeap.Commit();
@@ -178,8 +185,11 @@ void MeshParts::Draw(
 
 	m_commonConstantBuffer.CopyToVRAM(&cb);
 
-	if (m_expandData) {
-		m_expandConstantBuffer.CopyToVRAM(m_expandData);
+	for (int i = 0; i < 2; i++)
+	{
+		if (m_expandData[i]) {
+			m_expandConstantBuffer[i].CopyToVRAM(m_expandData[i]);
+		}
 	}
 	if (m_boneMatricesStructureBuffer.IsInited()) {
 		//ボーン行列を更新する。

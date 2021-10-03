@@ -4,11 +4,11 @@
 #include "BackGround.h"
 namespace
 {
-	const Vector3 LIGHTCAMERA_POSITION = { 0.0f, 4000.0f,0.0f };
+	const Vector3 LIGHTCAMERA_POSITION = { 0.0f, 400.0f,200.0f };
 	const Vector3 LIGHTCAMERA_TARGET = { 0.f,1.f,0.f };
-	const Vector3 LIGHTCAMERA_UP = { 1.f,0.f,0.f };
-	const float LIGHTCAMERA_WIDTH = 4000.0f;//2000
-	const float LIGHTCAMERA_HEIGHT = 4000.0f;
+	const Vector3 LIGHTCAMERA_UP = { 0.0f,0.0f,1.0f };
+	const float LIGHTCAMERA_WIDTH = 2000.0f;//2000
+	const float LIGHTCAMERA_HEIGHT = 2000.0f;
 	const int CAMERA_FAR = 100000;
 }
 
@@ -42,7 +42,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
 	nsMuscle::LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);
 	nsMuscle::LightManager::GetInstance()->SetPointLigNum(0);	
-	
+	nsMuscle::LightManager::GetInstance()->SetSpotLigNum(0);
+
 	//ブルームフラグ、シャドウフラグの順番
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
 
@@ -65,9 +66,19 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		
-		GameObjectManager::GetInstance()->ExecuteUpdate();
 		nsMuscle::LightManager::GetInstance()->UpdateEyePos();
+		// シャドウマップを表示するためのスプライトを初期化する
+		SpriteInitData spriteInitData;
+		spriteInitData.m_textures[0] = &nsMuscle::PostEffectManager::GetInstance()->GetShadowMap();
+		spriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
+		spriteInitData.m_width = 256;
+		spriteInitData.m_height = 256;
+		Sprite sprite;
+		sprite.Init(spriteInitData);
+
+		sprite.Update({ FRAME_BUFFER_W / -2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 1.0f });
 		
+		sprite.Draw(renderContext);
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！
 		//////////////////////////////////////

@@ -7,7 +7,7 @@
 #include <list>
 #include <string>
 class RenderContext;
-
+class Camera;
 /*!
 	*@brief	ゲームオブジェクト。
 	*/
@@ -36,14 +36,19 @@ public:
 		*@brief	更新
 		*/
 	virtual void Update() {}
+	
 	/*!
-	 *@brief	描画
+	 *@brief	カメラ情報付き描画
 	*/
-	virtual void Render(RenderContext& renderContext)
+	virtual void Render(RenderContext& renderContext, Camera* camera)
 	{
 		(void)renderContext;
 	}
-	
+
+	virtual void PostRender(RenderContext& renderContext)
+	{
+		(void)renderContext;
+	}
 public:
 	/*!
 	*@brief Start関数が完了した？
@@ -112,13 +117,20 @@ public:
 		return false;
 	}
 public:
-
-	void RenderWrapper(RenderContext& renderContext)
+	void RenderWrapper(RenderContext& renderContext, Camera* camera)
 	{
-		if (m_isActive && m_isStart && !m_isDead ) {
-			Render(renderContext);
+		if (m_isActive && m_isStart && !m_isDead) {
+			Render(renderContext, camera);
 		}
 	}
+
+	void PostRenderWrapper(RenderContext& renderContext)
+	{
+		if (m_isActive && m_isStart && !m_isDead) {
+			PostRender(renderContext);
+		}
+	}
+	
 	
 	void UpdateWrapper()
 	{

@@ -6,7 +6,7 @@
 
 #include "AnimationClip.h"
 #include "AnimationPlayController.h"
-
+#include <functional>
 
 
 class Skeleton;
@@ -97,7 +97,10 @@ public:
 	/// ユーザーは使用しないでください。
 	/// </remarks>
 	/// <param name="deltaTime">アニメーションを進める時間(単位：秒)</param>
-	void Progress(float deltaTime);
+	/// <param name="onPostCalcLocalMatrix">ローカル行列の計算が終わったときに実行される関数。</param>
+	void Progress(
+		float deltaTime, 
+		std::function<void(int boneNo, Bone* bone)> onPostCalcLocalMatrix = nullptr);
 	/*!
 	*@brief	アニメーションイベントリスナーを登録。
 	*@return
@@ -159,7 +162,7 @@ private:
 	/// <summary>
 	/// グローバルポーズの更新。
 	/// </summary>
-	void UpdateGlobalPose();
+	void UpdateGlobalPose(std::function<void(int boneNo, Bone* bone)> onPostCalcLocalMatrix);
 private:
 		
 	/*!

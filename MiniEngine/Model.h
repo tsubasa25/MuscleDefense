@@ -21,9 +21,9 @@ struct ModelInitData {
 	const char* m_vsSkinEntryPointFunc = "VSMain";					//スキンありマテリアル用の頂点シェーダーのエントリーポイント。
 	const char* m_psEntryPointFunc = "PSMain";						//ピクセルシェーダーのエントリーポイント。
 	const char* m_fxFilePath = nullptr;								//.fxファイルのファイルパス。
-	void* m_expandConstantBuffer = nullptr;							//ユーザー拡張の定数バッファ。
-	int m_expandConstantBufferSize = 0;								//ユーザー拡張の定数バッファのサイズ。
-	IShaderResource* m_expandShaderResoruceView = nullptr;			//ユーザー拡張のシェーダーリソース。
+	void* m_expandConstantBuffer[2] = { nullptr,nullptr };							//ユーザー拡張の定数バッファ。
+	int m_expandConstantBufferSize[2] = { 0,0 };								//ユーザー拡張の定数バッファのサイズ。
+	IShaderResource* m_expandShaderResoruceView[2] = { nullptr,nullptr };			//ユーザー拡張のシェーダーリソース。
 	Skeleton* m_skeleton = nullptr;									//スケルトン。
 	EnModelUpAxis m_modelUpAxis = enModelUpAxisZ;					//モデルの上方向。
 	DXGI_FORMAT m_colorBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;	//レンダリングするカラーバッファのフォーマット。
@@ -55,6 +55,8 @@ public:
 	/// </summary>
 	/// <param name="renderContext">レンダリングコンテキスト</param>
 	void Draw(RenderContext& renderContext);
+	void Draw(RenderContext& rc, Camera& camera);
+	
 	/// <summary>
 	/// ワールド行列を取得。
 	/// </summary>

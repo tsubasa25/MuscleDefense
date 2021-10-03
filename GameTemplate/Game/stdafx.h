@@ -9,3 +9,4 @@
 #include "PostEffectManager.h"
 #include "DirectionLight.h"
 #include "PointLight.h"
+#include "SpotLight.h"

@@ -60,7 +60,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 		//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
 		for (auto& goList : m_gameObjectListArray) {
 			for (auto& go : goList) {
-				go->RenderWrapper(rc);
+				go->RenderWrapper(rc, nsMuscle::LightManager::GetInstance()->GetLightCamera());
 			}
 		}
 	}
@@ -78,11 +78,37 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
-			go->RenderWrapper(rc);
+			go->RenderWrapper(rc,g_camera3D);
 		}
 	}
 
 	//ポストエフェクト用。Render後の処理
 	nsMuscle::PostEffectManager::GetInstance()->AfterRender(rc);
 	
+}
+void GameObjectManager::ExecutePostRender(RenderContext& rc)
+{
+	if (m_rc == nullptr) {
+		m_rc = &rc;
+	}
+
+	rc.SetStep(RenderContext::eStep_Render);
+
+	for (auto& goList : m_gameObjectListArray) {
+		for (auto& go : goList) {
+			go->PostRenderWrapper(rc);
+		}
+	}
+	//Level2D用　
+	{
+		g_camera2D->SetWidth(g_graphicsEngine->GetFrameBufferWidth());
+
+		rc.SetStep(RenderContext::eStep_Render);
+
+		for (auto& goList : m_gameObjectListArray) {
+			for (auto& go : goList) {
+				go->PostRenderWrapper(rc);
+			}
+		}
+	}
 }

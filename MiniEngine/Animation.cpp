@@ -81,7 +81,8 @@ Vector3 Animation::CalcFootstepDeltaValueInWorldSpace(Quaternion rotation, Vecto
 	footstepDeltaValueInWorldSpace *= t;
 	return footstepDeltaValueInWorldSpace;
 }
-void Animation::UpdateGlobalPose()
+void Animation::UpdateGlobalPose(
+	std::function<void(int boneNo, Bone* bone)> onPostCalcLocalMatrix )
 {
 	//グローバルポーズ計算用のメモリをスタックから確保。
 	int numBone = m_skeleton->GetNumBones();
@@ -167,10 +168,14 @@ void Animation::UpdateGlobalPose()
 		m_skeleton->SetBoneLocalMatrix(
 			boneNo,
 			boneMatrix
-		);			
+		);
+		// ローカル行列計算後に呼び出す関数を実行
+		if (onPostCalcLocalMatrix != nullptr) {
+			onPostCalcLocalMatrix(boneNo, m_skeleton->GetBone(boneNo));
+		}
 			
 	}
-		
+	
 	//最終アニメーション以外は補間完了していたら除去していく。
 	int numAnimationPlayController = m_numAnimationPlayController;
 	for (int i = 1; i < m_numAnimationPlayController; i++) {
@@ -184,7 +189,10 @@ void Animation::UpdateGlobalPose()
 	m_numAnimationPlayController = numAnimationPlayController;
 }
 	
-void Animation::Progress(float deltaTime)
+void Animation::Progress(
+	float deltaTime, 
+	std::function<void(int boneNo, Bone* bone)> onPostCalcLocalMatrix
+)
 {
 	if (m_numAnimationPlayController == 0) {
 		return;
@@ -194,5 +202,5 @@ void Animation::Progress(float deltaTime)
 	UpdateLocalPose(deltaTime);
 		
 	//グローバルポーズを計算していく。
-	UpdateGlobalPose();
+	UpdateGlobalPose(onPostCalcLocalMatrix);
 }

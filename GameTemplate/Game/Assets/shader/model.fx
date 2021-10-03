@@ -25,6 +25,14 @@ struct PointLigData
 	float3 ligColor;
 	float ligRange;
 };
+struct SpotLigData
+{
+    float3 ligPos;
+    float3 ligColor;
+    float ligRange;
+    float3 ligDir;
+    float ligAngle;
+};
 //スキニング用の頂点データをひとまとめ。
 struct SSkinVSIn{
 	int4  Indices  	: BLENDINDICES0;
@@ -45,7 +53,7 @@ struct SPSIn
 	float2 uv       : TEXCOORD0;
 	float3 worldPos : TEXCOORD1;
 	float3 normalInView : TEXCOORD2;//カメラ空間の法線
-    float4 posInLVP 	: TEXCOORD3;
+    float4 posInLVP 	: TEXCOORD3;//ライトビュースクリーン空間でのピクセルの座標
 };
 
 
@@ -54,8 +62,9 @@ cbuffer DirectionLightCb : register(b1)
 {
 	DirectionLigData directionLigData;//ディレクションライトの情報
 	PointLigData pointLigData[20];//ポイントライトの情報
-
+    SpotLigData spotLigData[20];
 	int pointLigNum;//ポイントライトの数
+    int spotLigNum;//スポットライトの数
 	float3 eyePos;          // 視点の位置
 	float3 ambientLight;    // アンビエントライト
 
@@ -83,7 +92,7 @@ Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
-
+TextureCube<float4> g_skyCubeMap : register(t11);
 /// <summary>
 //スキン行列を計算する。
 /// </summary>
@@ -126,8 +135,9 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
     // 頂点法線をピクセルシェーダーに渡す
     
     psIn.uv = vsIn.uv;
-
+    //ライトビュースクリーン空間の座標を計算する。
     psIn.posInLVP = mul(mLVP, float4(psIn.worldPos, 1.0f));
+    psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
 
     return psIn;
 }
@@ -180,7 +190,7 @@ float3 CalcPhongSpecular(float3 lightDirection, float3 lightColor, float3 worldP
     t = max(0.0f, t);
 
     // 鏡面反射の強さを絞る
-    t = pow(t, 10.0f);
+    t = pow(t, 1.0f);
 
     // 鏡面反射光を求める
     return lightColor * t;
@@ -202,6 +212,12 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 
 /// </summary>
 float4 PSMain( SPSIn psIn ) : SV_Target0
 {
+
+        //ライトビュースクリーン空間でのZ値を計算する
+    float zI = psIn.posInLVP.z / psIn.posInLVP.w;
+    float hoge = length(psIn.worldPos - lightCameraPos);
+    hoge = hoge / 1000.0f;
+
     float4 finalColor = 0.0f;
     finalColor.a = 1.0f;
 
@@ -251,6 +267,68 @@ float4 PSMain( SPSIn psIn ) : SV_Target0
 
         finalColor.xyz += ptfinalLig;
     }
+    //スポットライト
+    for (int i = 0; i < spotLigNum; i++)
+    {
+        float3 spotLigDir = psIn.worldPos - spotLigData[i].ligPos;
+        spotLigDir = normalize(spotLigDir);
+
+        //ランバート拡散反射
+        float3 diffuseLig = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, psIn.normal);
+
+        //フォン鏡面反射
+        float3 specularLig = CalcPhongSpecular(spotLigDir, spotLigData[i].ligColor, psIn.worldPos, psIn.normal);
+
+        float3 finalLig = diffuseLig + specularLig;
+
+        //距離による減衰
+
+        float3 distance = length(psIn.worldPos - spotLigData[i].ligPos);
+
+        float affect = 1.0f - 1.0f / spotLigData[i].ligRange * distance;
+
+        if (affect < 0)
+            affect = 0;
+
+        affect = pow(affect, 3.0f);
+
+        finalLig *= affect;
+
+        //角度による減衰
+        float3 toGround = psIn.worldPos - spotLigData[i].ligPos;
+        toGround = normalize(toGround);
+
+        float angle = dot(toGround, spotLigData[i].ligDir);
+
+        //floatの誤差かacos(1)が0に、acos(-1)がπになるはずなのにNanになっていたので臨時変更(錦織)
+        if (-1 < angle && angle < 1)
+        {
+            angle = acos(angle);
+        }
+        else if (angle > 0.9)
+        {
+            angle = 0;
+        }
+        else
+        {
+            angle = acos(-1.0f);
+        }
+
+        affect = 1.0f - 1.0f / spotLigData[i].ligAngle * angle;
+        if (affect <= 0.0f)
+        {
+            affect = 0.0f;
+        }
+        else
+        {
+            //0より大きい時だけ乗算
+            affect = pow(affect, 0.5f);
+        }
+
+        finalLig *= affect;
+
+        finalColor.xyz += finalLig;
+    }
     //半球ライトを計算する
     //サーフェイスの法線と地面の法線との内積を計算する
     //float t = dot(psIn.normal, groundNormal);
@@ -269,6 +347,8 @@ float4 PSMain( SPSIn psIn ) : SV_Target0
     float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
    // finalColor.xyz += ambientLight;
     finalColor *= albedoColor;
+
+
     //影
     float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;
     shadowMapUV *= float2(0.5f, -0.5f);
@@ -280,14 +360,27 @@ float4 PSMain( SPSIn psIn ) : SV_Target0
     if (shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f
         && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
     {
+        
         // シャドウマップに描き込まれているZ値と比較する
         // 計算したUV座標を使って、シャドウマップから深度値をサンプリング
         float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
-        if (zInLVP > zInShadowMap + 0.0000001f)
+        if (hoge > zInShadowMap + 0.01f)//psIn.posInLVP.z
         {
             // 遮蔽されている
             finalColor.xyz *= 0.5f;
-        }
+        }       
     }
     return finalColor;
 }
+/*!
+ *@brief	空用のシェーダー。
+ */
+float4 PSMain_SkyCube(SPSIn In) : SV_Target0
+{
+
+    float4 color = g_skyCubeMap.Sample(g_sampler, In.normal);
+    //color.xyz += emissionColor;
+
+    return color;
+}
+

@@ -121,7 +121,8 @@ public:
 	*@param[out]	scale		拡大率の格納先。
 	*/
 	void CalcWorldTRS(Vector3& trans, Quaternion& rot, Vector3& scale);
-		
+	void SetScale(Vector3 scale) { m_scale = scale; }
+	Vector3 GetScale() { return m_scale; }
 private:
 	
 	std::wstring	m_boneName;
@@ -133,7 +134,7 @@ private:
 	Matrix			m_worldMatrix;			//ワールド行列。
 	Matrix			m_offsetLocalMatrix;
 	Vector3			m_positoin;				//このボーンのワールド空間での位置。最後にCalcWorldTRSを実行したときの結果が格納されている。
-	Vector3			m_scale;				//このボーンの拡大率。最後にCalcWorldTRSを実行したときの結果が格納されている。
+	Vector3			m_scale = { 1.0f,1.0f,1.0f };				//このボーンの拡大率。最後にCalcWorldTRSを実行したときの結果が格納されている。
 	Quaternion		m_rotation;				//このボーンの回転。最後にCalcWorldTRSを実行したときの結果が格納されている。
 	std::list<Bone*>	m_children;			//子供のリスト。
 };

@@ -48,17 +48,17 @@ struct SVSIn{
 // ピクセルシェーダーへの入力
 struct SPSIn
 {
-	float4 pos      : SV_POSITION;
-	float3 normal   : NORMAL;
-	float2 uv       : TEXCOORD0;
-	float3 worldPos : TEXCOORD1;
+	float4 pos          : SV_POSITION;
+	float3 normal       : NORMAL;
+	float2 uv           : TEXCOORD0;
+	float3 worldPos     : TEXCOORD1;
 	float3 normalInView : TEXCOORD2;//カメラ空間の法線
     float4 posInLVP 	: TEXCOORD3;//ライトビュースクリーン空間でのピクセルの座標
 };
 
 
 // ライトデータにアクセスするための定数バッファーを用意する
-cbuffer DirectionLightCb : register(b1)
+cbuffer LightDataCb : register(b1)
 {
 	DirectionLigData directionLigData;//ディレクションライトの情報
 	PointLigData pointLigData[20];//ポイントライトの情報
@@ -92,7 +92,6 @@ Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
-TextureCube<float4> g_skyCubeMap : register(t11);
 /// <summary>
 //スキン行列を計算する。
 /// </summary>
@@ -133,6 +132,7 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
     psIn.pos = mul(mProj, psIn.pos);
     psIn.normal = mul(m, vsIn.normal);
     // 頂点法線をピクセルシェーダーに渡す
+    psIn.normal = normalize(psIn.normal);
     
     psIn.uv = vsIn.uv;
     //ライトビュースクリーン空間の座標を計算する。
@@ -190,10 +190,10 @@ float3 CalcPhongSpecular(float3 lightDirection, float3 lightColor, float3 worldP
     t = max(0.0f, t);
 
     // 鏡面反射の強さを絞る
-    t = pow(t, 1.0f);
+    t = pow(t, 3.0f);
 
     // 鏡面反射光を求める
-    return lightColor * t;
+    return lightColor * t*0.1;
 }
 float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 normal)
 {
@@ -331,12 +331,12 @@ float4 PSMain( SPSIn psIn ) : SV_Target0
     }
     //半球ライトを計算する
     //サーフェイスの法線と地面の法線との内積を計算する
-    //float t = dot(psIn.normal, groundNormal);
-    ////内積の結果を０～１の範囲に変換する。
-    //t = (t + 1.0f) / 2.0f;
-    ////地面色と天球色を補完率ｔで線形補完する。
-    //float3 hemiLight = lerp(groundColor, skyColor, t);
-    //finalColor.xyz += hemiLight;
+    float t = dot(psIn.normal, groundNormal);
+    //内積の結果を０～１の範囲に変換する。
+    t = (t + 1.0f) / 2.0f;
+    //地面色と天球色を補完率ｔで線形補完する。
+    float3 hemiLight = lerp(groundColor, skyColor, t);
+    finalColor.xyz += hemiLight;
 
     //リムライトの強さを求める
     //float3 limLig = CalcLimLight(directionLigData.ligDir, directionLigData.ligColor, psIn.normalInView, psIn.normal);
@@ -372,15 +372,5 @@ float4 PSMain( SPSIn psIn ) : SV_Target0
     }
     return finalColor;
 }
-/*!
- *@brief	空用のシェーダー。
- */
-float4 PSMain_SkyCube(SPSIn In) : SV_Target0
-{
 
-    float4 color = g_skyCubeMap.Sample(g_sampler, In.normal);
-    //color.xyz += emissionColor;
-
-    return color;
-}
 

@@ -81,8 +81,8 @@ void Model::Draw(RenderContext& rc)
 	m_meshParts.Draw(
 		rc, 
 		m_world, 
-		g_camera3D->GetViewMatrix(), 
-		g_camera3D->GetProjectionMatrix()
+		g_camera3D[0]->GetViewMatrix(),
+		g_camera3D[0]->GetProjectionMatrix()
 	);
 }
 void Model::Draw(RenderContext& rc, Camera& camera)

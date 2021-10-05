@@ -78,7 +78,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
-			go->RenderWrapper(rc,g_camera3D);
+			go->RenderWrapper(rc,g_camera3D[0]);
 		}
 	}
 

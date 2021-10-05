@@ -21,7 +21,7 @@ struct ModelInitData {
 	const char* m_vsSkinEntryPointFunc = "VSMain";					//スキンありマテリアル用の頂点シェーダーのエントリーポイント。
 	const char* m_psEntryPointFunc = "PSMain";						//ピクセルシェーダーのエントリーポイント。
 	const char* m_fxFilePath = nullptr;								//.fxファイルのファイルパス。
-	void* m_expandConstantBuffer[2] = { nullptr,nullptr };							//ユーザー拡張の定数バッファ。
+	void* m_expandConstantBuffer[2] = { nullptr ,nullptr};							//ユーザー拡張の定数バッファ。
 	int m_expandConstantBufferSize[2] = { 0,0 };								//ユーザー拡張の定数バッファのサイズ。
 	IShaderResource* m_expandShaderResoruceView[2] = { nullptr,nullptr };			//ユーザー拡張のシェーダーリソース。
 	Skeleton* m_skeleton = nullptr;									//スケルトン。

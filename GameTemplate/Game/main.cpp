@@ -3,11 +3,9 @@
 #include "GameScene.h"
 #include "BackGround.h"
 namespace
-{
-	const Vector3 LIGHTCAMERA_POSITION = { 0.0f, 400.0f,200.0f };
-	const Vector3 LIGHTCAMERA_TARGET = { 0.f,1.f,0.f };
+{	
 	const Vector3 LIGHTCAMERA_UP = { 0.0f,0.0f,1.0f };
-	const float LIGHTCAMERA_WIDTH = 2000.0f;//2000
+	const float LIGHTCAMERA_WIDTH = 2000.0f;
 	const float LIGHTCAMERA_HEIGHT = 2000.0f;
 	const int CAMERA_FAR = 100000;
 }
@@ -24,8 +22,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 	
-	g_camera3D->SetPosition({ 0.0f, 150.0f, 200.0f });
-	g_camera3D->SetTarget({ 0.0f, 50.0f, 0.0f });
+	g_camera3D[0]->SetPosition({ 0.0f, 150.0f, 200.0f });
+	g_camera3D[0]->SetTarget({ 0.0f, 50.0f, 0.0f });
 	
 	//////////////////////////////////////
 	// ここから初期化を行うコードを記述する。
@@ -41,7 +39,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
 	nsMuscle::LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
 	nsMuscle::LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);
-	nsMuscle::LightManager::GetInstance()->SetPointLigNum(0);	
+	nsMuscle::LightManager::GetInstance()->SetPointLigNum(0);
 	nsMuscle::LightManager::GetInstance()->SetSpotLigNum(0);
 
 	//ブルームフラグ、シャドウフラグの順番
@@ -69,14 +67,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		nsMuscle::LightManager::GetInstance()->UpdateEyePos();
 		// シャドウマップを表示するためのスプライトを初期化する
 		SpriteInitData spriteInitData;
-		spriteInitData.m_textures[0] = &nsMuscle::PostEffectManager::GetInstance()->GetShadowMap();
+		spriteInitData.m_textures[0] = &nsMuscle::PostEffectManager::GetInstance()->GetMainRender();
 		spriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
-		spriteInitData.m_width = 256;
+		spriteInitData.m_width = 256;//256
 		spriteInitData.m_height = 256;
 		Sprite sprite;
+
 		sprite.Init(spriteInitData);
 
-		sprite.Update({ FRAME_BUFFER_W / -2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 1.0f });
+		sprite.Update({ FRAME_BUFFER_W / 2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 1.0f, 1.0f });
 		
 		sprite.Draw(renderContext);
 		//////////////////////////////////////

@@ -433,8 +433,9 @@ void GraphicsEngine::BeginRender()
 	m_camera2D.Update();
 	for (auto& Camera : m_camera3D)
 	{
-		Camera.Update();		
+		Camera.Update();
 	}
+	
 	//コマンドアロケータををリセット。
 	m_commandAllocator->Reset();
 	//レンダリングコンテキストもリセット。

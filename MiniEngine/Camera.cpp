@@ -66,3 +66,7 @@ void Camera::RotateOriginTarget(const Quaternion& qRot)
 	m_position = m_target + toPos;
 	m_isDirty = true;
 }
+void Camera::SetAspect(int splitScreenNum)
+{
+	m_aspect = (float)g_graphicsEngine->GetFrameBufferWidth() / (float)g_graphicsEngine->GetFrameBufferHeight() / splitScreenNum;
+}

@@ -70,18 +70,31 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	nsMuscle::PostEffectManager::GetInstance()->BeforeRender(rc);
 
 	//レンダラーを変更するならここを改造していくと良い。
-	
+	if(m_isWipeScreenMode)
+	{ 
 	rc.SetStep(RenderContext::eStep_Render);
 	
 	//1P側の画面のカメラは1Pのカメラ(g_camera3D[0])
-	nsMuscle::LightManager::GetInstance()->UpdateEyePos();
+	nsMuscle::LightManager::GetInstance()->UpdateEyePos(0);
 	
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
-			go->RenderWrapper(rc,g_camera3D[0]);
+			go->RenderWrapper(rc,g_camera3D[0]);			
 		}
 	}
+}
+	else
+	{
+		//ワイプ用のカメラg_camera3D[1]
+		rc.SetStep(RenderContext::eStep_RenderWipe);
 
+		nsMuscle::LightManager::GetInstance()->UpdateEyePos(1);
+		for (auto& goList : m_gameObjectListArray) {
+			for (auto& go : goList) {
+				go->Render(rc, g_camera3D[1]);
+			}
+		}
+	}
 	//ポストエフェクト用。Render後の処理
 	nsMuscle::PostEffectManager::GetInstance()->AfterRender(rc);
 	

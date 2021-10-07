@@ -22,9 +22,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 	
-	g_camera3D[0]->SetPosition({ 0.0f, 150.0f, 200.0f });
+	/*g_camera3D[0]->SetPosition({ 0.0f, 150.0f, 200.0f });
 	g_camera3D[0]->SetTarget({ 0.0f, 50.0f, 0.0f });
-	
+	*/
 	//////////////////////////////////////
 	// ここから初期化を行うコードを記述する。
 	//////////////////////////////////////
@@ -64,7 +64,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		
-		nsMuscle::LightManager::GetInstance()->UpdateEyePos();
 		// シャドウマップを表示するためのスプライトを初期化する
 		SpriteInitData spriteInitData;
 		spriteInitData.m_textures[0] = &nsMuscle::PostEffectManager::GetInstance()->GetMainRender();

@@ -64,19 +64,24 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		
-		// シャドウマップを表示するためのスプライトを初期化する
-		SpriteInitData spriteInitData;
-		spriteInitData.m_textures[0] = &nsMuscle::PostEffectManager::GetInstance()->GetMainRender();
-		spriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
-		spriteInitData.m_width = 256;//256
-		spriteInitData.m_height = 256;
-		Sprite sprite;
+		////ここがおかしい
+		////メインに書けばいける
+		////Init関数の最後の方にwipeSpriteInitDataを書いてる		
+		//	//ワイプ画像
+		//SpriteInitData m_wipeSpriteInitData;
+		//m_wipeSpriteInitData.m_textures[0] = &nsMuscle::PostEffectManager::GetInstance()->GetWipeRender();
+		//m_wipeSpriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
+		//m_wipeSpriteInitData.m_width = 256;//256
+		//m_wipeSpriteInitData.m_height = 256;
 
-		sprite.Init(spriteInitData);
+		//Sprite sprite;
 
-		sprite.Update({ FRAME_BUFFER_W / 2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 1.0f, 1.0f });
-		
-		sprite.Draw(renderContext);
+		//sprite.Init(m_wipeSpriteInitData);
+
+		//sprite.Update({ FRAME_BUFFER_W / 2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 1.0f, 1.0f });
+
+		//sprite.Draw(renderContext);
+		//
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！
 		//////////////////////////////////////

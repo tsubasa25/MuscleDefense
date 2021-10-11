@@ -48,6 +48,12 @@
     <Filter Include="ExEngine\level2D">
       <UniqueIdentifier>{80abc458-e4b9-4836-89c7-3eb842072871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\prefab">
+      <UniqueIdentifier>{4013d735-20ae-4172-a1b0-3faffd5f5002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\prefab">
+      <UniqueIdentifier>{a81e8458-53e1-4424-a510-61b0534a1122}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -209,37 +215,16 @@
     <ClCompile Include="..\..\ExEngine\level2D\MapChip2D.cpp">
       <Filter>ExEngine\level2D</Filter>
     </ClCompile>
-    <ClCompile Include="SkinModelRender.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="LightManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectionLight.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PointLight.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="PostEffectManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GaussianBlur.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\MiniEngine\RenderTarget.cpp">
       <Filter>MiniEngine</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SpotLight.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sky.cpp">
@@ -250,6 +235,27 @@
     </ClCompile>
     <ClCompile Include="WipeCamera.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionLight.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianBlur.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="PostEffectManager.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinModelRender.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -436,19 +442,7 @@
     <ClInclude Include="..\..\ExEngine\level2D\MapChip2D.h">
       <Filter>ExEngine\level2D</Filter>
     </ClInclude>
-    <ClInclude Include="SkinModelRender.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="LightManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectionLight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PointLight.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
@@ -457,19 +451,10 @@
     <ClInclude Include="BackGround.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PostEffectManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GaussianBlur.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\MiniEngine\RenderTarget.h">
       <Filter>MiniEngine</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SpotLight.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sky.h">
@@ -480,6 +465,27 @@
     </ClInclude>
     <ClInclude Include="WipeCamera.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionLight.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianBlur.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="PostEffectManager.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinModelRender.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -116,6 +116,10 @@ public:
 		}
 		return false;
 	}
+	bool EqualName(const char* name)const
+	{
+		return strcmp(m_name.c_str(), name) == 0;
+	}
 public:
 	void RenderWrapper(RenderContext& renderContext, Camera* camera)
 	{

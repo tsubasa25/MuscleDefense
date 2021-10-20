@@ -7,8 +7,7 @@
 /// </remarks>
 
 #pragma once
-
-	
+#include "BSP.h"
 /// <summary>
 /// tkmファイルクラス。
 /// </summary>

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "tkFile/TkmFile.h"
 
-
 //法線スムージング。
 class NormalSmoothing {
 private:
@@ -57,17 +56,24 @@ public:
 			vert.normal.Normalize();
 		}
 		//ステップ２　座標と向きが同じ頂点の法線を平均化していく。
-		if(mesh.isFlatShading == 0)
+		if (mesh.isFlatShading == 0)
 		{
 			//重複している頂点の法線を平均化
+			BSP bsp;
 			std::vector<SSmoothVertex> smoothVertex;
 			smoothVertex.reserve(mesh.vertexBuffer.size());
 			for (auto& v : mesh.vertexBuffer) {
+				// BSPツリーのリーフを追加
+				bsp.AddLeaf(v.pos, &v.normal);
 				smoothVertex.push_back({ v.normal, &v });
 			}
-			for (auto& va : smoothVertex) {	
+			//BSPツリーを構築。
+			bsp.Build();
+#if 0 // こっちの計算量は頂点数をNとしたときに、O(N^2)
+
+			for (auto& va : smoothVertex) {
 				for (auto& vb : smoothVertex) {
-					
+
 					if (va.vertex != vb.vertex
 						&& va.vertex->pos.x == vb.vertex->pos.x
 						&& va.vertex->pos.y == vb.vertex->pos.y
@@ -82,10 +88,30 @@ public:
 				}
 				va.newNormal.Normalize();
 			}
+
+#else // こっちの計算量は頂点数をNとした時に、O(NlogN)
+			for (auto& va : smoothVertex) {
+				bsp.WalkTree(va.vertex->pos, [&](BSP::SLeaf* leaf) {
+					if (va.vertex->pos.x == leaf->position.x
+						&& va.vertex->pos.y == leaf->position.y
+						&& va.vertex->pos.z == leaf->position.z) {
+						//同じ座標。
+						auto* normal = static_cast<Vector3*>(leaf->extraData);
+						if (va.vertex->normal.Dot(*normal) > 0.0f) {
+							//同じ向き。
+							va.newNormal += *normal;
+						}
+					}
+					});
+				va.newNormal.Normalize();
+			}
+
+#endif
 			for (auto& va : smoothVertex) {
 				va.vertex->normal = va.newNormal;
 			}
 		}
+		///////////////////////////////////
 	}
 };
 /// <summary>

@@ -27,8 +27,7 @@ void IndexBuffer::Init(int size, int stride)
 		IID_PPV_ARGS(&m_indexBuffer));
 	
 	//インデックスバッファのビューを作成。
-	m_indexBufferView.BufferLocation = m_indexBuffer->GetGPUVirtualAddress();
-	
+	m_indexBufferView.BufferLocation = m_indexBuffer->GetGPUVirtualAddress();	
 	
 	//ストライドは４バイト固定。
 	m_strideInBytes = 4;

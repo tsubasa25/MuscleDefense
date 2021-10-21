@@ -249,10 +249,13 @@
     <ClCompile Include="..\..\ExEngine\physics\Physics.cpp" />
     <ClCompile Include="..\..\ExEngine\physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="..\..\ExEngine\physics\RigidBody.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\SphereCollider.cpp" />
     <ClCompile Include="..\..\MiniEngine\Animation.cpp" />
     <ClCompile Include="..\..\MiniEngine\AnimationClip.cpp" />
     <ClCompile Include="..\..\MiniEngine\AnimationPlayController.cpp" />
     <ClCompile Include="..\..\MiniEngine\Camera.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Camera\CameraCollisionSolver.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Camera\SpringCamera.cpp" />
     <ClCompile Include="..\..\MiniEngine\ConstantBuffer.cpp" />
     <ClCompile Include="..\..\MiniEngine\DescriptorHeap.cpp" />
     <ClCompile Include="..\..\MiniEngine\font\Font.cpp" />
@@ -331,10 +334,13 @@
     <ClInclude Include="..\..\ExEngine\physics\Physics.h" />
     <ClInclude Include="..\..\ExEngine\physics\PhysicsStaticObject.h" />
     <ClInclude Include="..\..\ExEngine\physics\RigidBody.h" />
+    <ClInclude Include="..\..\ExEngine\physics\SphereCollider.h" />
     <ClInclude Include="..\..\MiniEngine\Animation.h" />
     <ClInclude Include="..\..\MiniEngine\AnimationClip.h" />
     <ClInclude Include="..\..\MiniEngine\AnimationPlayController.h" />
     <ClInclude Include="..\..\MiniEngine\Camera.h" />
+    <ClInclude Include="..\..\MiniEngine\Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="..\..\MiniEngine\Camera\SpringCamera.h" />
     <ClInclude Include="..\..\MiniEngine\ConstantBuffer.h" />
     <ClInclude Include="..\..\MiniEngine\debug\MyAssert.h" />
     <ClInclude Include="..\..\MiniEngine\DescriptorHeap.h" />

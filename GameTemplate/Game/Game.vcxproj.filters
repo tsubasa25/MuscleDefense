@@ -57,6 +57,9 @@
     <Filter Include="MiniEngine\geometry">
       <UniqueIdentifier>{81e76651-6420-4218-8580-a1610ec3a1e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MiniEngine\Camera">
+      <UniqueIdentifier>{5ad04efd-c7f9-46c8-829e-94405805ad82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -271,6 +274,15 @@
     </ClCompile>
     <ClCompile Include="AABB.cpp">
       <Filter>MiniEngine\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Camera\CameraCollisionSolver.cpp">
+      <Filter>MiniEngine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Camera\SpringCamera.cpp">
+      <Filter>MiniEngine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\SphereCollider.cpp">
+      <Filter>ExEngine\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -513,6 +525,15 @@
     </ClInclude>
     <ClInclude Include="AABB.h">
       <Filter>MiniEngine\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Camera\CameraCollisionSolver.h">
+      <Filter>MiniEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Camera\SpringCamera.h">
+      <Filter>MiniEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\SphereCollider.h">
+      <Filter>ExEngine\physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

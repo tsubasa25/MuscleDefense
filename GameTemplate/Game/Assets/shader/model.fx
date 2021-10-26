@@ -45,6 +45,7 @@ struct SVSIn{
     float3 tangent  : TANGENT;      //接ベクトル
     float3 biNormal : BINORMAL;     //従ベクトル
     float2 uv 		: TEXCOORD0;	//UV座標。	
+    float4 posInMax   : TEXCOORD1;    //筋肉量最大のときの頂点座標。
     SSkinVSIn skinVert;
 };
 // ピクセルシェーダーへの入力
@@ -130,8 +131,14 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	}else{
 		m = mWorld;
 	}
-    
-    psIn.pos = mul(m, vsIn.pos);
+    // 頂点モーフ
+    /*float4 pos = lerp(
+        interporateRate,    // 補間率。定数バッファで送る。
+        vsIn.pos, 
+        vsIn.posInMax
+    );*/
+    float4 pos = vsIn.pos;
+    psIn.pos = mul(m, pos);
 
     psIn.worldPos = psIn.pos;
 

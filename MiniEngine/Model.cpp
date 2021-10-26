@@ -12,6 +12,10 @@ void Model::Init(const ModelInitData& initData)
 		initData.m_tkmFilePath,
 		"error : initData.m_tkmFilePathが指定されていません。"
 	);
+	MY_ASSERT(
+		initData.m_maxTkmFilePath,
+		"error : initData.m_tkmFilePathMaxMuscleが指定されていません。"
+	);
 	//内部のシェーダーをロードする処理が求めているのが
 	//wchar_t型の文字列なので、ここで変換しておく。
 	wchar_t wfxFilePath[256] = {L""};
@@ -20,6 +24,7 @@ void Model::Init(const ModelInitData& initData)
 		//std::abort();
 		mbstowcs(wfxFilePath, initData.m_fxFilePath, 256);
 	}
+
 	
 	if (initData.m_skeleton != nullptr) {
 		//スケルトンが指定されている。
@@ -28,10 +33,21 @@ void Model::Init(const ModelInitData& initData)
 	
 	m_modelUpAxis = initData.m_modelUpAxis;
 
-	m_tkmFile.Load(initData.m_tkmFilePath);
+	//リソースバンクに登録
+	m_tkmFile = nsMuscle::ResourceBankManager::GetInstance()->GetTkmFileFromBank(initData.m_tkmFilePath);
+
+	if (m_tkmFile == nullptr)
+	{
+		//未登録
+		m_tkmFile = new TkmFile;
+
+		m_tkmFile->Load(initData.m_tkmFilePath,initData.m_maxTkmFilePath);//
+		nsMuscle::ResourceBankManager::GetInstance()->RegistTkmFileToBank(initData.m_tkmFilePath, m_tkmFile);
+	}
+
 	m_meshParts.InitFromTkmFile(
-		m_tkmFile, 
-		wfxFilePath, 
+		*m_tkmFile, 
+		wfxFilePath,
 		initData.m_vsEntryPointFunc,
 		initData.m_vsSkinEntryPointFunc,
 		initData.m_psEntryPointFunc,

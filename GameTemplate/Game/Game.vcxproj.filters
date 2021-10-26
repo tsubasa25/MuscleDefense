@@ -284,6 +284,15 @@
     <ClCompile Include="..\..\ExEngine\physics\SphereCollider.cpp">
       <Filter>ExEngine\physics</Filter>
     </ClCompile>
+    <ClCompile Include="FontRender.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceBankManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ProteinBeam.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -534,6 +543,15 @@
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\SphereCollider.h">
       <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FontRender.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceBankManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ProteinBeam.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

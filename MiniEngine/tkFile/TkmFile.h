@@ -40,13 +40,14 @@ public:
 	/// ここを編集したら、レイトレのシェーダーで定義されている頂点構造体も変更する必要がある。
 	/// </remarks>
 	struct SVertex {
-		Vector3 pos;			//座標。
-		Vector3 normal;		//法線。
-		Vector3 tangent;		//接ベクトル。
-		Vector3 binormal;		//従ベクトル。
-		Vector2 uv;			//UV座標。
-		int indices[4];			//スキンインデックス。
-		Vector4 skinWeights;	//スキンウェイト。
+		Vector3 pos;			// 座標。
+		Vector3 normal;			// 法線。
+		Vector3 tangent;		// 接ベクトル。
+		Vector3 binormal;		// 従ベクトル。
+		Vector2 uv;				// UV座標。
+		int indices[4];			// スキンインデックス。
+		Vector4 skinWeights;	// スキンウェイト。
+		Vector3 posInMax;		// 筋肉量最大のときの頂点座標。
 	};
 	/// <summary>
 	/// 32ビットのインデックスバッファ。
@@ -76,6 +77,13 @@ public:
 	/// </summary>
 	/// <param name="filePath">ファイルパス。</param>
 	void Load(const char* filePath);
+
+	/// <summary>
+	/// ガリガリの3Dとムキムキの3Dモデルをロード
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="maxFilePath"></param>
+	void Load(const char* filePath, const char* maxFilePath);
 		
 	/// <summary>
 	/// メッシュパーツに対してクエリを行う。

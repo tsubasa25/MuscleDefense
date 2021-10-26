@@ -3,6 +3,8 @@
 
 #include "MiniEngine.h"
 #include "ExEngine.h"
+#include "ResourceBankManager.h"
+
 
 #include "SkinModelRender.h"
 #include "LightManager.h"

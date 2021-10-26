@@ -298,6 +298,7 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAnimation.cpp" />
+    <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="LightManager.cpp" />
@@ -306,6 +307,8 @@
     <ClCompile Include="PlayerAnimation.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
+    <ClCompile Include="ProteinBeam.cpp" />
+    <ClCompile Include="ResourceBankManager.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="SpotLight.cpp" />
@@ -390,6 +393,7 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAnimation.h" />
+    <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="LightManager.h" />
@@ -397,7 +401,9 @@
     <ClInclude Include="PlayerAnimation.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />
+    <ClInclude Include="ProteinBeam.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ResourceBankManager.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="Sky.h" />
     <ClInclude Include="SpotLight.h" />

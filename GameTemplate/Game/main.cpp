@@ -31,6 +31,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	PhysicsWorld::CreateInstance();
 	nsMuscle::PostEffectManager::CreateInstance();
 
+	//リソースマネージャのインスタンスを作成
+	nsMuscle::ResourceBankManager::CreateInstance();
+
 	//ライトマネージャーのインスタンスを作成
 	nsMuscle::LightManager::CreateInstance();
 	nsMuscle::LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
@@ -68,6 +71,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//////////////////////////////////////
 		g_engine->EndFrame();
 	}
+	//tkmFileManagerを削除
+	nsMuscle::ResourceBankManager::DeleteInstance();
+
 	//ゲームオブジェクトマネージャーを削除。
 	GameObjectManager::DeleteInstance();
 	return 0;

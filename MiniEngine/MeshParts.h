@@ -42,6 +42,7 @@ public:
 	/// <param name="psEntryPointFunc">ピクセルシェーダーのエントリーポイントの関数名</param>
 	void InitFromTkmFile(
 		const TkmFile& tkmFile,
+
 		const wchar_t* fxFilePath,
 		const char* vsEntryPointFunc,
 		const char* vsSkinEntryPointFunc,

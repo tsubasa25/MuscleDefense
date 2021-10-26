@@ -17,6 +17,7 @@ enum EnModelUpAxis {
 struct ModelInitData {
 	TkmFile* m_tkmFile = nullptr;
 	const char* m_tkmFilePath = nullptr;							//tkmファイルパス。
+	const char* m_maxTkmFilePath = nullptr;						//ムキムキ用のtkmファイルパス
 	const char* m_vsEntryPointFunc = "VSMain";						//頂点シェーダーのエントリーポイント。
 	const char* m_vsSkinEntryPointFunc = "VSMain";					//スキンありマテリアル用の頂点シェーダーのエントリーポイント。
 	const char* m_psEntryPointFunc = "PSMain";						//ピクセルシェーダーのエントリーポイント。
@@ -93,12 +94,12 @@ public:
 	/// <returns></returns>
 	const TkmFile& GetTkmFile() const
 	{
-		return m_tkmFile;
+		return *m_tkmFile;
 	}
 private:
 
 	Matrix m_world;														//ワールド行列。
-	TkmFile m_tkmFile;													//tkmファイル。
+	TkmFile* m_tkmFile;													//tkmファイル。
 	Skeleton m_skeleton;												//スケルトン。
 	MeshParts m_meshParts;											//メッシュパーツ。
 	EnModelUpAxis m_modelUpAxis = enModelUpAxisY;		//モデルの上方向。

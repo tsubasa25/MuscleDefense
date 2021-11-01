@@ -44,9 +44,11 @@ struct SVSIn{
     float3 normal	: NORMAL;		//法線
     float3 tangent  : TANGENT;      //接ベクトル
     float3 biNormal : BINORMAL;     //従ベクトル
-    float2 uv 		: TEXCOORD0;	//UV座標。	
-    float4 posInMax   : TEXCOORD1;    //筋肉量最大のときの頂点座標。
+    float2 uv 		: TEXCOORD0;	//UV座標。  
+    float4 posInMax : TEXCOORD1;    //筋肉量最大のときの頂点座標。    
+    
     SSkinVSIn skinVert;
+    
 };
 // ピクセルシェーダーへの入力
 struct SPSIn
@@ -77,12 +79,15 @@ cbuffer LightDataCb : register(b1)
 	float3 groundColor;		//照り返しのライト。
 	float3 skyColor;		//天球ライト。
 	float3 groundNormal;	//地面の法線
+   
 };
 cbuffer LightCameraCb : register(b2)
 {
     float4x4 mLVP;
     float3 lightCameraPos;
     float3 lightCameraDir;
+    //筋肉用
+    float interporateRate;
 };
 ////////////////////////////////////////////////
 // 関数定義。
@@ -100,6 +105,9 @@ Texture2D<float4> g_metallicSmooth : register(t2);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
+//StructuredBuffer<float>g_muscleRateArray:retister(t11);//筋肉量配列
+
+
 /// <summary>
 //スキン行列を計算する。
 /// </summary>
@@ -132,12 +140,18 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 		m = mWorld;
 	}
     // 頂点モーフ
-    /*float4 pos = lerp(
-        interporateRate,    // 補間率。定数バッファで送る。
-        vsIn.pos, 
-        vsIn.posInMax
-    );*/
     float4 pos = vsIn.pos;
+
+    if (all(vsIn.posInMax)) {
+       vsIn.posInMax = normalize(vsIn.posInMax);
+       pos = lerp(        
+        vsIn.pos,
+        vsIn.posInMax,
+        interporateRate// 補間率。定数バッファで送る。interporateRate         
+        );
+       //pos = vsIn.posInMax;
+    }
+  
     psIn.pos = mul(m, pos);
 
     psIn.worldPos = psIn.pos;
@@ -155,7 +169,7 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
     psIn.uv = vsIn.uv;
     //ライトビュースクリーン空間の座標を計算する。
     psIn.posInLVP = mul(mLVP, float4(psIn.worldPos, 1.0f));
-    psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
+    //psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
 
     return psIn;
 }
@@ -245,11 +259,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
     //normal = psIn.normal;//法線マップを使わない
 
-    //ライトビュースクリーン空間でのZ値を計算する
-    float zI = psIn.posInLVP.z / psIn.posInLVP.w;
-    float hoge = length(psIn.worldPos - lightCameraPos);
-    hoge = hoge / 1000.0f;
-
+   
     float4 finalColor = 0.0f;
     finalColor.a = 1.0f;
 
@@ -379,9 +389,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
     finalColor.xyz += ambientLight;
     finalColor *= albedoColor;
-
-
     //影
+
+     //ライトビュースクリーン空間でのZ値を計算する
+    float zI = psIn.posInLVP.z / psIn.posInLVP.w;
+    float hoge = length(psIn.worldPos - lightCameraPos);
+    hoge = hoge / 1000.0f;
+
     float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;
     shadowMapUV *= float2(0.5f, -0.5f);
     shadowMapUV += 0.5f;
@@ -391,8 +405,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
     if (shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f
         && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
-    {
-        
+    { 
         // シャドウマップに描き込まれているZ値と比較する
         // 計算したUV座標を使って、シャドウマップから深度値をサンプリング
         float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;

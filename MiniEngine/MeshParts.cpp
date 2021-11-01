@@ -76,6 +76,8 @@ void MeshParts::CreateDescriptorHeaps()
 			if (m_expandShaderResourceView){
 				descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 			}
+			//if()
+
 			descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);
 			for (int i = 0; i < 2; i++)
 			{
@@ -83,6 +85,8 @@ void MeshParts::CreateDescriptorHeaps()
 					descriptorHeap.RegistConstantBuffer(i + 1, m_expandConstantBuffer[i]);
 				}
 			}
+
+			
 			//ディスクリプタヒープへの登録を確定させる。
 			descriptorHeap.Commit();
 			descriptorHeapNo++;
@@ -208,7 +212,6 @@ void MeshParts::Draw(
 			//3. インデックスバッファを設定。
 			auto& ib = mesh->m_indexBufferArray[matNo];
 			rc.SetIndexBuffer(*ib);
-
 			//4. ドローコールを実行。
 			rc.DrawIndexed(ib->GetCount());
 			descriptorHeapNo++;

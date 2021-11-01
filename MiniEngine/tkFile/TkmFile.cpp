@@ -330,11 +330,7 @@ void TkmFile::Load(const char* filePath,const char* maxFilePath)
 		MessageBoxA(nullptr, "tkmファイルが開けません。", "エラー", MB_OK);
 		return ;
 	}
-	/*FILE* maxFp = fopen(maxFilePath, "rb");
-	if (maxFp == nullptr) {
-		MessageBoxA(nullptr, "tkmファイルが開けません。", "エラー", MB_OK);
-		return;
-	}*/
+	
 	//tkmファイルのヘッダーを読み込み。
 	tkmFileFormat::SHeader header;
 	fread(&header, sizeof(header), 1, fp);
@@ -342,10 +338,28 @@ void TkmFile::Load(const char* filePath,const char* maxFilePath)
 		//tkmファイルのバージョンが違う。
 		MessageBoxA(nullptr, "tkmファイルのバージョンが異なっています。", "エラー", MB_OK);
 	}
+
+	FILE* fpMax=nullptr;
+	
+	fpMax = fopen(maxFilePath, "rb");
+	if (fpMax == nullptr) {
+		MessageBoxA(nullptr, "tkmファイルが開けません。", "エラー", MB_OK);
+		return;
+	}
+	//ムキムキ用tkmファイルのヘッダーを読み込み。
+	tkmFileFormat::SHeader headerMax;	
+	
+	fread(&headerMax, sizeof(headerMax), 1, fpMax);
+	if (headerMax.version != tkmFileFormat::VERSION) {
+		//tkmファイルのバージョンが違う。
+		MessageBoxA(nullptr, "tkmファイルのバージョンが異なっています。", "エラー", MB_OK);
+	}
+	
+	
 	//メッシュ情報をロードしていく。
 	m_meshParts.resize(header.numMeshParts);
 	for (int meshPartsNo = 0; meshPartsNo < header.numMeshParts; meshPartsNo++) {
-			
+		
 		auto& meshParts = m_meshParts[meshPartsNo];
 		meshParts.isFlatShading = header.isFlatShading;
 		tkmFileFormat::SMeshePartsHeader meshPartsHeader;
@@ -357,17 +371,18 @@ void TkmFile::Load(const char* filePath,const char* maxFilePath)
 			auto& material = meshParts.materials[materialNo];
 			BuildMaterial(material, fp, filePath);
 		}
-			
-		//続いて頂点バッファ。
+
+		//続いて頂点バッファ。		
 		meshParts.vertexBuffer.resize(meshPartsHeader.numVertex);
 		for (unsigned int vertNo = 0; vertNo < meshPartsHeader.numVertex; vertNo++) {
 			tkmFileFormat::SVertex vertexTmp;
 			fread(&vertexTmp, sizeof(vertexTmp), 1, fp);
 			auto& vertex = meshParts.vertexBuffer[vertNo];
-			vertex.pos.Set(vertexTmp.pos[0], vertexTmp.pos[1], vertexTmp.pos[2]);
-			//筋肉用頂点
-			vertex.posInMax.Set(vertexTmp.pos[0], vertexTmp.pos[1], vertexTmp.pos[2]);
-
+			vertex.pos.Set(vertexTmp.pos[0], vertexTmp.pos[1], vertexTmp.pos[2]);			
+			//tkmFileFormat::SVertex vertexTmpMax;//ムキムキ用
+			//fread(&vertexTmpMax, sizeof(vertexTmpMax), 1, fpMax);
+			//vertex.posInMax.Set(vertexTmpMax.pos[0], vertexTmpMax.pos[1], vertexTmpMax.pos[2]);
+			//
 		//	vertex.normal.Set(vertexTmp.normal[0], vertexTmp.normal[1], vertexTmp.normal[2]);
 			vertex.normal = g_vec3Zero;
 			vertex.tangent = g_vec3Zero;
@@ -379,8 +394,7 @@ void TkmFile::Load(const char* filePath,const char* maxFilePath)
 			vertex.indices[1] = vertexTmp.indices[1] != -1 ? vertexTmp.indices[1] : 0;
 			vertex.indices[2] = vertexTmp.indices[2] != -1 ? vertexTmp.indices[2] : 0;
 			vertex.indices[3] = vertexTmp.indices[3] != -1 ? vertexTmp.indices[3] : 0;
-		}	
-
+		}			
 		
 		//続いてインデックスバッファ。
 		//インデックスバッファはマテリアルの数分だけ存在するんじゃよ。
@@ -417,12 +431,180 @@ void TkmFile::Load(const char* filePath,const char* maxFilePath)
 		}
 	}
 	//接ベクトルと従ベクトルを構築する。
+	//BuildTangentAndBiNormal();
+	
+	/// //////////////////////////////////////////////////////////////////////////////////////////
+	//ムキムキ用
+
+	//メッシュ情報をロードしていく。
+	m_meshParts.resize(headerMax.numMeshParts);
+	for (int meshPartsNo = 0; meshPartsNo < headerMax.numMeshParts; meshPartsNo++) {
+
+		auto& meshParts = m_meshParts[meshPartsNo];
+		meshParts.isFlatShading = headerMax.isFlatShading;
+		tkmFileFormat::SMeshePartsHeader meshPartsHeaderMax;
+		fread(&meshPartsHeaderMax, sizeof(meshPartsHeaderMax), 1, fpMax);
+		//マテリアル情報を記録できる領域を確保。
+		meshParts.materials.resize(meshPartsHeaderMax.numMaterial);
+		//マテリアル情報を構築していく。
+		for (unsigned int materialNo = 0; materialNo < meshPartsHeaderMax.numMaterial; materialNo++) {
+			auto& material = meshParts.materials[materialNo];
+			BuildMaterial(material, fpMax, maxFilePath);
+		}
+
+		//続いて頂点バッファ。		
+		meshParts.vertexBuffer.resize(meshPartsHeaderMax.numVertex);
+		for (unsigned int vertNo = 0; vertNo < meshPartsHeaderMax.numVertex; vertNo++) {
+			
+			auto& vertex = meshParts.vertexBuffer[vertNo];			
+			tkmFileFormat::SVertex vertexTmpMax;//ムキムキ用
+			fread(&vertexTmpMax, sizeof(vertexTmpMax), 1, fpMax);
+			vertex.posInMax.Set(vertexTmpMax.pos[0], vertexTmpMax.pos[1], vertexTmpMax.pos[2]);
+
+			//	vertex.normal.Set(vertexTmp.normal[0], vertexTmp.normal[1], vertexTmp.normal[2]);
+			vertex.normal = g_vec3Zero;
+			vertex.tangent = g_vec3Zero;
+			vertex.binormal = g_vec3Zero;
+
+			vertex.uv.Set(vertexTmpMax.uv[0], vertexTmpMax.uv[1]);
+			vertex.skinWeights.Set(vertexTmpMax.weights[0], vertexTmpMax.weights[1], vertexTmpMax.weights[2], vertexTmpMax.weights[3]);
+			vertex.indices[0] = vertexTmpMax.indices[0] != -1 ? vertexTmpMax.indices[0] : 0;
+			vertex.indices[1] = vertexTmpMax.indices[1] != -1 ? vertexTmpMax.indices[1] : 0;
+			vertex.indices[2] = vertexTmpMax.indices[2] != -1 ? vertexTmpMax.indices[2] : 0;
+			vertex.indices[3] = vertexTmpMax.indices[3] != -1 ? vertexTmpMax.indices[3] : 0;
+		}
+
+		//続いてインデックスバッファ。
+		//インデックスバッファはマテリアルの数分だけ存在するんじゃよ。		
+		if (meshPartsHeaderMax.indexSize == 2) {
+			//16bitのインデックスバッファ。
+			meshParts.indexBuffer16Array.resize(meshPartsHeaderMax.numMaterial);
+		}
+		else {
+			//32bitのインデックスバッファ。
+			meshParts.indexBuffer32Array.resize(meshPartsHeaderMax.numMaterial);
+		}
+
+		for (unsigned int materialNo = 0; materialNo < meshPartsHeaderMax.numMaterial; materialNo++) {
+			//ポリゴン数をロード。
+			int numPolygon;
+			fread(&numPolygon, sizeof(numPolygon), 1, fpMax);
+			//トポロジーはトライアングルリストオンリーなので、3を乗算するとインデックスの数になる。
+			int numIndex = numPolygon * 3;
+			if (meshPartsHeaderMax.indexSize == 2) {
+				LoadIndexBuffer(
+					meshParts.indexBuffer16Array[materialNo].indices,
+					numIndex,
+					fpMax
+				);
+			}
+			else {
+				LoadIndexBuffer(
+					meshParts.indexBuffer32Array[materialNo].indices,
+					numIndex,
+					fpMax
+				);
+			}
+
+		}
+	}
+	//接ベクトルと従ベクトルを構築する。
 	BuildTangentAndBiNormal();
 
-	fclose(fp);
-
+	fclose(fp);	
+	fclose(fpMax);
+	
 }
 void TkmFile::Load(const char* filePath)
 {
-	Load(filePath, nullptr);
+	FILE* fp = fopen(filePath, "rb");
+	if (fp == nullptr) {
+		MessageBoxA(nullptr, "tkmファイルが開けません。", "エラー", MB_OK);
+		return;
+	}
+
+	//tkmファイルのヘッダーを読み込み。
+	tkmFileFormat::SHeader header;
+	fread(&header, sizeof(header), 1, fp);
+	if (header.version != tkmFileFormat::VERSION) {
+		//tkmファイルのバージョンが違う。
+		MessageBoxA(nullptr, "tkmファイルのバージョンが異なっています。", "エラー", MB_OK);
+	}
+	
+	//メッシュ情報をロードしていく。
+	m_meshParts.resize(header.numMeshParts);
+	for (int meshPartsNo = 0; meshPartsNo < header.numMeshParts; meshPartsNo++) {
+
+		auto& meshParts = m_meshParts[meshPartsNo];
+		meshParts.isFlatShading = header.isFlatShading;
+		tkmFileFormat::SMeshePartsHeader meshPartsHeader;
+		fread(&meshPartsHeader, sizeof(meshPartsHeader), 1, fp);
+		//マテリアル情報を記録できる領域を確保。
+		meshParts.materials.resize(meshPartsHeader.numMaterial);
+		//マテリアル情報を構築していく。
+		for (unsigned int materialNo = 0; materialNo < meshPartsHeader.numMaterial; materialNo++) {
+			auto& material = meshParts.materials[materialNo];
+			BuildMaterial(material, fp, filePath);
+		}
+
+		//続いて頂点バッファ。
+		//meshPartsHeader.numVertex *= 2;
+		meshParts.vertexBuffer.resize(meshPartsHeader.numVertex);
+		for (unsigned int vertNo = 0; vertNo < meshPartsHeader.numVertex; vertNo++) {
+			tkmFileFormat::SVertex vertexTmp;
+			fread(&vertexTmp, sizeof(vertexTmp), 1, fp);
+			auto& vertex = meshParts.vertexBuffer[vertNo];
+			vertex.pos.Set(vertexTmp.pos[0], vertexTmp.pos[1], vertexTmp.pos[2]);
+			
+			//	vertex.normal.Set(vertexTmp.normal[0], vertexTmp.normal[1], vertexTmp.normal[2]);
+			vertex.normal = g_vec3Zero;
+			vertex.tangent = g_vec3Zero;
+			vertex.binormal = g_vec3Zero;
+
+			vertex.uv.Set(vertexTmp.uv[0], vertexTmp.uv[1]);
+			vertex.skinWeights.Set(vertexTmp.weights[0], vertexTmp.weights[1], vertexTmp.weights[2], vertexTmp.weights[3]);
+			vertex.indices[0] = vertexTmp.indices[0] != -1 ? vertexTmp.indices[0] : 0;
+			vertex.indices[1] = vertexTmp.indices[1] != -1 ? vertexTmp.indices[1] : 0;
+			vertex.indices[2] = vertexTmp.indices[2] != -1 ? vertexTmp.indices[2] : 0;
+			vertex.indices[3] = vertexTmp.indices[3] != -1 ? vertexTmp.indices[3] : 0;
+		}
+
+		//続いてインデックスバッファ。
+		//インデックスバッファはマテリアルの数分だけ存在するんじゃよ。
+		if (meshPartsHeader.indexSize == 2) {
+			//16bitのインデックスバッファ。
+			meshParts.indexBuffer16Array.resize(meshPartsHeader.numMaterial);
+		}
+		else {
+			//32bitのインデックスバッファ。
+			meshParts.indexBuffer32Array.resize(meshPartsHeader.numMaterial);
+		}
+
+		for (unsigned int materialNo = 0; materialNo < meshPartsHeader.numMaterial; materialNo++) {
+			//ポリゴン数をロード。
+			int numPolygon;
+			fread(&numPolygon, sizeof(numPolygon), 1, fp);
+			//トポロジーはトライアングルリストオンリーなので、3を乗算するとインデックスの数になる。
+			int numIndex = numPolygon * 3;
+			if (meshPartsHeader.indexSize == 2) {
+				LoadIndexBuffer(
+					meshParts.indexBuffer16Array[materialNo].indices,
+					numIndex,
+					fp
+				);
+			}
+			else {
+				LoadIndexBuffer(
+					meshParts.indexBuffer32Array[materialNo].indices,
+					numIndex,
+					fp
+				);
+			}
+
+		}
+	}
+	//接ベクトルと従ベクトルを構築する。
+	BuildTangentAndBiNormal();
+
+	fclose(fp);	
 }

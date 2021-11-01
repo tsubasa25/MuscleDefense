@@ -122,7 +122,7 @@ private:
 	ConstantBuffer m_commonConstantBuffer;					//メッシュ共通の定数バッファ。
 	ConstantBuffer m_expandConstantBuffer[2];					//ユーザー拡張用の定数バッファ
 	IShaderResource* m_expandShaderResourceView = nullptr;	//ユーザー拡張シェーダーリソースビュー。
-	StructuredBuffer m_boneMatricesStructureBuffer;	//ボーン行列の構造化バッファ。
+	StructuredBuffer m_boneMatricesStructureBuffer;	//ボーン行列の構造化バッファ。	
 	std::vector< SMesh* > m_meshs;							//メッシュ。
 	std::vector< DescriptorHeap > m_descriptorHeap;		//ディスクリプタヒープ。
 	Skeleton* m_skeleton = nullptr;								//スケルトン。

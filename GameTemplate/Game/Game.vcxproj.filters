@@ -1,16 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="ソース ファイル\system">
-      <UniqueIdentifier>{a9bb9230-eaa9-4c07-a610-f43e5384bb9c}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\system">
       <UniqueIdentifier>{dbc0c16e-80e1-4c7c-8b01-c720c0baa9a8}</UniqueIdentifier>
@@ -48,9 +41,6 @@
     <Filter Include="ExEngine\level2D">
       <UniqueIdentifier>{80abc458-e4b9-4836-89c7-3eb842072871}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\prefab">
-      <UniqueIdentifier>{4013d735-20ae-4172-a1b0-3faffd5f5002}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\prefab">
       <UniqueIdentifier>{a81e8458-53e1-4424-a510-61b0534a1122}</UniqueIdentifier>
     </Filter>
@@ -59,6 +49,16 @@
     </Filter>
     <Filter Include="MiniEngine\Camera">
       <UniqueIdentifier>{5ad04efd-c7f9-46c8-829e-94405805ad82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\system">
+      <UniqueIdentifier>{a9bb9230-eaa9-4c07-a610-f43e5384bb9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\prefab">
+      <UniqueIdentifier>{4013d735-20ae-4172-a1b0-3faffd5f5002}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

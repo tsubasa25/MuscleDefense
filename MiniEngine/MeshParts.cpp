@@ -27,7 +27,8 @@ void MeshParts::InitFromTkmFile(
 	void* const expandData[2],
 	const int expandDataSize[2],
 	IShaderResource* expandShaderResourceView,
-	DXGI_FORMAT colorBufferFormat
+	DXGI_FORMAT colorBufferFormat,
+	StructuredBuffer* muscleRateArraySB
 )
 {
 	m_meshs.resize(tkmFile.GetNumMesh());
@@ -48,6 +49,8 @@ void MeshParts::InitFromTkmFile(
 		}
 	}
 	m_expandShaderResourceView = expandShaderResourceView;
+	m_muscleRateArraySB = muscleRateArraySB;
+	//muscleRateArraySB = nullptr;
 	//ディスクリプタヒープを作成。
 	CreateDescriptorHeaps();
 }
@@ -76,7 +79,9 @@ void MeshParts::CreateDescriptorHeaps()
 			if (m_expandShaderResourceView){
 				descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 			}
-			//if()
+			if (m_muscleRateArraySB) {
+				descriptorHeap.RegistShaderResource(11, *m_muscleRateArraySB);//11に送る
+			}
 
 			descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);
 			for (int i = 0; i < 2; i++)
@@ -199,6 +204,11 @@ void MeshParts::Draw(
 		//ボーン行列を更新する。
 		m_boneMatricesStructureBuffer.Update(m_skeleton->GetBoneMatricesTopAddress());
 	}
+	/////////////////////////////////////////////////
+	if (m_muscleRateArraySB&&m_muscleRateArraySB->IsInited()) {
+		//m_muscleRateArraySB->Update();
+	}
+	
 	int descriptorHeapNo = 0;
 	for (auto& mesh : m_meshs) {
 		//1. 頂点バッファを設定。

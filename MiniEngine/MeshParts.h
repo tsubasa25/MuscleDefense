@@ -50,7 +50,8 @@ public:
 		void* const expandData[2],
 		const int expandDataSize[2],
 		IShaderResource* expandShaderResourceView,
-		DXGI_FORMAT m_colorBufferFormat
+		DXGI_FORMAT m_colorBufferFormat,
+		StructuredBuffer* muscleRateArraySB
 	);
 	/// <summary>
 	/// 描画。
@@ -127,4 +128,6 @@ private:
 	std::vector< DescriptorHeap > m_descriptorHeap;		//ディスクリプタヒープ。
 	Skeleton* m_skeleton = nullptr;								//スケルトン。
 	void* m_expandData[2] = { nullptr,nullptr };						//ユーザー拡張データ。
+
+	StructuredBuffer *m_muscleRateArraySB = nullptr;//各部位ごとの筋肉量
 };

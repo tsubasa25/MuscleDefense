@@ -28,6 +28,7 @@ struct ModelInitData {
 	Skeleton* m_skeleton = nullptr;									//スケルトン。
 	EnModelUpAxis m_modelUpAxis = enModelUpAxisZ;					//モデルの上方向。
 	DXGI_FORMAT m_colorBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;	//レンダリングするカラーバッファのフォーマット。
+	StructuredBuffer* m_muscleRateArraySB = nullptr;
 };
 
 /// <summary>

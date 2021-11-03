@@ -47,8 +47,7 @@ struct SVSIn{
     float2 uv 		: TEXCOORD0;	//UV座標。  
     float4 posInMax : TEXCOORD1;    //筋肉量最大のときの頂点座標。    
     
-    SSkinVSIn skinVert;
-    
+    SSkinVSIn skinVert;    
 };
 // ピクセルシェーダーへの入力
 struct SPSIn
@@ -105,15 +104,15 @@ Texture2D<float4> g_metallicSmooth : register(t2);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
-//StructuredBuffer<float>g_muscleRateArray:retister(t11);//筋肉量配列
 
+StructuredBuffer<float> g_muscleRateArray:register(t11);//筋肉量配列
 
 /// <summary>
 //スキン行列を計算する。
 /// </summary>
 float4x4 CalcSkinMatrix(SSkinVSIn skinVert)
 {
-	float4x4 skinning = 0;	
+	float4x4 skinning = 0;
 	float w = 0.0f;
 	[unroll]
     for (int i = 0; i < 3; i++)
@@ -141,17 +140,22 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	}
     // 頂点モーフ
     float4 pos = vsIn.pos;
+    if (hasSkin) {
+        float musleRate = 0;
+        float w = 0.0f;
+        for (int i = 0; i < 3; i++)
+        {
+            musleRate += g_muscleRateArray[vsIn.skinVert.Indices[i]] * vsIn.skinVert.Weights[i];
+            w += vsIn.skinVert.Weights[i];
+        }
+        musleRate += g_muscleRateArray[vsIn.skinVert.Indices[3]] * (1.0f - w);
 
-    if (all(vsIn.posInMax)) {
-       vsIn.posInMax = normalize(vsIn.posInMax);
-       pos = lerp(        
-        vsIn.pos,
-        vsIn.posInMax,
-        interporateRate// 補間率。定数バッファで送る。interporateRate         
+        pos = lerp(
+            vsIn.pos,
+            vsIn.posInMax,
+            musleRate      //interporateRate    // 補間率。定数バッファで送る。interporateRate         
         );
-       //pos = vsIn.posInMax;
     }
-  
     psIn.pos = mul(m, pos);
 
     psIn.worldPos = psIn.pos;
@@ -245,6 +249,8 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 
 /// </summary>
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
+   
+
     //ディフーズマップをサンプリング
     float4 diffuseMap = g_albedo.Sample(g_sampler,psIn.uv);
     float3 normal = psIn.normal;
@@ -415,6 +421,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
             finalColor.xyz *= 0.5f;
         }       
     }
+
     return finalColor;
 }
 

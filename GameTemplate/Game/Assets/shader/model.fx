@@ -98,8 +98,8 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 
 // グローバル変数。
 ////////////////////////////////////////////////
 Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
-Texture2D<float4> g_normal : register(t1);				//アルベドマップ
-Texture2D<float4> g_metallicSmooth : register(t2);				//アルベドマップ
+Texture2D<float4> g_normal : register(t1);				//法線マップ
+Texture2D<float4> g_metallicSmooth : register(t2);		//金属光沢、滑らかさマップ
 
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。

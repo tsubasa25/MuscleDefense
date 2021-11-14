@@ -95,7 +95,6 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 			go->RenderWrapper(rc, g_camera3D[1]);
 		}
 	}
-
 	nsMuscle::PostEffectManager::GetInstance()->EndWipeRender(rc);
 	//ポストエフェクト用。Render後の処理
 	nsMuscle::PostEffectManager::GetInstance()->AfterRender(rc);
@@ -113,18 +112,6 @@ void GameObjectManager::ExecutePostRender(RenderContext& rc)
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
 			go->PostRenderWrapper(rc);
-		}
-	}
-	//Level2D用　
-	{
-		g_camera2D->SetWidth(g_graphicsEngine->GetFrameBufferWidth());
-
-		rc.SetStep(RenderContext::eStep_Render);
-
-		for (auto& goList : m_gameObjectListArray) {
-			for (auto& go : goList) {
-				go->PostRenderWrapper(rc);
-			}
 		}
 	}
 }

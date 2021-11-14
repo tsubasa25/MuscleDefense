@@ -5,8 +5,10 @@
 #include "ExEngine.h"
 #include "ResourceBankManager.h"
 
+#include "FontRender.h"
 
 #include "SkinModelRender.h"
+#include "SpriteRender.h"
 #include "LightManager.h"
 #include "PostEffectManager.h"
 #include "DirectionLight.h"

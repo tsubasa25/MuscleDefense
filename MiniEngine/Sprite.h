@@ -78,6 +78,9 @@ public:
 	{
 		return m_isInited;
 	}
+
+	Vector4 GetMulColor() { return m_mulColor; }
+	void SetMulColor(Vector4 color) { m_mulColor = color; }
 private:
 	/// <summary>
 	/// テクスチャを初期化。
@@ -108,6 +111,7 @@ private:
 	/// </summary>
 	/// <param name="initData"></param>
 	void InitConstantBuffer(const SpriteInitData& initData);
+
 private:
 	IndexBuffer m_indexBuffer;			//インデックスバッファ。
 	VertexBuffer m_vertexBuffer;		//頂点バッファ。
@@ -118,7 +122,7 @@ private:
 	Vector2 m_size;						//サイズ。
 	Quaternion m_rotation ;			//回転。
 	Matrix m_world;					//ワールド行列。
-
+	Vector4 m_mulColor = {1.0f,1.0f, 1.0f, 1.0f};
 	struct LocalConstantBuffer {
 		Matrix mvp;
 		Vector4 mulColor;

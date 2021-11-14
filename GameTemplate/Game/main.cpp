@@ -46,7 +46,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ブルームフラグ、シャドウフラグの順番
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
 
-	NewGO<nsMuscle::GameScene>(0);
+	NewGO<nsMuscle::GameScene>(0,"gameScene");
 	NewGO<nsMuscle::BackGround>(0);
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
@@ -61,6 +61,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 		GameObjectManager::GetInstance()->ExecuteUpdate();
 		GameObjectManager::GetInstance()->ExecuteRender(renderContext);
+		GameObjectManager::GetInstance()->ExecutePostRender(renderContext);
 		//////////////////////////////////////
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////

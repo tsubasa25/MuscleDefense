@@ -44,7 +44,6 @@ public:
 	{
 		(void)renderContext;
 	}
-
 	virtual void PostRender(RenderContext& renderContext)
 	{
 		(void)renderContext;

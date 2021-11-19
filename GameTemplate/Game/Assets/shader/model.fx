@@ -398,16 +398,16 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     //影
 
      //ライトビュースクリーン空間でのZ値を計算する
-    float zI = psIn.posInLVP.z / psIn.posInLVP.w;
+    //float zI = psIn.posInLVP.z / psIn.posInLVP.w;
     float hoge = length(psIn.worldPos - lightCameraPos);
     hoge = hoge / 1000.0f;
 
-    float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;
+    float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;//
     shadowMapUV *= float2(0.5f, -0.5f);
     shadowMapUV += 0.5f;
 
     //ライトビュースクリーン空間でのZ値を計算する
-    float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
+    //float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
 
     if (shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f
         && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
@@ -415,7 +415,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
         // シャドウマップに描き込まれているZ値と比較する
         // 計算したUV座標を使って、シャドウマップから深度値をサンプリング
         float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
-        if (hoge > zInShadowMap + 0.01f)//psIn.posInLVP.z
+        if (hoge > zInShadowMap + 0.01f)//psIn.posInLVP.z//
         {
             // 遮蔽されている
             finalColor.xyz *= 0.5f;

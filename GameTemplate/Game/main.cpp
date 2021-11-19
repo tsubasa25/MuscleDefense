@@ -2,9 +2,10 @@
 #include "system/system.h"
 #include "GameScene.h"
 #include "BackGround.h"
+#include "DebagWireFrame.h"
 namespace
 {	
-	const Vector3 LIGHTCAMERA_UP = { 0.0f,0.0f,1.0f };
+	const Vector3 LIGHTCAMERA_UP = { -5.0f,-3.0f,0.0f };
 	const float LIGHTCAMERA_WIDTH = 2000.0f;
 	const float LIGHTCAMERA_HEIGHT = 2000.0f;
 	const int CAMERA_FAR = 100000;
@@ -30,7 +31,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	GameObjectManager::CreateInstance();
 	PhysicsWorld::CreateInstance();
 	nsMuscle::PostEffectManager::CreateInstance();
-
 	//リソースマネージャのインスタンスを作成
 	nsMuscle::ResourceBankManager::CreateInstance();
 
@@ -43,6 +43,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::LightManager::GetInstance()->SetPointLigNum(0);
 	nsMuscle::LightManager::GetInstance()->SetSpotLigNum(0);
 
+	//DebugWireframe::Init();
 	//ブルームフラグ、シャドウフラグの順番
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
 
@@ -65,7 +66,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//////////////////////////////////////
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
-		
+		//DebugWireframe::getDebugMode()->RenderContextUpdate(renderContext);
 	
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-
+#include "CharacterController.h"
 class PhysicsWorld
 {
 	static PhysicsWorld* m_instance;	//唯一のインスタンス。
@@ -75,7 +75,15 @@ public:
 	{
 		m_dynamicWorld->convexSweepTest(castShape, convexFromWorld, convexToWorld, resultCallback, allowedCcdPenetration);
 	}
-#if 0
+	/*!
+		* @brief	コリジョンオブジェクトをワールドから削除。
+		*@param[in]	colliObj	コリジョンオブジェクト。
+		*/
+	void RemoveCollisionObject(btCollisionObject& colliObj)
+	{
+		m_dynamicWorld->removeCollisionObject(&colliObj);
+	}
+
 	/*!
 	* @brief	コリジョンオブジェクトをワールドに登録。
 	*@param[in]	colliObj	コリジョンオブジェクト。
@@ -84,29 +92,22 @@ public:
 	{
 		m_dynamicWorld->addCollisionObject(&colliObj);
 	}
-	/*!
-	* @brief	コリジョンオブジェクトをワールドから削除。
-	*@param[in]	colliObj	コリジョンオブジェクト。
-	*/
-	void RemoveCollisionObject(btCollisionObject& colliObj)
-	{
-		m_dynamicWorld->removeCollisionObject(&colliObj);
-	}
+
 	
 	void ContactTest(
 		btCollisionObject* colObj,
 		std::function<void(const btCollisionObject& contactCollisionObject)> cb
 	);
 	void ContactTest(
-		CRigidBody& rb,
+		RigidBody& rb,
 		std::function<void(const btCollisionObject& contactCollisionObject)> cb
 	);
 		
 	void ContactTest(
-		CCharacterController& charaCon,
+		CharacterController& charaCon,
 		std::function<void(const btCollisionObject& contactCollisionObject)> cb
 	);
-#endif		
+
 private:
 	PhysicsWorld();
 	~PhysicsWorld();

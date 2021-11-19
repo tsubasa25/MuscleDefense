@@ -243,6 +243,7 @@
     <ClCompile Include="..\..\ExEngine\level2D\CaslFile.cpp" />
     <ClCompile Include="..\..\ExEngine\level2D\Level2D.cpp" />
     <ClCompile Include="..\..\ExEngine\level2D\MapChip2D.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\BoxCollider.cpp" />
     <ClCompile Include="..\..\ExEngine\physics\CapsuleCollider.cpp" />
     <ClCompile Include="..\..\ExEngine\physics\CharacterController.cpp" />
     <ClCompile Include="..\..\ExEngine\physics\MeshCollider.cpp" />
@@ -295,6 +296,7 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BSP.cpp" />
+    <ClCompile Include="DebagWireFrame.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAnimation.cpp" />
@@ -304,6 +306,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAnimation.cpp" />
     <ClCompile Include="PointLight.cpp" />
@@ -332,6 +335,7 @@
     <ClInclude Include="..\..\ExEngine\level2D\CaslFile.h" />
     <ClInclude Include="..\..\ExEngine\level2D\Level2D.h" />
     <ClInclude Include="..\..\ExEngine\level2D\MapChip2D.h" />
+    <ClInclude Include="..\..\ExEngine\physics\BoxCollider.h" />
     <ClInclude Include="..\..\ExEngine\physics\CapsuleCollider.h" />
     <ClInclude Include="..\..\ExEngine\physics\CharacterController.h" />
     <ClInclude Include="..\..\ExEngine\physics\ICollider.h" />
@@ -392,6 +396,7 @@
     <ClInclude Include="AABB.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BSP.h" />
+    <ClInclude Include="DebagWireFrame.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAnimation.h" />
@@ -400,6 +405,7 @@
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAnimation.h" />
     <ClInclude Include="PointLight.h" />

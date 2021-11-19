@@ -4,7 +4,7 @@
 
 
 #include "stdafx.h"
-#include "physics/PhysicsStaticObject.h"
+#include "physics/PhysicsStaticObject.h"//
 
 PhysicsStaticObject::PhysicsStaticObject()
 {

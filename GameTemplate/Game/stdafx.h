@@ -15,5 +15,5 @@
 #include "PointLight.h"
 #include "SpotLight.h"
 
-const Vector3 LIGHTCAMERA_POSITION = { 100.0f, 500.0f,100.0f };
-const Vector3 LIGHTCAMERA_TARGET = { 0.f,1.f,0.f };
+const Vector3 LIGHTCAMERA_POSITION = { 300.0f, 500.0f,0.0f };
+const Vector3 LIGHTCAMERA_TARGET = { 0.f,0.f,0.f };

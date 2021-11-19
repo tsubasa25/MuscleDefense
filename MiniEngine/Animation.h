@@ -55,10 +55,21 @@ public:
 	/// </summary>
 	/// <param name="clipNo">アニメーションクリップの番号。Init関数に渡したanimClipListの並びとなる。</param>
 	/// <param name="interpolateTime">補完時間(単位：秒)</param>
+	void Play(int clipNo,bool isRePlay, float interpolateTime = 0.0f)
+	{
+		if (clipNo < m_animationClips.size()) {
+			PlayCommon(m_animationClips[clipNo], interpolateTime,isRePlay);
+		}
+	}
+	/// <summary>
+	/// アニメーションの再生。
+	/// </summary>
+	/// <param name="clipNo">アニメーションクリップの番号。Init関数に渡したanimClipListの並びとなる。</param>
+	/// <param name="interpolateTime">補完時間(単位：秒)</param>
 	void Play(int clipNo, float interpolateTime = 0.0f)
 	{
 		if (clipNo < m_animationClips.size()) {
-			PlayCommon(m_animationClips[clipNo], interpolateTime);
+			PlayCommon(m_animationClips[clipNo], interpolateTime, false);
 		}
 	}
 	/// <summary>
@@ -134,10 +145,10 @@ public:
 	Vector3 CalcFootstepDeltaValueInWorldSpace(Quaternion rotation, Vector3 scale) const;
 
 private:
-	void PlayCommon(AnimationClip* nextClip, float interpolateTime)
+	void PlayCommon(AnimationClip* nextClip, float interpolateTime,bool isRePlay)
 	{
 		int index = GetLastAnimationControllerIndex();
-		if (m_animationPlayController[index].GetAnimClip() == nextClip) {
+		if (m_animationPlayController[index].GetAnimClip() == nextClip&&isRePlay==false) {
 			return;
 		}
 		if (interpolateTime == 0.0f) {

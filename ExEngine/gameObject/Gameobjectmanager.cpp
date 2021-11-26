@@ -67,7 +67,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	nsMuscle::PostEffectManager::GetInstance()->EndShadowRender(rc);
 
 	//ポストエフェクト用。Render前の処理
-	nsMuscle::PostEffectManager::GetInstance()->BeforeRender(rc);	
+	nsMuscle::PostEffectManager::GetInstance()->BeforeRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetMainRenderTarget());
 
 	//レンダラーを変更するならここを改造していくと良い。
 
@@ -81,25 +81,51 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 			go->RenderWrapper(rc, g_camera3D[0]);
 		}
 	}
-	//ポストエフェクト用。Render前の処理ワイプ用
-	nsMuscle::PostEffectManager::GetInstance()->BeforeWipeRender(rc);
-
-	nsMuscle::PostEffectManager::GetInstance()->WipeRender(rc);
-
-	////wipe
-
-	rc.SetStep(RenderContext::eStep_RenderWipe);
-	//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
-	for (auto& goList : m_gameObjectListArray) {
-		for (auto& go : goList) {
-			go->RenderWrapper(rc, g_camera3D[1]);
-		}
-	}
-	nsMuscle::PostEffectManager::GetInstance()->EndWipeRender(rc);
 	//ポストエフェクト用。Render後の処理
-	nsMuscle::PostEffectManager::GetInstance()->AfterRender(rc);
-	//ポストエフェクト用。Render後の処理ワイプ用
-	nsMuscle::PostEffectManager::GetInstance()->AfterWipeRender(rc);
+	nsMuscle::PostEffectManager::GetInstance()->AfterRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetMainRenderTarget());
+
+
+	//ポストエフェクト用。Render前の処理ワイプ用
+	
+	for (int i = 0; i < 4; i++) {
+		nsMuscle::PostEffectManager::GetInstance()->BeforeRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetWipeRenderTarget(i));
+
+		////wipe
+		switch (i)
+		{
+		case 0:
+			rc.SetStep(RenderContext::eStep_RenderWipe0);
+			break;
+		case 1:
+			rc.SetStep(RenderContext::eStep_RenderWipe1);
+			break;
+		case 2:
+			rc.SetStep(RenderContext::eStep_RenderWipe2);
+			break;
+		case 3:
+			rc.SetStep(RenderContext::eStep_RenderWipe3);
+			break;
+		default:
+			break;
+		}
+	
+		//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+		for (auto& goList : m_gameObjectListArray) {
+			for (auto& go : goList) {
+				go->RenderWrapper(rc, g_camera3D[i+1]);
+			}
+		}
+		nsMuscle::PostEffectManager::GetInstance()->EndWipeRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetWipeRenderTarget(i));
+		//ポストエフェクト用。Render後の処理ワイプ用
+		nsMuscle::PostEffectManager::GetInstance()->AfterWipeRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetWipeRenderTarget(i), i);
+
+	}
+	
+	/*for (int i = 0; i < 4; i++) {
+		
+		}*/
+	//nsMuscle::PostEffectManager::GetInstance()->AfterWipeRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetWipeRenderTarget(1));
+
 }
 void GameObjectManager::ExecutePostRender(RenderContext& rc)
 {

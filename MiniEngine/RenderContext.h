@@ -15,7 +15,10 @@ class RenderContext {
 public:
 	enum EnStep {
 		eStep_Render,	// Render to AllScreen
-		eStep_RenderWipe,//ワイプカメラ用
+		eStep_RenderWipe0,//ワイプカメラ用
+		eStep_RenderWipe1,//ワイプカメラ用
+		eStep_RenderWipe2,//ワイプカメラ用
+		eStep_RenderWipe3,//ワイプカメラ用
 		eStep_RenderShadowMap,	// Render to shadowMap,
 	};
 	/// <summary>

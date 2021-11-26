@@ -3,7 +3,7 @@
 
 GraphicsEngine* g_graphicsEngine = nullptr;	//グラフィックスエンジン
 Camera* g_camera2D = nullptr;				//2Dカメラ。
-Camera* g_camera3D[2] = { nullptr,nullptr };				//3Dカメラ。
+Camera* g_camera3D[5] = { nullptr};				//3Dカメラ。
 
 GraphicsEngine::~GraphicsEngine()
 {
@@ -172,7 +172,7 @@ bool GraphicsEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeig
 	m_camera2D.SetTarget({ 0.0f, 0.0f, 0.0f });
 
 	g_camera2D = &m_camera2D;
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		m_camera3D[i].SetPosition({ 0.0f, 50.0f, 200.0f });
 		m_camera3D[i].SetTarget({ 0.0f, 50.0f, 0.0f });

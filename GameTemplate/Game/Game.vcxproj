@@ -290,6 +290,7 @@
     <ClCompile Include="..\..\MiniEngine\Texture.cpp" />
     <ClCompile Include="..\..\MiniEngine\tkEngine.cpp" />
     <ClCompile Include="..\..\MiniEngine\tkFile\TkaFile.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkFile\TklFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\tkFile\TkmFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
@@ -303,9 +304,12 @@
     <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
+    <ClCompile Include="GoldGym.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="Level3D.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapChip.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAnimation.cpp" />
@@ -390,6 +394,7 @@
     <ClInclude Include="..\..\MiniEngine\Texture.h" />
     <ClInclude Include="..\..\MiniEngine\tkEngine.h" />
     <ClInclude Include="..\..\MiniEngine\tkFile\TkaFile.h" />
+    <ClInclude Include="..\..\MiniEngine\tkFile\TklFile.h" />
     <ClInclude Include="..\..\MiniEngine\tkFile\TkmFile.h" />
     <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
@@ -403,8 +408,11 @@
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
+    <ClInclude Include="GoldGym.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="Level3D.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="MapChip.h" />
     <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAnimation.h" />

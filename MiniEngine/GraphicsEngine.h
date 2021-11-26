@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <d3d12.h>
 #include <dxgi.h>
 #include <dxgi1_2.h>
@@ -304,7 +303,7 @@ private:
 	UINT m_frameBufferWidth = 0;				//フレームバッファの幅。
 	UINT m_frameBufferHeight = 0;				//フレームバッファの高さ。
 	Camera m_camera2D;							//2Dカメラ。
-	Camera m_camera3D[2];							//3Dカメラ。
+	Camera m_camera3D[5];							//3Dカメラ。
 	raytracing::Engine m_raytracingEngine;		//レイトレエンジン。
 	NullTextureMaps m_nullTextureMaps;			//ヌルテクスチャマップ。
 	FontEngine m_fontEngine;					//フォントエンジン。
@@ -313,4 +312,4 @@ private:
 };
 extern GraphicsEngine* g_graphicsEngine;	//グラフィックスエンジン
 extern Camera* g_camera2D;					//2Dカメラ。
-extern Camera* g_camera3D[2];					//3Dカメラ。
+extern Camera* g_camera3D[5];					//3Dカメラ。

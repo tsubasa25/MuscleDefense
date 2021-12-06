@@ -173,7 +173,9 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
     psIn.uv = vsIn.uv;
     //ライトビュースクリーン空間の座標を計算する。
     psIn.posInLVP = mul(mLVP, float4(psIn.worldPos, 1.0f));
-    //psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
+    psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos);
+    psIn.posInLVP.z /= 1000.0f;
+
 
     return psIn;
 }
@@ -379,12 +381,12 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     }
     //半球ライトを計算する
     //サーフェイスの法線と地面の法線との内積を計算する
-    float t = dot(psIn.normal, groundNormal);
+    //float t = dot(psIn.normal, groundNormal);
     //内積の結果を０～１の範囲に変換する。
-    t = (t + 1.0f) / 2.0f;
+    //t = (t + 1.0f) / 2.0f;
     //地面色と天球色を補完率ｔで線形補完する。
-    float3 hemiLight = lerp(groundColor, skyColor, t);
-    finalColor.xyz += hemiLight;
+    //float3 hemiLight = lerp(groundColor, skyColor, t);
+    //finalColor.xyz += hemiLight;
 
     //リムライトの強さを求める
     //float3 limLig = CalcLimLight(directionLigData.ligDir, directionLigData.ligColor, psIn.normalInView, psIn.normal);
@@ -399,9 +401,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
      //ライトビュースクリーン空間でのZ値を計算する
     //float zI = psIn.posInLVP.z / psIn.posInLVP.w;
-    float hoge = length(psIn.worldPos - lightCameraPos);
-    hoge = hoge / 1000.0f;
-
+   
     float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;//
     shadowMapUV *= float2(0.5f, -0.5f);
     shadowMapUV += 0.5f;
@@ -415,11 +415,11 @@ float4 PSMain(SPSIn psIn) : SV_Target0
         // シャドウマップに描き込まれているZ値と比較する
         // 計算したUV座標を使って、シャドウマップから深度値をサンプリング
         float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
-        if (hoge > zInShadowMap + 0.01f)//psIn.posInLVP.z//
+        if (psIn.posInLVP.z > zInShadowMap + 0.01f)//psIn.posInLVP.z//hoge
         {
             // 遮蔽されている
             finalColor.xyz *= 0.5f;
-        }       
+        }
     }
 
     return finalColor;

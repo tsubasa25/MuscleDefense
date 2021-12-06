@@ -297,6 +297,7 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BSP.cpp" />
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="DebagWireFrame.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -310,6 +311,9 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapChip.cpp" />
+    <ClCompile Include="NaviMesh.cpp" />
+    <ClCompile Include="Path.cpp" />
+    <ClCompile Include="PathFinding.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAnimation.cpp" />
@@ -330,6 +334,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="TestEnemy.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TknFile.cpp" />
     <ClCompile Include="WipeCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +408,7 @@
     <ClInclude Include="AABB.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BSP.h" />
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="DebagWireFrame.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Enemy.h" />
@@ -413,6 +421,9 @@
     <ClInclude Include="Level3D.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="MapChip.h" />
+    <ClInclude Include="NaviMesh.h" />
+    <ClInclude Include="Path.h" />
+    <ClInclude Include="PathFinding.h" />
     <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAnimation.h" />
@@ -427,6 +438,9 @@
     <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="TestEnemy.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TknFile.h" />
     <ClInclude Include="WipeCamera.h" />
   </ItemGroup>
   <ItemGroup>

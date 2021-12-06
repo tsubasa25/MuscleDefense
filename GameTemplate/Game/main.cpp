@@ -2,6 +2,7 @@
 #include "system/system.h"
 #include "GameScene.h"
 #include "BackGround.h"
+#include "TitleScene.h"
 #include "DebagWireFrame.h"
 namespace
 {	
@@ -34,6 +35,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//リソースマネージャのインスタンスを作成
 	nsMuscle::ResourceBankManager::CreateInstance();
 
+	
 	//ライトマネージャーのインスタンスを作成
 	nsMuscle::LightManager::CreateInstance();
 	nsMuscle::LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
@@ -42,13 +44,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);
 	nsMuscle::LightManager::GetInstance()->SetPointLigNum(0);
 	nsMuscle::LightManager::GetInstance()->SetSpotLigNum(0);
-
+	nsMuscle::LightManager::GetInstance()->SetLightCameraFar(10000.0f);
 	//DebugWireframe::Init();
 	//ブルームフラグ、シャドウフラグの順番
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
 
-	NewGO<nsMuscle::GameScene>(0,"gameScene");
-	NewGO<nsMuscle::BackGround>(0);
+	NewGO<nsMuscle::TitleScene>(0, "titleScene");
+	//NewGO<nsMuscle::GameScene>(0,"gameScene");
+	//NewGO<nsMuscle::BackGround>(0,"backGround");
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////

@@ -4,6 +4,7 @@
 #include "BackGround.h"
 #include "TitleScene.h"
 #include "DebagWireFrame.h"
+#include "WipeCamera.h"
 namespace
 {	
 	const Vector3 LIGHTCAMERA_UP = { -5.0f,-3.0f,0.0f };
@@ -48,7 +49,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//DebugWireframe::Init();
 	//ブルームフラグ、シャドウフラグの順番
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
-
+	NewGO<nsMuscle::WipeCamera>(0);
 	NewGO<nsMuscle::TitleScene>(0, "titleScene");
 	//NewGO<nsMuscle::GameScene>(0,"gameScene");
 	//NewGO<nsMuscle::BackGround>(0,"backGround");

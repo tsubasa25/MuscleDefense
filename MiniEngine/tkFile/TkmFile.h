@@ -11,6 +11,11 @@
 /// <summary>
 /// tkmファイルクラス。
 /// </summary>
+struct LowTexture {
+std::string filePath;			// ファイルパス。
+std::unique_ptr<char[]> data;	// 生データ(ddsファイル)
+unsigned int dataSize;			// データのサイズ。
+};
 class  TkmFile {
 public:
 	/// <summary>

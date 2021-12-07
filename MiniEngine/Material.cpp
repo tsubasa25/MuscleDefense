@@ -11,29 +11,68 @@ enum {
 void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 {
 	const auto& nullTextureMaps = g_graphicsEngine->GetNullTextureMaps();
+
+	const char* filePath = nullptr;
+	char* map = nullptr;
+	unsigned int mapSize;
+
+
+	//const auto& nullTextureMaps = g_graphicsEngine->GetNullTextureMaps();
 	if (tkmMat.albedoMap != nullptr) {
 		m_albedoMap.InitFromMemory(tkmMat.albedoMap.get(), tkmMat.albedoMapSize);
 	}
 	else {
 		m_albedoMap.InitFromMemory(
-			nullTextureMaps.GetAlbedoMap().get(), 
-			nullTextureMaps.GetAlbedoMapSize());
+		nullTextureMaps.GetAlbedoMap().get(), 
+		nullTextureMaps.GetAlbedoMapSize());
 	}
+	//auto albedoMap = nsMuscle::ResourceBankManager::GetInstance()->GetTextureFromBank(tkmMat);
+
+
+	//アルベドマップ。
+	/*{
+		if (tkmMat.albedoMap != nullptr)
+		{
+			filePath = tkmMat.albedoMap->filePath.c_str();
+			map = tkmMat.albedoMap->data.get();
+			mapSize = tkmMat.albedoMap->dataSize;
+		}
+		else
+		{
+			filePath = nullTextureMaps.GetAlbedoMapFilePath();
+			map = nullTextureMaps.GetAlbedoMap().get();
+			mapSize = nullTextureMaps.GetAlbedoMapSize();
+		}
+		auto albedoMap = g_engine->GetTextureFromBank(filePath);
+
+		if (albedoMap == nullptr)
+		{
+			albedoMap = new Texture();
+			albedoMap->InitFromMemory(map, mapSize);
+			g_engine->RegistTextureToBank(filePath, albedoMap);
+		}
+		m_albedoMap = albedoMap;
+	}*/
+
+
+
+
+
 	if (tkmMat.normalMap != nullptr) {
 		m_normalMap.InitFromMemory(tkmMat.normalMap.get(), tkmMat.normalMapSize);
 	}
 	else {
 		m_normalMap.InitFromMemory(
-			nullTextureMaps.GetNormalMap().get(), 
-			nullTextureMaps.GetNormalMapSize());
+		nullTextureMaps.GetNormalMap().get(), 
+		nullTextureMaps.GetNormalMapSize());
 	}
 	if (tkmMat.specularMap != nullptr) {
 		m_specularMap.InitFromMemory(tkmMat.specularMap.get(), tkmMat.specularMapSize);
 	}
 	else {
 		m_specularMap.InitFromMemory(
-			nullTextureMaps.GetSpecularMap().get(),
-			nullTextureMaps.GetSpecularMapSize());
+		nullTextureMaps.GetSpecularMap().get(),
+		nullTextureMaps.GetSpecularMapSize());
 	}
 
 	if (tkmMat.reflectionMap != nullptr) {
@@ -41,8 +80,8 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 	}
 	else {
 		m_reflectionMap.InitFromMemory(
-			nullTextureMaps.GetReflectionMap().get(),
-			nullTextureMaps.GetReflectionMapSize());
+		nullTextureMaps.GetReflectionMap().get(),
+		nullTextureMaps.GetReflectionMapSize());
 	}
 
 	if (tkmMat.refractionMap != nullptr) {
@@ -50,8 +89,8 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 	}
 	else {
 		m_refractionMap.InitFromMemory(
-			nullTextureMaps.GetRefractionMap().get(),
-			nullTextureMaps.GetRefractionMapSize());
+		nullTextureMaps.GetRefractionMap().get(),
+		nullTextureMaps.GetRefractionMapSize());
 	}
 }
 void Material::InitFromTkmMaterila(

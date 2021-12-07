@@ -1,21 +1,21 @@
 #pragma once
 
 /// <summary>
-/// Nullテクスチャマップを保持しているクラス。
-/// </summary>
-/// <remarks>
-/// このクラスが保持しているのは、
-/// スペキュラマップ、法線マップ、反射率マップなどの
-/// マテリアルで使用するテクスチャマップです。
-/// このクラスのマップはマテリアルに、上記のマップが
-/// 貼り付けられていない場合です。
-/// ですので、このクラスが保持しているマップは、スペキュラマップであれば
-/// 鏡面反射率０、法線マップであれば凸凹なし、リフレクションマップであれば反射率０となります。
-/// マテリアルにマップが貼り付けられていない場合に、このクラスのマップを利用することで、
-/// シェーダーでの動的分岐を減らすことができ、シェーダ―プログラムをシンプルにすることができるようになっています。
-/// このクラスでロードされているテクスチャは、Assets/modelData/presetの下に用意されています。
-/// </remarks>
-class NullTextureMaps {
+	/// Nullテクスチャマップを保持しているクラス。
+	/// </summary>
+	/// <remarks>
+	/// このクラスが保持しているのは、
+	/// スペキュラマップ、法線マップ、反射率マップなどの
+	/// マテリアルで使用するテクスチャマップです。
+	/// このクラスのマップはマテリアルに、上記のマップが
+	/// 貼り付けられていない場合です。
+	/// ですので、このクラスが保持しているマップは、スペキュラマップであれば
+	/// 鏡面反射率０、法線マップであれば凸凹なし、リフレクションマップであれば反射率０となります。
+	/// マテリアルにマップが貼り付けられていない場合に、このクラスのマップを利用することで、
+	/// シェーダーでの動的分岐を減らすことができ、シェーダ―プログラムをシンプルにすることができるようになっています。
+	/// このクラスでロードされているテクスチャは、Assets/modelData/presetの下に用意されています。
+	/// </remarks>
+class NullTextureMaps {// : public Noncopyable
 public:
 	/// <summary>
 	/// 初期化。
@@ -37,13 +37,17 @@ public:
 	{
 		return m_normalMapSize;
 	}
+	const char* GetNormalMapFilePath() const
+	{
+		return m_normalMapFilePath;
+	}
 	/// <summary>
 	/// スペキュラマップを取得。
 	/// </summary>
 	/// <returns></returns>
 	const std::unique_ptr<char[]>& GetSpecularMap() const
 	{
-		return m_zeroValueMap;
+		return m_specMap;
 	}
 	/// <summary>
 	/// スペキュラマップのサイズを取得。
@@ -51,9 +55,13 @@ public:
 	/// <returns></returns>
 	unsigned int GetSpecularMapSize() const
 	{
-		return m_zeroValueMapSize;
+		return m_specMapSize;
 	}
-	/// <summary>
+	const char* GetSpecularMapFilePath() const
+	{
+		return m_specMapFilePath;
+	}
+	/// <summary> 
 	/// アルベドマップを取得。
 	/// </summary>
 	/// <returns></returns>
@@ -68,6 +76,10 @@ public:
 	unsigned int GetAlbedoMapSize() const
 	{
 		return m_albedoMapSize;
+	}
+	const char* GetAlbedoMapFilePath() const
+	{
+		return m_albedoMapFilePath;
 	}
 	/// <summary>
 	/// リフレクションマップを取得。
@@ -85,6 +97,10 @@ public:
 	{
 		return m_zeroValueMapSize;
 	}
+	const char* GetReflectionMapFilePath() const
+	{
+		return m_zeroValueMapFilePath;
+	}
 	/// <summary>
 	/// 屈折マップを取得。
 	/// </summary>
@@ -101,11 +117,21 @@ public:
 	{
 		return m_zeroValueMapSize;
 	}
+	const char* GetRefractionMapFilePath() const
+	{
+		return m_zeroValueMapFilePath;
+	}
 private:
 	std::unique_ptr<char[]> m_albedoMap;	//アルベドマップ。
 	unsigned int m_albedoMapSize = 0;		//アルベドマップのサイズ。
 	std::unique_ptr<char[]>	m_normalMap;	//法線マップ。
 	unsigned int m_normalMapSize = 0;		//法線マップのサイズ。
+	std::unique_ptr<char[]>	m_specMap;		//法線マップ。
+	unsigned int m_specMapSize = 0;			//法線マップのサイズ。
 	std::unique_ptr<char[]> m_zeroValueMap;	//0の値を格納しているマップ。
 	unsigned int m_zeroValueMapSize = 0;	//0の値を格納しているマップのサイズ。
+	const char* m_albedoMapFilePath;
+	const char* m_normalMapFilePath;
+	const char* m_specMapFilePath;
+	const char* m_zeroValueMapFilePath;
 };

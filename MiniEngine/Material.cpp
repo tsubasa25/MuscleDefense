@@ -16,21 +16,18 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 	char* map = nullptr;
 	unsigned int mapSize;
 
-
-	//const auto& nullTextureMaps = g_graphicsEngine->GetNullTextureMaps();
-	if (tkmMat.albedoMap != nullptr) {
+	/*if (tkmMat.albedoMap != nullptr) {
 		m_albedoMap.InitFromMemory(tkmMat.albedoMap.get(), tkmMat.albedoMapSize);
 	}
 	else {
 		m_albedoMap.InitFromMemory(
 		nullTextureMaps.GetAlbedoMap().get(), 
 		nullTextureMaps.GetAlbedoMapSize());
-	}
+	}*/
 	//auto albedoMap = nsMuscle::ResourceBankManager::GetInstance()->GetTextureFromBank(tkmMat);
 
-
 	//アルベドマップ。
-	/*{
+	{
 		if (tkmMat.albedoMap != nullptr)
 		{
 			filePath = tkmMat.albedoMap->filePath.c_str();
@@ -43,55 +40,119 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 			map = nullTextureMaps.GetAlbedoMap().get();
 			mapSize = nullTextureMaps.GetAlbedoMapSize();
 		}
-		auto albedoMap = g_engine->GetTextureFromBank(filePath);
+		auto albedoMap = nsMuscle::ResourceBankManager::GetInstance()->GetTextureFromBank(filePath);
 
 		if (albedoMap == nullptr)
 		{
 			albedoMap = new Texture();
 			albedoMap->InitFromMemory(map, mapSize);
-			g_engine->RegistTextureToBank(filePath, albedoMap);
+			nsMuscle::ResourceBankManager::GetInstance()->RegistTextureToBank(filePath, albedoMap);
 		}
 		m_albedoMap = albedoMap;
-	}*/
+	}
+
+	//法線マップ。
+	{
+		if (tkmMat.normalMap != nullptr)
+		{
+			filePath = tkmMat.normalMap->filePath.c_str();
+			map = tkmMat.normalMap->data.get();
+			mapSize = tkmMat.normalMap->dataSize;
+		}
+		else
+		{
+			filePath = nullTextureMaps.GetNormalMapFilePath();
+			map = nullTextureMaps.GetNormalMap().get();
+			mapSize = nullTextureMaps.GetNormalMapSize();
+		}
+		auto normalMap = nsMuscle::ResourceBankManager::GetInstance()->GetTextureFromBank(filePath);
+
+		if (normalMap == nullptr)
+		{
+			normalMap = new Texture();
+			normalMap->InitFromMemory(map, mapSize);
+			nsMuscle::ResourceBankManager::GetInstance()->RegistTextureToBank(filePath, normalMap);
+		}
+		m_normalMap = normalMap;
+	}
 
 
 
+	//スペキュラマップ。
+	{
+		if (tkmMat.specularMap != nullptr)
+		{
+			filePath = tkmMat.specularMap->filePath.c_str();
+			map = tkmMat.specularMap->data.get();
+			mapSize = tkmMat.specularMap->dataSize;
+		}
+		else
+		{
+			filePath = nullTextureMaps.GetSpecularMapFilePath();
+			map = nullTextureMaps.GetSpecularMap().get();
+			mapSize = nullTextureMaps.GetSpecularMapSize();
+		}
+		auto specularMap = nsMuscle::ResourceBankManager::GetInstance()->GetTextureFromBank(filePath);
 
-
-	if (tkmMat.normalMap != nullptr) {
-		m_normalMap.InitFromMemory(tkmMat.normalMap.get(), tkmMat.normalMapSize);
-	}
-	else {
-		m_normalMap.InitFromMemory(
-		nullTextureMaps.GetNormalMap().get(), 
-		nullTextureMaps.GetNormalMapSize());
-	}
-	if (tkmMat.specularMap != nullptr) {
-		m_specularMap.InitFromMemory(tkmMat.specularMap.get(), tkmMat.specularMapSize);
-	}
-	else {
-		m_specularMap.InitFromMemory(
-		nullTextureMaps.GetSpecularMap().get(),
-		nullTextureMaps.GetSpecularMapSize());
-	}
-
-	if (tkmMat.reflectionMap != nullptr) {
-		m_reflectionMap.InitFromMemory(tkmMat.reflectionMap.get(), tkmMat.reflectionMapSize);
-	}
-	else {
-		m_reflectionMap.InitFromMemory(
-		nullTextureMaps.GetReflectionMap().get(),
-		nullTextureMaps.GetReflectionMapSize());
+		if (specularMap == nullptr)
+		{
+			specularMap = new Texture();
+			specularMap->InitFromMemory(map, mapSize);
+			nsMuscle::ResourceBankManager::GetInstance()->RegistTextureToBank(filePath, specularMap);
+		}
+		m_specularMap = specularMap;
 	}
 
-	if (tkmMat.refractionMap != nullptr) {
-		m_refractionMap.InitFromMemory(tkmMat.refractionMap.get(), tkmMat.refractionMapSize);
+	//反射マップ。
+	{
+		if (tkmMat.reflectionMap != nullptr)
+		{
+			filePath = tkmMat.reflectionMap->filePath.c_str();
+			map = tkmMat.reflectionMap->data.get();
+			mapSize = tkmMat.reflectionMap->dataSize;
+		}
+		else
+		{
+			filePath = nullTextureMaps.GetReflectionMapFilePath();
+			map = nullTextureMaps.GetReflectionMap().get();
+			mapSize = nullTextureMaps.GetReflectionMapSize();
+		}
+		auto reflectionMap = nsMuscle::ResourceBankManager::GetInstance()->GetTextureFromBank(filePath);
+
+		if (reflectionMap == nullptr)
+		{
+			reflectionMap = new Texture();
+			reflectionMap->InitFromMemory(map, mapSize);
+			nsMuscle::ResourceBankManager::GetInstance()->RegistTextureToBank(filePath, reflectionMap);
+		}
+		m_reflectionMap = reflectionMap;
 	}
-	else {
-		m_refractionMap.InitFromMemory(
-		nullTextureMaps.GetRefractionMap().get(),
-		nullTextureMaps.GetRefractionMapSize());
+
+	//屈折マップ。
+	{
+		if (tkmMat.refractionMap != nullptr)
+		{
+			filePath = tkmMat.refractionMap->filePath.c_str();
+			map = tkmMat.refractionMap->data.get();
+			mapSize = tkmMat.refractionMap->dataSize;
+		}
+		else
+		{
+			filePath = nullTextureMaps.GetRefractionMapFilePath();
+			map = nullTextureMaps.GetRefractionMap().get();
+			mapSize = nullTextureMaps.GetRefractionMapSize();
+		}
+		auto refractionMap = nsMuscle::ResourceBankManager::GetInstance()->GetTextureFromBank(filePath);
+
+		if (refractionMap == nullptr)
+		{
+			refractionMap = new Texture();
+			refractionMap->InitFromMemory(map, mapSize);
+			nsMuscle::ResourceBankManager::GetInstance()->RegistTextureToBank(filePath, refractionMap);
+		}
+		m_refractionMap = refractionMap;
 	}
+
 }
 void Material::InitFromTkmMaterila(
 	const TkmFile::SMaterial& tkmMat,
@@ -105,8 +166,8 @@ void Material::InitFromTkmMaterila(
 	
 	//定数バッファを作成。
 	SMaterialParam matParam;
-	matParam.hasNormalMap = m_normalMap.IsValid() ? 1 : 0;
-	matParam.hasSpecMap = m_specularMap.IsValid() ? 1 : 0;
+	matParam.hasNormalMap = m_normalMap->IsValid() ? 1 : 0;
+	matParam.hasSpecMap = m_specularMap->IsValid() ? 1 : 0;
 	m_constantBuffer.Init(sizeof(SMaterialParam), &matParam);
 
 	//ルートシグネチャを初期化。

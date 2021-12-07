@@ -265,50 +265,64 @@ void TkmFile::BuildMaterial(SMaterial& tkmMat, FILE* fp, const char* filePath)
 
 	std::string texFilePath = filePath;
 	auto loadTexture = [&](
-		std::string& texFileName, 
-		std::unique_ptr<char[]>& ddsFileMemory, 
-		unsigned int& fileSize
-	) {
-		int filePathLength = static_cast<int>(texFilePath.length());
-		if (texFileName.length() > 0) {
-			//モデルのファイルパスからラストのフォルダ区切りを探す。
-			auto replaseStartPos = texFilePath.find_last_of('/');
-			if (replaseStartPos == std::string::npos) {
-				replaseStartPos = texFilePath.find_last_of('\\');
-			}
-			replaseStartPos += 1;
-			auto replaceLen = filePathLength - replaseStartPos;
-			texFilePath.replace(replaseStartPos, replaceLen, texFileName);
-			//拡張子をddsに変更する。
-			replaseStartPos = texFilePath.find_last_of('.') + 1;
-			replaceLen = texFilePath.length() - replaseStartPos;
-			texFilePath.replace(replaseStartPos, replaceLen, "dds");
-				
-			//テクスチャをロード。
-			FILE* texFileFp = fopen(texFilePath.c_str(), "rb");
-			if (texFileFp != nullptr) {
-				//ファイルサイズを取得。
-				fseek(texFileFp, 0L, SEEK_END);		
-				fileSize = ftell(texFileFp);
-				fseek(texFileFp, 0L, SEEK_SET);
+		std::string& texFileName,
+		LowTexture*& lowTexture
+		) {
+			int filePathLength = static_cast<int>(texFilePath.length());
+			if (texFileName.length() > 0) {
+				//モデルのファイルパスからラストのフォルダ区切りを探す。
+				auto replaseStartPos = texFilePath.find_last_of('/');
+				if (replaseStartPos == std::string::npos) {
+					replaseStartPos = texFilePath.find_last_of('\\');
+				}
+				replaseStartPos += 1;
+				auto replaceLen = filePathLength - replaseStartPos;
+				texFilePath.replace(replaseStartPos, replaceLen, texFileName);
+				//拡張子をddsに変更する。
+				replaseStartPos = texFilePath.find_last_of('.') + 1;
+				replaceLen = texFilePath.length() - replaseStartPos;
+				texFilePath.replace(replaseStartPos, replaceLen, "dds");
 
-				ddsFileMemory = std::make_unique<char[]>(fileSize);
-				fread(ddsFileMemory.get(), fileSize, 1, texFileFp);
-				fclose(texFileFp);
+				// テクスチャをリソースバンクから取得する。
+				lowTexture = nsMuscle::ResourceBankManager::GetInstance()->GetLowTextureFromBank(texFilePath.c_str());
+				if (lowTexture == nullptr) {
+					lowTexture = new LowTexture();
+					// バンクから取得できなかったので、新規テクスチャ。
+					FILE* texFileFp = fopen(texFilePath.c_str(), "rb");
+					if (texFileFp != nullptr) {
+						//ファイルサイズを取得。
+						fseek(texFileFp, 0L, SEEK_END);
+						lowTexture->dataSize = ftell(texFileFp);
+						fseek(texFileFp, 0L, SEEK_SET);
+
+						lowTexture->data = std::make_unique<char[]>(lowTexture->dataSize);
+						fread(lowTexture->data.get(), lowTexture->dataSize, 1, texFileFp);
+						fclose(texFileFp);
+						lowTexture->filePath = texFilePath;
+						// ロードしたテクスチャをバンクに登録する。
+						nsMuscle::ResourceBankManager::GetInstance()->RegistLowTextureToBank(lowTexture->filePath.c_str(), lowTexture);
+					}
+					else {
+						char errorMessage[256];
+						sprintf(errorMessage, "テクスチャのロードに失敗しました。%s\n", texFilePath.c_str());
+						MessageBoxA(nullptr, errorMessage, "エラー", MB_OK);
+
+					}
+				}
+				else {
+					int hoge = 0;
+				}
+
 			}
-			else {
-				MessageBoxA(nullptr, "テクスチャのロードに失敗しました。", "エラー", MB_OK);
-				std::abort();
-			}
-		}
 	};
 	//テクスチャをロード。
-	loadTexture( tkmMat.albedoMapFileName, tkmMat.albedoMap, tkmMat.albedoMapSize );
-	loadTexture( tkmMat.normalMapFileName, tkmMat.normalMap, tkmMat.normalMapSize );
-	loadTexture( tkmMat.specularMapFileName, tkmMat.specularMap, tkmMat.specularMapSize );
-	loadTexture( tkmMat.reflectionMapFileName, tkmMat.reflectionMap, tkmMat.reflectionMapSize );
-	loadTexture( tkmMat.refractionMapFileName, tkmMat.refractionMap, tkmMat.refractionMapSize) ;
+	loadTexture(tkmMat.albedoMapFileName, tkmMat.albedoMap);
+	loadTexture(tkmMat.normalMapFileName, tkmMat.normalMap);
+	loadTexture(tkmMat.specularMapFileName, tkmMat.specularMap);
+	loadTexture(tkmMat.reflectionMapFileName, tkmMat.reflectionMap);
+	loadTexture(tkmMat.refractionMapFileName, tkmMat.refractionMap);
 }
+
 void TkmFile::BuildTangentAndBiNormal()
 {
 	NormalSmoothing normalSmoothing;

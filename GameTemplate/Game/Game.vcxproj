@@ -321,6 +321,7 @@
     <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="ProteinBeam.cpp" />
     <ClCompile Include="ResourceBankManager.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="SpotLight.cpp" />
@@ -432,6 +433,7 @@
     <ClInclude Include="ProteinBeam.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceBankManager.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="Sky.h" />
     <ClInclude Include="SpotLight.h" />

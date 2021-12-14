@@ -75,9 +75,9 @@ cbuffer LightDataCb : register(b1)
 	float3 ambientLight;    // アンビエントライト
 
 	//半球ライト用
-	float3 groundColor;		//照り返しのライト。
-	float3 skyColor;		//天球ライト。
-	float3 groundNormal;	//地面の法線
+	//float3 groundColor;		//照り返しのライト。
+	//float3 skyColor;		//天球ライト。
+	//float3 groundNormal;	//地面の法線
    
 };
 cbuffer LightCameraCb : register(b2)

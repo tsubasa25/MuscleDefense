@@ -16,7 +16,7 @@ namespace
 //////////////////////////////////////
 // 関数宣言
 //////////////////////////////////////
-
+bool isGameEnd = false;//ゲーム終了か
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -51,8 +51,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
 	NewGO<nsMuscle::WipeCamera>(0);
 	NewGO<nsMuscle::TitleScene>(0, "titleScene");
+	NewGO<nsMuscle::GameScene>(0, "gameScene");
 	//NewGO<nsMuscle::GameScene>(0,"gameScene");
 	//NewGO<nsMuscle::BackGround>(0,"backGround");
+	
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
@@ -80,6 +82,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//tkmFileManagerを削除
 	nsMuscle::ResourceBankManager::DeleteInstance();
 
+	nsMuscle::LightManager::DeleteInstance();
+	nsMuscle::PostEffectManager::DeleteInstance();
 	//ゲームオブジェクトマネージャーを削除。
 	GameObjectManager::DeleteInstance();
 	return 0;

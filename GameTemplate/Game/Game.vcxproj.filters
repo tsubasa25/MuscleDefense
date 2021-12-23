@@ -60,6 +60,9 @@
     <Filter Include="ソース ファイル\prefab">
       <UniqueIdentifier>{4013d735-20ae-4172-a1b0-3faffd5f5002}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MiniEngine\util">
+      <UniqueIdentifier>{d52e939d-5fc7-498f-94e9-a980e7f3e23e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -342,6 +345,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ResultScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -654,6 +663,15 @@
     </ClInclude>
     <ClInclude Include="ResultScene.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Minion.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\util\Util.h">
+      <Filter>MiniEngine\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

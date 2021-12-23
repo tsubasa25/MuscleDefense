@@ -311,6 +311,7 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapChip.cpp" />
+    <ClCompile Include="Minion.cpp" />
     <ClCompile Include="NaviMesh.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PathFinding.cpp" />
@@ -336,6 +337,7 @@
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="TestEnemy.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TknFile.cpp" />
     <ClCompile Include="WipeCamera.cpp" />
@@ -405,6 +407,7 @@
     <ClInclude Include="..\..\MiniEngine\tkFile\TklFile.h" />
     <ClInclude Include="..\..\MiniEngine\tkFile\TkmFile.h" />
     <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
+    <ClInclude Include="..\..\MiniEngine\util\Util.h" />
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
     <ClInclude Include="AABB.h" />
     <ClInclude Include="BackGround.h" />
@@ -422,6 +425,7 @@
     <ClInclude Include="Level3D.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="MapChip.h" />
+    <ClInclude Include="Minion.h" />
     <ClInclude Include="NaviMesh.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="PathFinding.h" />
@@ -441,6 +445,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="TestEnemy.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TknFile.h" />
     <ClInclude Include="WipeCamera.h" />

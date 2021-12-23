@@ -38,7 +38,7 @@ public:
 				totalTime += time;
 			}
 			//•½‹Ï’l‚ğ‚Æ‚éB
-			m_frameDeltaTime = min(1.0f / 30.0f, totalTime / m_frameDeltaTimeQue.size());
+			m_frameDeltaTime = min(1.0f / 20.0f, totalTime / m_frameDeltaTimeQue.size());
 			m_frameDeltaTimeQue.pop_front();
 		}
 	}

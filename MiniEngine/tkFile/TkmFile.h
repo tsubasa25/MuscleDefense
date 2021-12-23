@@ -22,6 +22,7 @@ public:
 	/// マテリアル
 	/// </summary>
 	struct SMaterial {
+		int uniqID;								//ユニークID
 		std::string albedoMapFileName;			//アルベドマップのファイル名。
 		std::string normalMapFileName;			//法線マップのファイル名。
 		std::string specularMapFileName;		//スペキュラマップのファイル名。
@@ -112,6 +113,10 @@ public:
 		return (int)(m_meshParts.size());
 	}
 private:
+	/// <summary>
+	/// TKMファイルを最適化する。
+	/// </summary>
+	void Optimize();
 	/// <summary>
 	/// テクスチャ名をロード。
 	/// </summary>

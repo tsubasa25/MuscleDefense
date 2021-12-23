@@ -5,6 +5,7 @@
 #pragma once
 
 #include "CapsuleCollider.h"
+#include "SphereCollider.h"
 #include "RigidBody.h"
 
 
@@ -71,7 +72,7 @@ public:
 	/*!
 	* @brief	コライダーを取得。
 	*/
-	CCapsuleCollider* GetCollider()
+	SphereCollider* GetCollider()
 	{
 		return &m_collider;
 	}
@@ -103,7 +104,8 @@ private:
 	Vector3 			m_position;						//!<座標。
 	bool 				m_isJump = false;				//!<ジャンプ中？
 	bool				m_isOnGround = true;			//!<地面の上にいる？
-	CCapsuleCollider	m_collider;						//!<コライダー。
+	// CCapsuleCollider	m_collider;						//!<コライダー。
+	SphereCollider		m_collider;						//!<コライダー。
 	float				m_radius = 0.0f;				//!<カプセルコライダーの半径。
 	float				m_height = 0.0f;				//!<カプセルコライダーの高さ。
 	RigidBody			m_rigidBody;					//剛体。

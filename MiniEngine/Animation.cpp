@@ -36,7 +36,8 @@ void Animation::Init(
 		ctr.Init(m_skeleton, footstepBoneNo);
 	}
 
-	Play(0);
+	//Play(0);
+	Play(numAnimClip);
 	m_isInited = true;
 }
 /*!

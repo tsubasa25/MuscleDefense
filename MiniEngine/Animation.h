@@ -165,6 +165,7 @@ private:
 		m_interpolateTime = 0.0f;
 		m_interpolateTimeEnd = interpolateTime;
 	}
+
 	/// <summary>
 	/// ローカルポーズの更新。
 	/// </summary>

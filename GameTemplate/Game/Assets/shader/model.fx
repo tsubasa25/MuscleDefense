@@ -410,8 +410,9 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     //float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
 
     if (shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f
-        && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
-    { 
+        && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f 
+        && psIn.posInLVP.z < 1.0f 
+    ){ 
         // シャドウマップに描き込まれているZ値と比較する
         // 計算したUV座標を使って、シャドウマップから深度値をサンプリング
         float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;

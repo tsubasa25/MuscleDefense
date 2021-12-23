@@ -47,14 +47,21 @@ void Skeleton::UpdateBoneWorldMatrix(Bone& bone, const Matrix& parentMatrix)
 bool Skeleton::Init(const char* tksFilePath)
 {
 	//tksファイルをロードする。
-	m_tksFile.Load(tksFilePath);
+	m_tksFile= nsMuscle::ResourceBankManager::GetInstance()->GetTksFromBank(tksFilePath);
+	if (m_tksFile == nullptr)
+	{
+		//未登録
+		m_tksFile = new TksFile;
+		m_tksFile->Load(tksFilePath);
+		nsMuscle::ResourceBankManager::GetInstance()->RegistTksFileToBank(tksFilePath, m_tksFile);
+	}
 	//ボーン行列を構築する。
 	BuildBoneMatrices();
 	return true;
 }
 void Skeleton::BuildBoneMatrices()
 {
-	m_tksFile.QueryBone([&](TksFile::SBone & tksBone) {
+	m_tksFile->QueryBone([&](TksFile::SBone & tksBone) {
 		//バインドポーズ。
 		Matrix bindPoseMatrix;
 		memcpy(bindPoseMatrix.m[0], &tksBone.bindPose[0], sizeof(tksBone.bindPose[0]));

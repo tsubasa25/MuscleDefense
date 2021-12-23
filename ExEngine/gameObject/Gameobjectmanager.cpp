@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ExEngine.h"
 #include "GameObjectManager.h"
+#include "time/Stopwatch.h"
 
 GameObjectManager* GameObjectManager::m_instance = nullptr;
 
@@ -21,6 +22,8 @@ GameObjectManager::~GameObjectManager()
 }
 void GameObjectManager::ExecuteUpdate()
 {	
+	
+
 	//死亡フラグがついているゲームオブジェクトを破棄する。
 	for (auto& goList : m_gameObjectListArray) {
 		goList.remove_if([&](IGameObject* go) {	
@@ -84,11 +87,6 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	//ポストエフェクト用。Render後の処理
 	nsMuscle::PostEffectManager::GetInstance()->AfterRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetMainRenderTarget());
 
-
-
-
-
-
 	//ポストエフェクト用。Render前の処理ワイプ用
 	if (nsMuscle::PostEffectManager::GetInstance()->GetIsWipeRender()) {
 		for (int i = 0; i < 4; i++) {
@@ -113,7 +111,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 				break;
 			}
 
-			//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+			//Renderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
 			for (auto& goList : m_gameObjectListArray) {
 				for (auto& go : goList) {
 					go->RenderWrapper(rc, g_camera3D[i + 1]);
@@ -130,6 +128,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 			}*/
 			//nsMuscle::PostEffectManager::GetInstance()->AfterWipeRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetWipeRenderTarget(1));
 	}
+
 }
 void GameObjectManager::ExecutePostRender(RenderContext& rc)
 {

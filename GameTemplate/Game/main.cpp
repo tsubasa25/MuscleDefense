@@ -5,6 +5,13 @@
 #include "TitleScene.h"
 #include "DebagWireFrame.h"
 #include "WipeCamera.h"
+
+#include "TestScene.h"
+#include "time/Stopwatch.h"
+
+
+#define OUTPUT_1FRAME_TIME	// 有効で1フレームの経過時間を表示
+
 namespace
 {	
 	const Vector3 LIGHTCAMERA_UP = { -5.0f,-3.0f,0.0f };
@@ -49,12 +56,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//DebugWireframe::Init();
 	//ブルームフラグ、シャドウフラグの順番
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
-	NewGO<nsMuscle::WipeCamera>(0);
-	NewGO<nsMuscle::TitleScene>(0, "titleScene");
-	NewGO<nsMuscle::GameScene>(0, "gameScene");
-	//NewGO<nsMuscle::GameScene>(0,"gameScene");
-	//NewGO<nsMuscle::BackGround>(0,"backGround");
-	
+	NewGO<nsMuscle::WipeCamera>(0);//ワイプカメラ用クラス
+	NewGO<nsMuscle::TitleScene>(0, "titleScene");//タイトル
+	NewGO<nsMuscle::GameScene>(0, "gameScene");//ゲームシーン
+	//NewGO<nsMuscle::TestScene>(0);//デバック用
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
@@ -63,6 +68,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここからゲームループ。
 	while (DispatchWindowMessage())
 	{
+		Stopwatch sw;
+		sw.Start();
 		//レンダリング開始。
 		g_engine->BeginFrame();		
 
@@ -78,6 +85,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//絵を描くコードを書くのはここまで！！！
 		//////////////////////////////////////
 		g_engine->EndFrame();
+		sw.Stop();
+#ifdef OUTPUT_1FRAME_TIME
+		char text[256];
+		sprintf(text, "1frame time = %f\n", sw.GetElapsedMillisecond());
+		OutputDebugStringA(text);
+#endif
 	}
 	//tkmFileManagerを削除
 	nsMuscle::ResourceBankManager::DeleteInstance();

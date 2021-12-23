@@ -100,7 +100,9 @@ void PhysicsWorld::ContactTest(
 	std::function<void(const btCollisionObject& contactCollisionObject)> cb
 )
 {
-	ContactTest(rb.GetBody(), cb);
+	if (rb.GetBody()) {
+		ContactTest(rb.GetBody(), cb);
+	}
 }
 void PhysicsWorld::ContactTest(
 	CharacterController& charaCon,

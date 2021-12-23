@@ -113,7 +113,8 @@ void CharacterController::Init(float radius, float height, const Vector3& positi
 	//コリジョン作成。
 	m_radius = radius;
 	m_height = height;
-	m_collider.Init(radius, height);
+	//m_collider.Init(radius, height);
+	m_collider.Create(radius);
 
 	//剛体を初期化。
 	RigidBodyInitData rbInfo;

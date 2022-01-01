@@ -28,7 +28,7 @@ void Font::Draw(
 		return;
 	}
 	pivot.y = 1.0f - pivot.y;
-	DirectX::XMFLOAT2 tkFloat2Zero(0, 0);
+	//DirectX::XMFLOAT2 tkFloat2Zero(0, 0);
 	//座標系をスプライトと合わせる。
 	Vector2 pos = position;
 	float frameBufferHalfWidth = g_graphicsEngine->GetFrameBufferWidth() * 0.5f;

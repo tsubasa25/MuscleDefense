@@ -310,6 +310,7 @@
     <ClCompile Include="Level3D.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapChip.cpp" />
     <ClCompile Include="Minion.cpp" />
     <ClCompile Include="NaviMesh.cpp" />
@@ -424,6 +425,7 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Level3D.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="MapChip.h" />
     <ClInclude Include="Minion.h" />
     <ClInclude Include="NaviMesh.h" />

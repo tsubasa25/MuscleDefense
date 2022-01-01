@@ -89,7 +89,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 
 	//ポストエフェクト用。Render前の処理ワイプ用
 	if (nsMuscle::PostEffectManager::GetInstance()->GetIsWipeRender()) {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			nsMuscle::PostEffectManager::GetInstance()->BeforeRender(rc, nsMuscle::PostEffectManager::GetInstance()->GetWipeRenderTarget(i));
 
 			////wipe
@@ -103,10 +103,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 				break;
 			case 2:
 				rc.SetStep(RenderContext::eStep_RenderWipe2);
-				break;
-			case 3:
-				rc.SetStep(RenderContext::eStep_RenderWipe3);
-				break;
+				break;			
 			default:
 				break;
 			}

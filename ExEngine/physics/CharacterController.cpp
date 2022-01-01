@@ -107,12 +107,11 @@ namespace {
 }
 
 
-void CharacterController::Init(float radius, float height, const Vector3& position)
+void CharacterController::Init(float radius, const Vector3& position)
 {
 	m_position = position;
 	//コリジョン作成。
-	m_radius = radius;
-	m_height = height;
+	m_radius = radius;	
 	//m_collider.Init(radius, height);
 	m_collider.Create(radius);
 
@@ -123,7 +122,7 @@ void CharacterController::Init(float radius, float height, const Vector3& positi
 	m_rigidBody.Init(rbInfo);
 	btTransform& trans = m_rigidBody.GetBody()->getWorldTransform();
 	//剛体の位置を更新。
-	trans.setOrigin(btVector3(position.x, position.y + m_height * 0.5f + m_radius, position.z));
+	trans.setOrigin(btVector3(position.x, position.y + m_radius, position.z));
 	//@todo 未対応。trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 	m_rigidBody.GetBody()->setUserIndex(enCollisionAttr_Character);
 	m_rigidBody.GetBody()->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
@@ -163,7 +162,7 @@ const Vector3& CharacterController::Execute( Vector3& moveSpeed, float deltaTime
 			}
 			//カプセルコライダーの中心座標 + 高さ*0.1の座標をposTmpに求める。
 			Vector3 posTmp = m_position;
-			posTmp.y += m_height * 0.5f + m_radius + m_height * 0.1f;
+			posTmp.y += m_radius;
 			//レイを作成。
 			btTransform start, end;
 			start.setIdentity();
@@ -238,7 +237,7 @@ const Vector3& CharacterController::Execute( Vector3& moveSpeed, float deltaTime
 		start.setIdentity();
 		end.setIdentity();
 		//始点はカプセルコライダーの中心。
-		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+		start.setOrigin(btVector3(m_position.x, m_position.y + m_radius, m_position.z));
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。

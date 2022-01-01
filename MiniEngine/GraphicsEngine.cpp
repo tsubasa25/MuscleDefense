@@ -3,7 +3,7 @@
 
 GraphicsEngine* g_graphicsEngine = nullptr;	//グラフィックスエンジン
 Camera* g_camera2D = nullptr;				//2Dカメラ。
-Camera* g_camera3D[5] = { nullptr};				//3Dカメラ。
+Camera* g_camera3D[4] = { nullptr};				//3Dカメラ。
 
 GraphicsEngine::~GraphicsEngine()
 {
@@ -68,12 +68,9 @@ bool GraphicsEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeig
 	//
 	g_graphicsEngine = this;
 
-	
-
-
 	m_frameBufferWidth = frameBufferWidth;
 	m_frameBufferHeight = frameBufferHeight;
-
+	
 	//デバイスにアクセスするためのインターフェースを作成。
 	auto dxgiFactory = CreateDXGIFactory();
 	//D3Dデバイスの作成。
@@ -166,18 +163,21 @@ bool GraphicsEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeig
 
 	//カメラを初期化する。
 	m_camera2D.SetUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);
-	m_camera2D.SetWidth( static_cast<float>(m_frameBufferWidth) );
-	m_camera2D.SetHeight( static_cast<float>(m_frameBufferHeight) );
+	m_camera2D.SetWidth( static_cast<float>(m_frameBufferWidth) );	 
+	m_camera2D.SetHeight( static_cast<float>(m_frameBufferHeight) ); 
 	m_camera2D.SetPosition({0.0f, 0.0f, -1.0f});
 	m_camera2D.SetTarget({ 0.0f, 0.0f, 0.0f });
 
 	g_camera2D = &m_camera2D;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		m_camera3D[i].SetPosition({ 0.0f, 50.0f, 200.0f });
 		m_camera3D[i].SetTarget({ 0.0f, 50.0f, 0.0f });
 		m_camera3D[i].SetFar(250000.0f);
-
+		if (i != 0)
+		{
+			m_camera3D[i].SetIsSquare(true);
+		}
 		g_camera3D[i] = &m_camera3D[i];
 	}
 	

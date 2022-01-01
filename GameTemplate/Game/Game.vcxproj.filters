@@ -353,6 +353,9 @@
     <ClCompile Include="Minion.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -672,6 +675,9 @@
     </ClInclude>
     <ClInclude Include="..\..\MiniEngine\util\Util.h">
       <Filter>MiniEngine\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

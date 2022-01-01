@@ -316,7 +316,7 @@ public:
 	/// アスペクト比を設定。
 	/// </summary>
 	/// <param name="splitScreenNum"></param>
-	void SetAspect(int splitScreenNum);
+	void SetAspect(float splitScreenNum);
 	
 	/// <summary>
 	/// カメラのコピーを作成。
@@ -338,6 +338,8 @@ public:
 	/// <param name="worldPos">ワールド座標</param>
 	void CalcScreenPositionFromWorldPosition(Vector2& screenPos, const Vector3& worldPos) const;
 
+	void SetIsSquare(bool flag) { m_isSquare = flag; }
+	void SetHeightAspect(float num) { m_heightAspect = num; }
 protected:
 	float		m_targetToPositionLen = 1.0f;			//注視点と視点まで距離。
 	Vector3		m_position = {0.0f, 0.0f, 1.0f};		//カメラ位置。
@@ -359,4 +361,6 @@ protected:
 	EnUpdateProjMatrixFunc m_updateProjMatrixFunc = enUpdateProjMatrixFunc_Perspective;	//プロジェクション行列の更新の仕方。
 	bool		m_isNeedUpdateProjectionMatrix = true;
 	bool		m_isDirty = false;						//ダーティフラグ。
+	bool		m_isSquare = false;						//アスペクト比を変えるかどうか
+	float		m_heightAspect = 4.0f/3.0f;			//縦のアスペクト比
 };

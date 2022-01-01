@@ -17,4 +17,5 @@
 
 const Vector3 LIGHTCAMERA_POSITION = { 300.0f, 500.0f,0.0f };
 const Vector3 LIGHTCAMERA_TARGET = { 0.f,0.f,0.f };
-const int CAMERA_MAX_NUM = 5;
+const int CAMERA_MAX_NUM = 4;
+const int WIPE_MAX_NUM = 3;

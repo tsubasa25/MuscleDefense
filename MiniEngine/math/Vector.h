@@ -9,6 +9,8 @@ class Matrix;
 class Vector2 {
 public:
 	static const Vector2 Zero;
+	static const Vector2 One;
+	static const Vector2 AxisX;
 	/// <summary>
 	/// コンストラクタ。
 	/// </summary>

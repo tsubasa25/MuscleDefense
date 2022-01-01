@@ -4,7 +4,6 @@
 #include "BackGround.h"
 #include "TitleScene.h"
 #include "DebagWireFrame.h"
-#include "WipeCamera.h"
 
 #include "TestScene.h"
 #include "time/Stopwatch.h"
@@ -56,7 +55,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//DebugWireframe::Init();
 	//ブルームフラグ、シャドウフラグの順番
 	nsMuscle::PostEffectManager::GetInstance()->Init(true,true);
-	NewGO<nsMuscle::WipeCamera>(0);//ワイプカメラ用クラス
 	NewGO<nsMuscle::TitleScene>(0, "titleScene");//タイトル
 	NewGO<nsMuscle::GameScene>(0, "gameScene");//ゲームシーン
 	//NewGO<nsMuscle::TestScene>(0);//デバック用
@@ -64,7 +62,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
 	auto& renderContext = g_graphicsEngine->GetRenderContext();
-
 	// ここからゲームループ。
 	while (DispatchWindowMessage())
 	{

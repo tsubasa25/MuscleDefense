@@ -41,8 +41,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::PostEffectManager::CreateInstance();
 	//リソースマネージャのインスタンスを作成
 	nsMuscle::ResourceBankManager::CreateInstance();
+	//サウンドソースのインスタンスを作成
+	nsMuscle::SoundEngine::CreateInstance();
+	nsMuscle::SoundEngine::GetInstance()->Init();
+	//エネミーSEのインスタンスを作成
+	nsMuscle::EnemySEManager::CreateInstance();
 
-	
 	//ライトマネージャーのインスタンスを作成
 	nsMuscle::LightManager::CreateInstance();
 	nsMuscle::LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
@@ -96,6 +100,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::PostEffectManager::DeleteInstance();
 	//ゲームオブジェクトマネージャーを削除。
 	GameObjectManager::DeleteInstance();
+
+	nsMuscle::EnemySEManager::DeleteInstance();
 	return 0;
 }
 

@@ -24,9 +24,15 @@
 
 #include "NameKey.h"
 #include "InGameSoundConst.h"
+
+#include "effect/Effect.h"
+#include "effect/EffectEngine.h"
+
 const Vector3 LIGHTCAMERA_POSITION = { 300.0f, 500.0f,0.0f };
 const Vector3 LIGHTCAMERA_TARGET = { 0.f,0.f,0.f };
 const int CAMERA_MAX_NUM = 4;
 const int WIPE_MAX_NUM = 3;
 
 const float SOUND_SE_EXPLOSION_VOLUME = 1.0f;
+
+const bool IS_BGM = true;

@@ -17,10 +17,10 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 	unsigned int mapSize;
 
 	/*if (tkmMat.albedoMap != nullptr) {
-		m_albedoMap.InitFromMemory(tkmMat.albedoMap.get(), tkmMat.albedoMapSize);
+		m_albedoMap->InitFromMemory(tkmMat.albedoMap->data.get(), tkmMat.albedoMap->dataSize);
 	}
 	else {
-		m_albedoMap.InitFromMemory(
+		m_albedoMap->InitFromMemory(
 		nullTextureMaps.GetAlbedoMap().get(), 
 		nullTextureMaps.GetAlbedoMapSize());
 	}*/

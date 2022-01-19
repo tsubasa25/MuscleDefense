@@ -16,7 +16,7 @@ namespace
 	const Vector3 LIGHTCAMERA_UP = { -5.0f,-3.0f,0.0f };
 	const float LIGHTCAMERA_WIDTH = 2000.0f;
 	const float LIGHTCAMERA_HEIGHT = 2000.0f;
-	const int CAMERA_FAR = 100000;
+	const int CAMERA_FAR = 100000;	
 }
 
 //////////////////////////////////////
@@ -46,6 +46,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::SoundEngine::GetInstance()->Init();
 	//エネミーSEのインスタンスを作成
 	nsMuscle::EnemySEManager::CreateInstance();
+	//エフェクトエンジンのインスタンスを作成
+	EffectEngine::CreateInstance();
 
 	//ライトマネージャーのインスタンスを作成
 	nsMuscle::LightManager::CreateInstance();
@@ -81,7 +83,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		//DebugWireframe::getDebugMode()->RenderContextUpdate(renderContext);
-	
+		EffectEngine::GetInstance()->Update(g_gameTime->GetFrameDeltaTime());
+		EffectEngine::GetInstance()->Draw();
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！
 		//////////////////////////////////////

@@ -63,6 +63,9 @@
     <Filter Include="MiniEngine\util">
       <UniqueIdentifier>{d52e939d-5fc7-498f-94e9-a980e7f3e23e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ExEngine\effect">
+      <UniqueIdentifier>{9d6f2596-849e-4a8c-928b-f67805dcf659}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -382,6 +385,12 @@
     </ClCompile>
     <ClCompile Include="PlayerVoice.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\effect\Effect.cpp">
+      <Filter>ExEngine\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\effect\EffectEngine.cpp">
+      <Filter>ExEngine\effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -735,6 +744,12 @@
     </ClInclude>
     <ClInclude Include="InGameSoundConst.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\effect\Effect.h">
+      <Filter>ExEngine\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h">
+      <Filter>ExEngine\effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

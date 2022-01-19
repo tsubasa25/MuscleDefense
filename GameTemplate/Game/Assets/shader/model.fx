@@ -73,12 +73,6 @@ cbuffer LightDataCb : register(b1)
     int spotLigNum;//スポットライトの数
 	float3 eyePos;          // 視点の位置
 	float3 ambientLight;    // アンビエントライト
-
-	//半球ライト用
-	//float3 groundColor;		//照り返しのライト。
-	//float3 skyColor;		//天球ライト。
-	//float3 groundNormal;	//地面の法線
-   
 };
 cbuffer LightCameraCb : register(b2)
 {

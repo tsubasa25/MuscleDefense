@@ -84,9 +84,9 @@ void EffectEngine::Update(float deltaTime)
 	m_manager->Update();
 
 	//レンダラーにカメラ行列を設定。
-	m_renderer->SetCameraMatrix(*(const Effekseer::Matrix44*)&g_camera3D->GetViewMatrix());
+	m_renderer->SetCameraMatrix(*(const Effekseer::Matrix44*)&g_camera3D[0]->GetViewMatrix());
 	//レンダラーにプロジェクション行列を設定。
-	m_renderer->SetProjectionMatrix(*(const Effekseer::Matrix44*)&g_camera3D->GetProjectionMatrix());
+	m_renderer->SetProjectionMatrix(*(const Effekseer::Matrix44*)&g_camera3D[0]->GetProjectionMatrix());
 
 	m_renderer->SetTime(deltaTime);
 }

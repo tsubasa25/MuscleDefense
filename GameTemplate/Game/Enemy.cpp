@@ -20,8 +20,6 @@ namespace nsMuscle {
 			m_map->DeleteEnemySprite(m_enemyNum);
 		}
 		//PhysicsWorld::GetInstance()->RemoveRigidBody(m_rigidBody);
-
-
 	}
 	bool Enemy::Start()
 	{

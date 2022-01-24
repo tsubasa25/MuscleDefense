@@ -1,0 +1,59 @@
+﻿  btKinematicCharacterController.cpp
+  btConeTwistConstraint.cpp
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.cpp(868,21): warning C4244: '=': 'double' から 'btScalar' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.cpp(913,20): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.cpp(973,13): warning C4244: '=': 'double' から 'btScalar' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.cpp(975,8): warning C4244: '=': 'double' から 'btScalar' への変換です。データが失われる可能性があります。
+  btContactConstraint.cpp
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btContactConstraint.h(25,28): warning C4359: 'btContactConstraint': アライメント指定子は実際のアラインメント (128) より小さいため、無視されます。
+  btFixedConstraint.cpp
+  btGearConstraint.cpp
+  btGeneric6DofConstraint.cpp
+  btGeneric6DofSpring2Constraint.cpp
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpring2Constraint.cpp(786,24): warning C4244: '初期化中': 'double' から 'btScalar' への変換です。データが失われる可能性があります。
+  btGeneric6DofSpringConstraint.cpp
+  btHinge2Constraint.cpp
+  btHingeConstraint.cpp
+  btNNCGConstraintSolver.cpp
+  btPoint2PointConstraint.cpp
+  btSequentialImpulseConstraintSolver.cpp
+  btSliderConstraint.cpp
+  btSolve2LinearConstraint.cpp
+  btTypedConstraint.cpp
+  btUniversalConstraint.cpp
+  btDiscreteDynamicsWorld.cpp
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btContactConstraint.h(25,28): warning C4359: 'btContactConstraint': アライメント指定子は実際のアラインメント (128) より小さいため、無視されます。
+  btRigidBody.cpp
+  btSimpleDynamicsWorld.cpp
+  コンパイル中...
+  btMultiBody.cpp
+  btMultiBodyConstraint.cpp
+  btMultiBodyConstraintSolver.cpp
+  btMultiBodyDynamicsWorld.cpp
+  btMultiBodyJointLimitConstraint.cpp
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.cpp(114,22): warning C4244: '初期化中': 'int' から 'btScalar' への変換です。データが失われる可能性があります。
+  btMultiBodyJointMotor.cpp
+  btMultiBodyPoint2Point.cpp
+  btDantzigLCP.cpp
+  btLemkeAlgorithm.cpp
+D:\MuscleDefense\ExEngine\bulletPhysics\src\LinearMath\btMatrixX.h(109,18): warning C4244: '=': 'double' から 'T' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+D:\MuscleDefense\ExEngine\bulletPhysics\src\LinearMath\btMatrixX.h(71): message : クラス テンプレート メンバー関数 'T btVectorX<T>::nrm2(void) const' のコンパイル中
+          with
+          [
+              T=float
+          ]
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.cpp(251): message : コンパイル対象の関数 テンプレート インスタンス化 'T btVectorX<T>::nrm2(void) const' のリファレンスを確認してください
+          with
+          [
+              T=float
+          ]
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.h(86): message : コンパイル対象の クラス テンプレート インスタンス化 'btVectorX<float>' のリファレンスを確認してください
+  btMLCPSolver.cpp
+  btRaycastVehicle.cpp
+D:\MuscleDefense\ExEngine\bulletPhysics\src\BulletDynamics\ConstraintSolver\btContactConstraint.h(25,28): warning C4359: 'btContactConstraint': アライメント指定子は実際のアラインメント (128) より小さいため、無視されます。
+  btWheelInfo.cpp
+  BulletDynamics.vcxproj -> D:\MuscleDefense\GameTemplate\exlib\x64\BulletDynamics.lib

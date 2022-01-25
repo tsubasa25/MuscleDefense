@@ -190,6 +190,7 @@ namespace nsMuscle {
 			}
 			if (m_isDieCreate == true && m_ssDie->IsPlaying() == false)
 			{
+
 				EnemySEManager::GetInstance()->MinusDieSENum();
 				m_isDieCreate = false;				
 				m_ssDie->Release();//è¡Ç∑

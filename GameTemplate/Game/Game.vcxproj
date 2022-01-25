@@ -305,6 +305,7 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAnimation.cpp" />
+    <ClCompile Include="EnemyFindManager.cpp" />
     <ClCompile Include="EnemySEManager.cpp" />
     <ClCompile Include="EnemyVoice.cpp" />
     <ClCompile Include="FontRender.cpp" />
@@ -432,6 +433,7 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAnimation.h" />
+    <ClInclude Include="EnemyFindManager.h" />
     <ClInclude Include="EnemySEManager.h" />
     <ClInclude Include="EnemyVoice.h" />
     <ClInclude Include="FontRender.h" />

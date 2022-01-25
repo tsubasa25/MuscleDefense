@@ -392,6 +392,9 @@
     <ClCompile Include="..\..\ExEngine\effect\EffectEngine.cpp">
       <Filter>ExEngine\effect</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyFindManager.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -750,6 +753,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h">
       <Filter>ExEngine\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFindManager.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

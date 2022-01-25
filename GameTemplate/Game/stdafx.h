@@ -21,6 +21,7 @@
 #include "SoundEngine.h"
 #include "SoundSource.h"
 #include "EnemySEManager.h"
+#include "EnemyFindManager.h"
 
 #include "NameKey.h"
 #include "InGameSoundConst.h"
@@ -38,5 +39,6 @@ const int CAMERA_MAX_NUM = 4;
 const int WIPE_MAX_NUM = 3;
 
 const float SOUND_SE_EXPLOSION_VOLUME = 1.0f;
+const int MAX_FIND_ENEMY_NUM = 2;
 
-const bool IS_BGM = false;
+const bool IS_BGM = true;

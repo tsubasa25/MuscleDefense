@@ -176,17 +176,25 @@ namespace nsMuscle {
 	}	
 	void EnemyVoice::DieVoice()
 	{
-		//if (EnemySEManager::GetInstance()->GetDieSENum() < m_dieSENum) {//nå¬Ç‹Ç≈ìØéûÇ…çƒê∂
+		if (EnemySEManager::GetInstance()->GetDieSENum() < m_dieSENum) {//nå¬Ç‹Ç≈ìØéûÇ…çƒê∂
 			if (m_isDiePlay == false)
 			{
+				EnemySEManager::GetInstance()->PlusDieSENum();
 				m_isDiePlay = true;
+				m_isDieCreate = true;
 				m_ssDie = NewGO<SoundSource>(0);
 				m_ssDie->SetIsDeleteGOSelf(false);
 				m_ssDie->Init(L"Assets/sound/Zombie_Die.wav", enSE);
 				m_ssDie->SetVolume(nsInGameSoundConstant::ENEMY_DIE_SE_VOL);
 				m_ssDie->Play(false);
 			}
-		//}
+			if (m_isDieCreate == true && m_ssDie->IsPlaying() == false)
+			{
+				EnemySEManager::GetInstance()->MinusDieSENum();
+				m_isDieCreate = false;				
+				m_ssDie->Release();//è¡Ç∑
+			}
+		}
 	}
 	///à»ç~Not ////////////////////////////////////////////////////////////////
 

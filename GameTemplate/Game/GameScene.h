@@ -10,8 +10,8 @@ namespace nsMuscle {
 	namespace nsGameSceneConstant {
 		//const Vector3 BASE_POSITION = { 0.0f,0.0f,200.0f };
 		const int MAX_PLAYER_NUM = 4;
-		const int WAVE_POP_NUM[4] = { 2,3,4,50 };
-		const int WAVEENEMY_POP_NUM[4] = { 3,3,4,50 };
+		const int WAVE_POP_NUM[4] = { 10,15,20,50 };
+		const int WAVEENEMY_POP_NUM[4] = { 20,30,40,50 };
 		const int ZOMBI_BGM_NUM = 4;
 		const float INGAME_BGM_VOL = 0.15f;
 		const float TITLE_BGM_VOL = 0.3f;

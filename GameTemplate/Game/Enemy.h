@@ -134,6 +134,8 @@ namespace nsMuscle {
 		int m_displayTimer = 0;
 
 		bool m_isMapDisplay = true;
+
+		bool m_isToPlayerMove = false;//ƒvƒŒƒCƒ„[‚ğ’Ç‚Á‚Ä‚¢‚é‚©
 };
 }
 

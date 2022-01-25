@@ -46,6 +46,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::SoundEngine::GetInstance()->Init();
 	//エネミーSEのインスタンスを作成
 	nsMuscle::EnemySEManager::CreateInstance();
+	//プレイヤーを追いかけるエネミーを制限するクラスのインスタンスを作成
+	nsMuscle::EnemyFindManager::CreateInstance();
 	//エフェクトエンジンのインスタンスを作成
 	EffectEngine::CreateInstance();
 
@@ -105,6 +107,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	GameObjectManager::DeleteInstance();
 
 	nsMuscle::EnemySEManager::DeleteInstance();
+	nsMuscle::EnemyFindManager::DeleteInstance();
 	return 0;
 }
 

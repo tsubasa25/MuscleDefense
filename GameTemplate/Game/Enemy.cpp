@@ -12,16 +12,13 @@
 
 namespace nsMuscle {
 	Enemy::~Enemy()
-	{				
+	{
 		DeleteGO(m_skinModelRender);
 		DeleteGO(m_enemyAnimation);
 		DeleteGO(m_enemyVoice);
 		if (m_isWaveEnemy == false&& m_isMapDisplay) {
 			m_map->DeleteEnemySprite(m_enemyNum);
 		}
-		//PhysicsWorld::GetInstance()->RemoveRigidBody(m_rigidBody);
-
-
 	}
 	bool Enemy::Start()
 	{
@@ -247,8 +244,23 @@ namespace nsMuscle {
 	}
 	void Enemy::EnemyMoveToPlayer()
 	{
+		//if (m_diffPlayerPos.Length() < 1000.0f) //プレイヤーが近くにいれば
+		//	//追いかける数が上限に達していなければ
+		//{
+		//	if (EnemyFindManager::GetInstance()->GetMoveEnemyNum() < MAX_FIND_ENEMY_NUM) {
+		//		m_isToPlayerMove = true;
+		//		EnemyFindManager::GetInstance()->PlusMoveEnemyNum();
+		//	}
+		//}
+		//else if (m_isToPlayerMove == true)
+		//{
+		//	m_isToPlayerMove = false;
+		//	EnemyFindManager::GetInstance()->MinusMoveEnemyNum();
+		//}
+
 		//NotDisplayでm_diffPlayerPosは計算済み
-		if (m_diffPlayerPos.Length() < 1000.0f)//プレイヤーが近くにいれば
+		if (m_diffPlayerPos.Length() < 1000.0f)//&&//プレイヤーが近くにいれば
+			//m_isToPlayerMove == true)//追いかける数が上限に達していなければ
 		{
 			m_isGymAttack = false;//ジムが近くにあってもプレイヤーに来る（本当は逆のやつもほしい）
 			m_playerDir = m_diffPlayerPos;
@@ -263,8 +275,9 @@ namespace nsMuscle {
 			}
 			m_enemyVoice->SetIsVoice(true);//敵は声を出す
 		}
-		else
-		{
+		else// if(m_isToPlayerMove == false)
+		{			
+			m_isToPlayerMove = false;
 			m_enemyVoice->SetIsVoice(false);//敵は声を出さない
 			m_isGymAttack = true;
 		}

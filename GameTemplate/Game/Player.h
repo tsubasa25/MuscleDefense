@@ -6,9 +6,9 @@ namespace nsMuscle {
 		const Vector3 INI_POSITION = { 0.f,0.f,0.f };
 		const Vector3 GYM_POSITION = { -5000.0f,0.0f,-50.0f };
 		const Vector3 PLAYER_DIR_Y= { 0.0f,0.0f, -1.0f };
-		const Vector3 UPPER_BOX_SIZE = { 100.0f,500.0f,100.0f };
-		const float CAMERA_SPEED = 3.0f;
+		const Vector3 UPPER_BOX_SIZE = { 100.0f,500.0f,100.0f };		
 		const Vector3 PLAYER_COLOR[4] = { {10.0f,10.0f,10.0f},{1.0f,10.0f,1.0f},{1.0,1.0f,10.0f},{1.0f,10.0f,10.0f} };
+		const float CAMERA_SPEED = 3.0f;
 		const float LEVEL_1_VALUE = 0.25f;
 		const float LEVEL_2_VALUE = 0.5f;
 		const float LEVEL_3_VALUE = 0.75f;

@@ -108,14 +108,14 @@ namespace nsMuscle
 		m_title->SetPosition(nsResultSceneConstant::TITLE_POS);
 		g_camera3D[0]->SetPosition(nsResultSceneConstant::RESULT_CAMERA_POS);
 		g_camera3D[0]->SetTarget(nsResultSceneConstant::RESULT_CAMERA_TARGET);
-		if (m_isClear)
+		/*if (m_isClear)
 		{
 			SoundOneShotPlay(L"Assets/sound/gameclear.wav", 1.0f);
 		}
 		else
 		{
 			SoundOneShotPlay(L"Assets/sound/gameover.wav", 1.0f);
-		}
+		}*/
 		return true;
 	}
 	void ResultScene::Update()

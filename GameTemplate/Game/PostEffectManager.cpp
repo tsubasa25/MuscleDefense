@@ -157,15 +157,14 @@ namespace nsMuscle {
 		for (int i = 0; i < nsPostEffectConstant::MAX_WIPE_NUM; i++) {
 			m_wipeSpriteInitData[i].m_textures[0] = &nsMuscle::PostEffectManager::GetInstance()->GetWipeRender(i);
 			m_wipeSpriteInitData[i].m_fxFilePath = "Assets/shader/sprite.fx";
-			m_wipeSpriteInitData[i].m_width = 200.0f;//256
-			m_wipeSpriteInitData[i].m_height = 150.0f;//* 9 / 16;//512
+			m_wipeSpriteInitData[i].m_width = 200.0f;
+			m_wipeSpriteInitData[i].m_height = 150.0f;
 			m_wipeCopyToFrameBufferSprite[i].Init(m_wipeSpriteInitData[i]);
 		}
 		float frame_h = 720.0f;
 		m_wipeCopyToFrameBufferSprite[0].Update({ FRAME_BUFFER_W / 2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 1.0f, 1.0f });//âEè„
 		m_wipeCopyToFrameBufferSprite[1].Update({ FRAME_BUFFER_W / -2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 1.0f });//ç∂è„
-		m_wipeCopyToFrameBufferSprite[2].Update({ FRAME_BUFFER_W / -2.0f, FRAME_BUFFER_H/-2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 0.0f });//ç∂â∫
-		
+		m_wipeCopyToFrameBufferSprite[2].Update({ FRAME_BUFFER_W / -2.0f, FRAME_BUFFER_H/-2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 0.0f });//ç∂â∫		
 }
 
 	void PostEffectManager::ShadowRender(RenderContext& rc)

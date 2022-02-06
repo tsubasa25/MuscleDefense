@@ -101,7 +101,7 @@ SPSIn VSSkinMain(SVSIn vsIn)
 float4 PSMain_SkyCube(SPSIn In) : SV_Target0
 {
  	float4 color = g_skyCubeMap.Sample(g_sampler, In.normal);
- 	color.xyz += 0.2f;
+ 	color.xyz += 0.1f;
 	
  	return color;
  }

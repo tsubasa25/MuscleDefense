@@ -84,11 +84,11 @@ namespace nsMuscle {
 	{
 		m_muscleRateArraySB.Update(m_muscleRateArray);//頂点モーフ用
 		m_loopCount++;
-		int a = m_gameScene->GetEnGameStatus();
-		if (a == GameScene::EnGameStatus::enGameStatus_Wave1
-			|| a == GameScene::EnGameStatus::enGameStatus_Wave2
-			|| a == GameScene::EnGameStatus::enGameStatus_Wave3)//戦闘状態の時
-		{			
+		//int a = m_gameScene->GetEnGameStatus();
+		//if (a == GameScene::EnGameStatus::enGameStatus_Wave1
+		//	|| a == GameScene::EnGameStatus::enGameStatus_Wave2
+		//	|| a == GameScene::EnGameStatus::enGameStatus_Wave3)//戦闘状態の時
+		//{
 			if (m_playerStatus == EnPlayerStatus::enPlayerStatus_War)//戦闘状態の時
 			{
 				m_playerVoice->SetIsVoice(true);
@@ -116,11 +116,11 @@ namespace nsMuscle {
 					break;
 				}
 			}
-		}
+		/*}
 		else
-		{
+		{*/
 			m_playerVoice->SetIsVoice(false);
-		}
+		//}
 		PlayerDeath();
 	}
 void Player::PushUp()
@@ -307,9 +307,7 @@ void Player::Attack()
 			windEff.SetRotation(rot);
 			windEff.Update();
 			break;
-		case PlayerAnimation::EnPlayerAnimStatus::enStatus_JumpAttack:
-			
-			break;
+		
 		default:
 			break;
 		}
@@ -318,31 +316,7 @@ void Player::Attack()
 	else
 	{
 		m_punchSpeed = 0.0f;
-	}
-	if (g_pad[0]->IsTrigger(enButtonY))//キック
-	{
-		switch (m_playerAnimation->GetAnimationStatus())
-		{		
-		case PlayerAnimation::EnPlayerAnimStatus::enStatus_Kick0:
-			m_comboNum = 1;
-			EnemyAnyDamage(m_punchDamage);
-			break;
-		case PlayerAnimation::EnPlayerAnimStatus::enStatus_Kick1:
-			m_comboNum = 2;
-			EnemyAnyDamage(m_punchDamage);
-			break;
-		case PlayerAnimation::EnPlayerAnimStatus::enStatus_Kick2:
-			m_comboNum = 3;
-			EnemyAnyDamage(m_punchDamage*3);
-			break;
-		case PlayerAnimation::EnPlayerAnimStatus::enStatus_JumpAttack:
-			
-			break;
-		default:
-			break;
-		}
-		
-	}
+	}	
 	
 }
 void Player::JumpAttack()

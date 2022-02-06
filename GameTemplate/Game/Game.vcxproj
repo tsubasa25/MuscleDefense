@@ -305,7 +305,6 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAnimation.cpp" />
-    <ClCompile Include="EnemyFindManager.cpp" />
     <ClCompile Include="EnemySEManager.cpp" />
     <ClCompile Include="EnemyVoice.cpp" />
     <ClCompile Include="FontRender.cpp" />
@@ -318,7 +317,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapChip.cpp" />
-    <ClCompile Include="Minion.cpp" />
     <ClCompile Include="NameKey.cpp" />
     <ClCompile Include="NaviMesh.cpp" />
     <ClCompile Include="Path.cpp" />
@@ -329,7 +327,6 @@
     <ClCompile Include="PlayerVoice.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
-    <ClCompile Include="ProteinBeam.cpp" />
     <ClCompile Include="ResourceBankManager.cpp" />
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
@@ -433,7 +430,6 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAnimation.h" />
-    <ClInclude Include="EnemyFindManager.h" />
     <ClInclude Include="EnemySEManager.h" />
     <ClInclude Include="EnemyVoice.h" />
     <ClInclude Include="FontRender.h" />

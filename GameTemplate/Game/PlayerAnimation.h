@@ -16,15 +16,20 @@ namespace nsMuscle {
 			enAnimClip_Kick2,
 			enAnimClip_JumpAttack,
 			enAnimClip_Damage,
-			enAnimClip_Die,
-			
+			enAnimClip_Die,			
 			enAnimClip_TrainingIdle,
 			enAnimClip_PushUp,
 			enAnimClip_SitUp,
 			enAnimClip_Squat,
 			enAnimClip_LevelUp,
+			enAnimClip_Lose,
+			enAnimClip_Clear0,
+			enAnimClip_Clear1,
+			enAnimClip_Clear2,
+			enAnimClip_Clear3,
 			enAnimClip_num
 		};
+		
 		//状態の数
 		enum EnPlayerAnimStatus {
 			enStatus_Idle,
@@ -39,12 +44,16 @@ namespace nsMuscle {
 			enStatus_JumpAttack,
 			enStatus_Damage,
 			enStatus_Die,
-
 			enStatus_TrainingIdle,
 			enStatus_PushUp,
 			enStatus_SitUp,
 			enStatus_Squat,
 			enStatus_LevelUp,
+			enStatus_Lose,
+			enStatus_Clear0,
+			enStatus_Clear1,
+			enStatus_Clear2,
+			enStatus_Clear3,
 			enStatus_Num,			//状態の数。
 		};
 
@@ -59,6 +68,7 @@ namespace nsMuscle {
 		void AnimationTrans();
 		AnimationClip *GetAnimationClips() { return m_animationClips; }
 		int GetAnimationStatus() { return m_animStatus; }
+		void SetAnimationStatus(EnPlayerAnimStatus status) { m_animStatus = status; }
 		int GetAnimationClipNum() { return enAnimClip_num; }
 		//待機状態に遷移する
 		void TryChangeStatusIdle();		
@@ -72,10 +82,10 @@ namespace nsMuscle {
 		void TryChangeStatusPunchi0();
 		void TryChangeStatusPunchi1();
 		void TryChangeStatusPunchi2();
-		void TryChangeStatusKick0();
+		/*void TryChangeStatusKick0();
 		void TryChangeStatusKick1();
 		void TryChangeStatusKick2();
-		void TryChangeStatusJumpAttack();
+		void TryChangeStatusJumpAttack();*/
 		
 		//被ダメージ状態に遷移する
 		void TryChangeStatusDamage();
@@ -97,17 +107,17 @@ namespace nsMuscle {
 		int GetEnStatusPunchi0(){return EnPlayerAnimStatus::enStatus_Punchi0;}
 		int GetEnStatusPunchi1() { return EnPlayerAnimStatus::enStatus_Punchi1; }
 		int GetEnStatusPunchi2() { return EnPlayerAnimStatus::enStatus_Punchi2; }
-		int GetEnStatusKick0() { return EnPlayerAnimStatus::enStatus_Kick0; }
+		/*int GetEnStatusKick0() { return EnPlayerAnimStatus::enStatus_Kick0; }
 		int GetEnStatusKick1() { return EnPlayerAnimStatus::enStatus_Kick1; }
 		int GetEnStatusKick2() { return EnPlayerAnimStatus::enStatus_Kick2; }
-		int GetEnStatusJumpAttack() { return EnPlayerAnimStatus::enStatus_JumpAttack; }
+		int GetEnStatusJumpAttack() { return EnPlayerAnimStatus::enStatus_JumpAttack; }*/
 		int GetEnStatusDie() { return EnPlayerAnimStatus::enStatus_Die; }
 	private:
 
 		EnPlayerAnimStatus m_animStatus = enStatus_TrainingIdle;
 		//アニメーション関連
 		AnimationClip m_animationClips[enAnimClip_num];			//アニメーションクリップ
-
+		
 		Player* m_parent = nullptr;
 		
 		bool m_isCombo = false;//コンボが繋がるか

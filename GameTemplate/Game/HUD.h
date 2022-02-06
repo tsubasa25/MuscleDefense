@@ -19,7 +19,6 @@ namespace nsMuscle {
 		};
 	private:
 		EnPreparationStatus m_preparationStatus = enPreparationStatus_MoveCamera;
-
 	public:
 		~HUD();
 		bool Start();
@@ -66,7 +65,8 @@ namespace nsMuscle {
 		void Clear();
 
 		void MuscleSentence(int baseNum, Vector4 color);
-	private:		
+		void SetGameScene(GameScene& gameScene) { m_gameScene = &gameScene; }
+	private:
 		FontRender* m_sentence =  nullptr;
 		FontRender* m_muscleFont = nullptr;
 		FontRender* m_killFont = nullptr;

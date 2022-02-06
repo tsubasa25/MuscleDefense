@@ -26,6 +26,7 @@ namespace nsMuscle {
 		DirectionLight &GetDirectionLight() { return *m_directionLight; }
 		void SetIsGameEnd() { m_isGameEnd = true;}		
 		void SetIsBreakOnce() { m_isBreakOnce = true; }
+	
 	private:
 		DirectionLight* m_directionLight = nullptr;
 		Vector3 m_dir = { 1.0f, -1.0f, -1.0f };

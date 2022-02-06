@@ -13,7 +13,7 @@ namespace nsMuscle {
 		player[0]->SetPosition({ -200.0f,0.0f,0.0f, });
 		player[1] = NewGO<Player>(0);
 		player[1]->SetPlayerStatus(Player::EnPlayerStatus::enPlayerStatus_War);
-		player[1]->SetPosition({ -60.0f,0.0f,0.0f });
+		player[1]->SetPosition({ -60.0f,0.0f,0.0f });		
 		g_camera3D[0]->SetPosition({ -130.0f,100.0f,-200.0f });
 		g_camera3D[0]->SetTarget({ -130.0f,50.0f,0.0f });
 
@@ -59,7 +59,8 @@ namespace nsMuscle {
 
 		for (int i = 0; i < boneId.size(); i++) {
 			player[0]->SetMuscleRateArray(boneId[i], 0.0f);//•âŠÔ—¦‚ð‘ã“ü
-			player[1]->SetMuscleRateArray(boneId[i], scale);//•âŠÔ—¦‚ð‘ã“ü
+			player[1]->SetMuscleRateArray(boneId[i], scale);//•âŠÔ—¦‚ð‘ã“ü			
+			//player[1]->GetSkinModelRender()->GetSkeleton().GetBone(boneId[i])->SetScale({ scale+0.6f,scale + 0.6f, scale + 0.6f });
 		}
 		scale += 0.005f;
 		scale = min(1.0f, scale);

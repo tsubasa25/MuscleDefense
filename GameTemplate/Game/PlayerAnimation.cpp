@@ -24,14 +24,14 @@ namespace nsMuscle {
 		m_animationClips[enAnimClip_Punchi1].SetLoopFlag(false);	//ループモーション
 		m_animationClips[enAnimClip_Punchi2].Load("Assets/animData/Player/test/Punchi2.tka");
 		m_animationClips[enAnimClip_Punchi2].SetLoopFlag(false);	//ループモーション
-		m_animationClips[enAnimClip_Kick0].Load("Assets/animData/Player/Kick0.tka");
-		m_animationClips[enAnimClip_Kick0].SetLoopFlag(false);	//ループモーション
-		m_animationClips[enAnimClip_Kick1].Load("Assets/animData/Player/Kick1.tka");
-		m_animationClips[enAnimClip_Kick1].SetLoopFlag(false);	//ループモーション
-		m_animationClips[enAnimClip_Kick2].Load("Assets/animData/Player/Kick2.tka");
-		m_animationClips[enAnimClip_Kick2].SetLoopFlag(false);	//ループモーション
-		m_animationClips[enAnimClip_JumpAttack].Load("Assets/animData/Player/test/Hadoken.tka");
-		m_animationClips[enAnimClip_JumpAttack].SetLoopFlag(false);	//ループモーション
+		//m_animationClips[enAnimClip_Kick0].Load("Assets/animData/Player/Kick0.tka");
+		//m_animationClips[enAnimClip_Kick0].SetLoopFlag(false);	//ループモーション
+		//m_animationClips[enAnimClip_Kick1].Load("Assets/animData/Player/Kick1.tka");
+		//m_animationClips[enAnimClip_Kick1].SetLoopFlag(false);	//ループモーション
+		//m_animationClips[enAnimClip_Kick2].Load("Assets/animData/Player/Kick2.tka");
+		//m_animationClips[enAnimClip_Kick2].SetLoopFlag(false);	//ループモーション
+		//m_animationClips[enAnimClip_JumpAttack].Load("Assets/animData/Player/test/Hadoken.tka");
+		//m_animationClips[enAnimClip_JumpAttack].SetLoopFlag(false);	//ループモーション
 		m_animationClips[enAnimClip_Damage].Load("Assets/animData/Player/test/HitDamage.tka");
 		m_animationClips[enAnimClip_Damage].SetLoopFlag(false);	//ループモーション
 		m_animationClips[enAnimClip_Die].Load("Assets/animData/Player/test/Die.tka");
@@ -48,6 +48,16 @@ namespace nsMuscle {
 		m_animationClips[enAnimClip_LevelUp].Load("Assets/animData/Player/training/LevelUp.tka");
 		m_animationClips[enAnimClip_LevelUp].SetLoopFlag(false);	//ループモーションにする。
 
+		m_animationClips[enAnimClip_Lose].Load("Assets/animData/Player/result/pose.tka");
+		m_animationClips[enAnimClip_Lose].SetLoopFlag(false);
+		m_animationClips[enAnimClip_Clear0].Load("Assets/animData/Player/result/pose0.tka");
+		m_animationClips[enAnimClip_Clear0].SetLoopFlag(false);
+		m_animationClips[enAnimClip_Clear1].Load("Assets/animData/Player/result/pose1.tka");
+		m_animationClips[enAnimClip_Clear1].SetLoopFlag(false);
+		m_animationClips[enAnimClip_Clear2].Load("Assets/animData/Player/result/pose2.tka");
+		m_animationClips[enAnimClip_Clear2].SetLoopFlag(false);
+		m_animationClips[enAnimClip_Clear3].Load("Assets/animData/Player/result/pose3.tka");
+		m_animationClips[enAnimClip_Clear3].SetLoopFlag(false);
 		return true;
 	}
 	void PlayerAnimation::Update()
@@ -98,7 +108,7 @@ namespace nsMuscle {
 		case nsMuscle::PlayerAnimation::enStatus_Punchi2:
 			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Punchi2, interpolateTime, onPostCalcLocalMatrix);
 			break;
-		case nsMuscle::PlayerAnimation::enStatus_Kick0:
+		/*case nsMuscle::PlayerAnimation::enStatus_Kick0:
 			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Kick0, interpolateTime, onPostCalcLocalMatrix);
 			break;
 		case nsMuscle::PlayerAnimation::enStatus_Kick1:
@@ -109,7 +119,7 @@ namespace nsMuscle {
 			break;
 		case nsMuscle::PlayerAnimation::enStatus_JumpAttack:
 			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_JumpAttack, interpolateTime, onPostCalcLocalMatrix);
-			break;
+			break;*/
 		case nsMuscle::PlayerAnimation::enStatus_Damage:
 			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Damage, m_parent->GetIsRePlay(), interpolateTime, onPostCalcLocalMatrix);
 			m_parent->SetIsRePlay(false);
@@ -131,6 +141,21 @@ namespace nsMuscle {
 			break;
 		case nsMuscle::PlayerAnimation::enStatus_LevelUp:
 			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_LevelUp, 0.0f, onPostCalcLocalMatrix);
+			break;
+		case nsMuscle::PlayerAnimation::enStatus_Lose:
+			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Lose, 0.0f, onPostCalcLocalMatrix);
+			break;
+		case nsMuscle::PlayerAnimation::enStatus_Clear0:
+			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Clear0, 0.0f, onPostCalcLocalMatrix);
+			break;
+		case nsMuscle::PlayerAnimation::enStatus_Clear1:
+			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Clear1, 0.0f, onPostCalcLocalMatrix);
+			break;
+		case nsMuscle::PlayerAnimation::enStatus_Clear2:
+			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Clear2, 0.0f, onPostCalcLocalMatrix);
+			break;
+		case nsMuscle::PlayerAnimation::enStatus_Clear3:
+			m_parent->GetSkinModelRender()->PlayAnimation(enAnimClip_Clear3, 0.0f, onPostCalcLocalMatrix);
 			break;
 		case nsMuscle::PlayerAnimation::enStatus_Num:
 			break;
@@ -155,14 +180,13 @@ namespace nsMuscle {
 		case nsMuscle::PlayerAnimation::enStatus_Idle:
 			TryChangeStatusRun();//歩き状態に遷移できる
 			TryChangeStatusPunchi0();
-			TryChangeStatusKick0();
+			
 			TryChangeStatusDamage();
 			TryChangeStatusDie();
 			break;
 		case nsMuscle::PlayerAnimation::enStatus_Run:
 			TryChangeStatusIdle();//待機状態に遷移できる			
 			TryChangeStatusPunchi0();
-			TryChangeStatusKick0();
 			TryChangeStatusDamage();
 			TryChangeStatusDie();
 			break;		
@@ -182,27 +206,27 @@ namespace nsMuscle {
 			TryChangeStatusDamage();
 			TryChangeStatusDie();
 			break;
-		case nsMuscle::PlayerAnimation::enStatus_Kick0:
-			//攻撃状態に遷移できる
-			TryChangeStatusKick0();
-			TryChangeStatusDamage();
-			TryChangeStatusDie();
-			break;
-		case nsMuscle::PlayerAnimation::enStatus_Kick1:
-			TryChangeStatusKick1();//攻撃1状態に遷移できる
-			TryChangeStatusDamage();
-			TryChangeStatusDie();
-			break;
-		case nsMuscle::PlayerAnimation::enStatus_Kick2:
-			TryChangeStatusKick2();//攻撃1状態に遷移できる		
-			TryChangeStatusDamage();
-			TryChangeStatusDie();
-			break;
-		case nsMuscle::PlayerAnimation::enStatus_JumpAttack:
-			TryChangeStatusJumpAttack();
-			TryChangeStatusDamage();
-			TryChangeStatusDie();
-			break;
+		//case nsMuscle::PlayerAnimation::enStatus_Kick0:
+		//	//攻撃状態に遷移できる
+		//	TryChangeStatusKick0();
+		//	TryChangeStatusDamage();
+		//	TryChangeStatusDie();
+		//	break;
+		//case nsMuscle::PlayerAnimation::enStatus_Kick1:
+		//	TryChangeStatusKick1();//攻撃1状態に遷移できる
+		//	TryChangeStatusDamage();
+		//	TryChangeStatusDie();
+		//	break;
+		//case nsMuscle::PlayerAnimation::enStatus_Kick2:
+		//	TryChangeStatusKick2();//攻撃1状態に遷移できる		
+		//	TryChangeStatusDamage();
+		//	TryChangeStatusDie();
+		//	break;
+		//case nsMuscle::PlayerAnimation::enStatus_JumpAttack:
+		//	TryChangeStatusJumpAttack();
+		//	TryChangeStatusDamage();
+		//	TryChangeStatusDie();
+		//	break;
 		case nsMuscle::PlayerAnimation::enStatus_Damage:
 			TryChangeStatusDamage();
 			TryChangeStatusDie();
@@ -244,6 +268,9 @@ namespace nsMuscle {
 			TryChangeStatusSitUp();
 			TryChangeStatusSquat();
 			TryChangeStatusLevelUp();
+			break;
+		case nsMuscle::PlayerAnimation::enStatus_Lose:
+			
 			break;
 		default:
 			break;
@@ -331,81 +358,81 @@ namespace nsMuscle {
 			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
 		}
 	}
-	void PlayerAnimation::TryChangeStatusKick0()
-	{
-		if (g_pad[0]->IsTrigger(enButtonY))
-		{
-			if (m_parent->GetComboNum() == 0)
-			{
-				m_parent->GetSkinModelRender()->SetAnimationSpeed(2.0f);
-				m_animStatus = PlayerAnimation::enStatus_Kick0;
-			}
-		}
-		if (m_parent->GetComboNum() >= 1 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
-		{
-			m_animStatus = PlayerAnimation::enStatus_Kick1;
-			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
-		}
-		else if (m_parent->GetComboNum() == 0 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
-		{
-			m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
-			m_animStatus = PlayerAnimation::enStatus_Idle;
-			m_parent->ReSetComboNum();//コンボ数をリセット
-			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
-		}
-	}
-	void PlayerAnimation::TryChangeStatusKick1()
-	{
-		if (m_parent->GetComboNum() >= 1)
-		{
-			m_animStatus = nsMuscle::PlayerAnimation::enStatus_Kick1;
-		}
-		if (m_parent->GetComboNum() >= 2 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
-		{
-			m_animStatus = PlayerAnimation::enStatus_Kick2;
-			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
-		}
-		else if (m_parent->GetComboNum() == 1 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
-		{
-			m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
-			m_animStatus = PlayerAnimation::enStatus_Idle;
-			m_parent->ReSetComboNum();//コンボ数をリセット
-			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
-		}
-	}
-	void PlayerAnimation::TryChangeStatusKick2()
-	{
-		if (m_parent->GetComboNum() >= 2)
-		{
-			m_animStatus = nsMuscle::PlayerAnimation::enStatus_Kick2;
-		}
-		if (m_parent->GetComboNum() >= 3 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
-		{
-			m_animStatus = PlayerAnimation::enStatus_JumpAttack;
-			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
-		}
-		else if (!m_parent->GetSkinModelRender()->IsPlayingAnimation())
-		{
-			m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
-			m_animStatus = PlayerAnimation::enStatus_Idle;
-			m_parent->ReSetComboNum();//コンボ数をリセット
-			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
-		}
-	}
-	void PlayerAnimation::TryChangeStatusJumpAttack()
-	{
-		if (m_parent->GetComboNum() >= 3)
-		{
-			m_animStatus = nsMuscle::PlayerAnimation::enStatus_JumpAttack;
-		}
-		if (!m_parent->GetSkinModelRender()->IsPlayingAnimation())
-		{
-			m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
-			m_animStatus = PlayerAnimation::enStatus_Idle;
-			m_parent->ReSetComboNum();//コンボ数をリセット
-			m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
-		}
-	}
+	//void PlayerAnimation::TryChangeStatusKick0()
+	//{
+	//	if (g_pad[0]->IsTrigger(enButtonY))
+	//	{
+	//		if (m_parent->GetComboNum() == 0)
+	//		{
+	//			m_parent->GetSkinModelRender()->SetAnimationSpeed(2.0f);
+	//			m_animStatus = PlayerAnimation::enStatus_Kick0;
+	//		}
+	//	}
+	//	if (m_parent->GetComboNum() >= 1 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
+	//	{
+	//		m_animStatus = PlayerAnimation::enStatus_Kick1;
+	//		m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
+	//	}
+	//	else if (m_parent->GetComboNum() == 0 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
+	//	{
+	//		m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
+	//		m_animStatus = PlayerAnimation::enStatus_Idle;
+	//		m_parent->ReSetComboNum();//コンボ数をリセット
+	//		m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
+	//	}
+	//}
+	//void PlayerAnimation::TryChangeStatusKick1()
+	//{
+	//	if (m_parent->GetComboNum() >= 1)
+	//	{
+	//		m_animStatus = nsMuscle::PlayerAnimation::enStatus_Kick1;
+	//	}
+	//	if (m_parent->GetComboNum() >= 2 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
+	//	{
+	//		m_animStatus = PlayerAnimation::enStatus_Kick2;
+	//		m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
+	//	}
+	//	else if (m_parent->GetComboNum() == 1 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
+	//	{
+	//		m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
+	//		m_animStatus = PlayerAnimation::enStatus_Idle;
+	//		m_parent->ReSetComboNum();//コンボ数をリセット
+	//		m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
+	//	}
+	//}
+	//void PlayerAnimation::TryChangeStatusKick2()
+	//{
+	//	if (m_parent->GetComboNum() >= 2)
+	//	{
+	//		m_animStatus = nsMuscle::PlayerAnimation::enStatus_Kick2;
+	//	}
+	//	if (m_parent->GetComboNum() >= 3 && !m_parent->GetSkinModelRender()->IsPlayingAnimation())
+	//	{
+	//		m_animStatus = PlayerAnimation::enStatus_JumpAttack;
+	//		m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
+	//	}
+	//	else if (!m_parent->GetSkinModelRender()->IsPlayingAnimation())
+	//	{
+	//		m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
+	//		m_animStatus = PlayerAnimation::enStatus_Idle;
+	//		m_parent->ReSetComboNum();//コンボ数をリセット
+	//		m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
+	//	}
+	//}
+	//void PlayerAnimation::TryChangeStatusJumpAttack()
+	//{
+	//	if (m_parent->GetComboNum() >= 3)
+	//	{
+	//		m_animStatus = nsMuscle::PlayerAnimation::enStatus_JumpAttack;
+	//	}
+	//	if (!m_parent->GetSkinModelRender()->IsPlayingAnimation())
+	//	{
+	//		m_parent->GetSkinModelRender()->SetAnimationSpeed(1.0f);
+	//		m_animStatus = PlayerAnimation::enStatus_Idle;
+	//		m_parent->ReSetComboNum();//コンボ数をリセット
+	//		m_parent->ReSetIsAttackOn();//敵にダメージを与えられるようにする
+	//	}
+	//}
 	void PlayerAnimation::TryChangeStatusDamage()
 	{
 		if (m_parent->GetIsDamage())

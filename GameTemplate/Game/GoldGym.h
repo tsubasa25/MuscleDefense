@@ -5,8 +5,7 @@ namespace nsMuscle {
 	class HUD;
 	class GoldGym : public IGameObject
 	{
-	public:
-	
+	public:	
 		~GoldGym();
 		bool Start();
 		void Update();

@@ -45,9 +45,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::SoundEngine::CreateInstance();
 	nsMuscle::SoundEngine::GetInstance()->Init();
 	//エネミーSEのインスタンスを作成
-	nsMuscle::EnemySEManager::CreateInstance();
-	//プレイヤーを追いかけるエネミーを制限するクラスのインスタンスを作成
-	nsMuscle::EnemyFindManager::CreateInstance();
+	nsMuscle::EnemySEManager::CreateInstance();	
 	//エフェクトエンジンのインスタンスを作成
 	EffectEngine::CreateInstance();
 
@@ -73,6 +71,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここからゲームループ。
 	while (DispatchWindowMessage())
 	{
+		if (GameObjectManager::GetInstance()->GetIsEnd()) {
+			break;
+		}
 		Stopwatch sw;
 		sw.Start();
 		//レンダリング開始。
@@ -105,9 +106,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsMuscle::PostEffectManager::DeleteInstance();
 	//ゲームオブジェクトマネージャーを削除。
 	GameObjectManager::DeleteInstance();
+	PhysicsWorld::DeleteInstance();
 
-	nsMuscle::EnemySEManager::DeleteInstance();
-	nsMuscle::EnemyFindManager::DeleteInstance();
+	nsMuscle::EnemySEManager::DeleteInstance();	
+	nsMuscle::SoundEngine::DeleteInstance();
+	//EffectEngine::DeleteInstance();
 	return 0;
 }
 

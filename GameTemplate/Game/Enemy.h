@@ -7,15 +7,13 @@ namespace nsMuscle {
 		const Vector3 INI_POSITION = { 0.0f,0.0f,-500.0f };
 		const int ATTACK_COOLTIME = 60;
 		const int PLATER_ATTACK_LENGE = 80;
+		const float ENEMY_ATTACK_DAMAGE = 3.0f;
 	}
 	class EnemyAnimation;
 	class BackGround;
 	class GameScene;
 	class EnemyVoice;
 	class Map;
-	/*class NaviMesh;
-	class Path;
-	class PathFinding;*/
 
 	class Enemy :public IGameObject
 	{
@@ -74,6 +72,7 @@ namespace nsMuscle {
 		bool GetIsPlayerDamage() { return m_isPlayerDamage; }
 
 		void SetIsWaveEnemy(bool flag) { m_isWaveEnemy = flag; }
+
 	private:
 		int m_enemyNum = 0;
 		CharacterController m_charaCon;//プレイヤーの物理カプセル
@@ -135,7 +134,7 @@ namespace nsMuscle {
 
 		bool m_isMapDisplay = true;
 
-		bool m_isToPlayerMove = false;//プレイヤーを追っているか
+		bool m_isToPlayerMove = false;//プレイヤーを追っているか	
 };
 }
 

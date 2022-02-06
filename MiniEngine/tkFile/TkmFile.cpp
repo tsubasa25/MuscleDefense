@@ -17,7 +17,6 @@ public:
 	template <class IndexBuffer>
 	void Execute(TkmFile::SMesh& mesh, const IndexBuffer& indexBuffer)
 	{
-
 		//ステップ１面法線を計算していく。
 		auto numPolygon = indexBuffer.indices.size() / 3;
 		std::vector< SFace> faces;

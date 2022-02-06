@@ -1,77 +1,185 @@
-﻿  BackGround.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+﻿  stdafx.cpp
+D:\MuscleDefense\MiniEngine\time\GameTime.h(67,37): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\MiniEngine\raytracing\RaytracingInstance.h(11,18): warning C4099: 'raytracing::Instance': タイプ名は最初 'class' として使われていましたが 'struct' として使われています。
+D:\MuscleDefense\MiniEngine\raytracing\RaytracingInstance.h(11): message : 'raytracing::Instance' の宣言を確認してください
+D:\MuscleDefense\MiniEngine\raytracing\RaytracingWorld.h(44,1): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+D:\MuscleDefense\GameTemplate\Game\PointLight.h(22,64): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\LightManager.h(119,54): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\LightManager.h(130,51): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  Effect.cpp
+  EffectEngine.cpp
+  Gameobjectmanager.cpp
+  IGameObject.cpp
+  CaslFile.cpp
+D:\MuscleDefense\ExEngine\level2D\CaslFile.h(39,1): warning C4267: 'return': 'size_t' から 'const int' に変換しました。データが失われているかもしれません。
+D:\MuscleDefense\ExEngine\level2D\CaslFile.cpp(19,49): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+D:\MuscleDefense\ExEngine\level2D\CaslFile.cpp(132,13): warning C4244: 'return': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Level2D.cpp
+D:\MuscleDefense\ExEngine\level2D\CaslFile.h(39,1): warning C4267: 'return': 'size_t' から 'const int' に変換しました。データが失われているかもしれません。
+  MapChip2D.cpp
+D:\MuscleDefense\ExEngine\level2D\CaslFile.h(39,1): warning C4267: 'return': 'size_t' から 'const int' に変換しました。データが失われているかもしれません。
+  BoxCollider.cpp
+  CapsuleCollider.cpp
+  CharacterController.cpp
+  MeshCollider.cpp
+  Physics.cpp
+  PhysicsStaticObject.cpp
+  RigidBody.cpp
+  SphereCollider.cpp
+  Animation.cpp
+  AnimationClip.cpp
+  AnimationPlayController.cpp
+  Camera.cpp
+  CameraCollisionSolver.cpp
+  コンパイル中...
+  SpringCamera.cpp
+  ConstantBuffer.cpp
+  DescriptorHeap.cpp
+  GPUBuffer.cpp
+  GraphicsEngine.cpp
+  GamePad.cpp
+  IndexBuffer.cpp
+  Material.cpp
+  MeshParts.cpp
+D:\MuscleDefense\MiniEngine\MeshParts.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Model.cpp
+  NullTextureMaps.cpp
+  PipelineState.cpp
+  RWStructuredBuffer.cpp
+  RenderTarget.cpp
+  RootSignature.cpp
+  Shader.cpp
+  Skeleton.cpp
+  Sprite.cpp
+  StructuredBuffer.cpp
+  Texture.cpp
+  コンパイル中...
+  VertexBuffer.cpp
+  Font.cpp
+  FontEngine.cpp
+D:\MuscleDefense\MiniEngine\font\FontEngine.cpp(40,56): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\MiniEngine\font\FontEngine.cpp(41,58): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Matrix.cpp
+  Vector.cpp
+  BLASBuffer.cpp
+  RaytracingDescriptorHeaps.cpp
+  RaytracingEngine.cpp
+  RaytracingInstance.cpp
+  RaytracingPSO.cpp
+D:\MuscleDefense\MiniEngine\raytracing\RaytracingPSO.cpp(157,77): warning C4267: '=': 'size_t' から 'UINT' に変換しました。データが失われているかもしれません。
+  RaytracingShaderTable.cpp
+  RaytracingWorld.cpp
+  TLASBuffer.cpp
+D:\MuscleDefense\MiniEngine\raytracing\TLASBuffer.cpp(26,37): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  tkEngine.cpp
+  TkaFile.cpp
+  TklFile.cpp
+  TkmFile.cpp
+D:\MuscleDefense\MiniEngine\tkFile\TkmFile.cpp(655,35): warning C4267: '+=': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+D:\MuscleDefense\MiniEngine\tkFile\TkmFile.cpp(693,49): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  TksFile.cpp
+  AABB.cpp
+  BSP.cpp
+  コンパイル中...
+  BackGround.cpp
+  CUtil.cpp
+  Cell.cpp
+  DebagWireFrame.cpp
+  DirectionLight.cpp
   Enemy.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(57,26): warning C4552: '<': 式の結果が使用されていません
-D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(167,27): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
-D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(222,28): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
-D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(309,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(56,26): warning C4552: '<': 式の結果が使用されていません
+D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(164,27): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(219,28): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+D:\MuscleDefense\GameTemplate\Game\Enemy.cpp(323,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   EnemyAnimation.cpp
 D:\MuscleDefense\GameTemplate\Game\EnemyAnimation.cpp(225,16): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  EnemyFindManager.cpp
+  EnemySEManager.cpp
+  EnemyVoice.cpp
+  FontRender.cpp
   GameScene.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(52,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(53,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(54,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(58,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(59,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(60,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(64,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(65,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(66,25): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(413,24): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(414,24): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(432,23): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(433,23): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(407,24): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(408,24): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(426,23): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GameScene.cpp(427,23): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  GaussianBlur.cpp
   GoldGym.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\GoldGym.cpp(59,47): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\GoldGym.cpp(56,47): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
   HUD.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(155,56): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(155,48): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(400,60): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(400,54): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(403,65): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(403,59): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(408,61): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(408,55): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(409,82): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(409,76): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(411,60): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(411,53): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(416,67): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(416,60): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(425,71): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(425,64): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(435,65): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
-D:\MuscleDefense\GameTemplate\Game\HUD.cpp(435,58): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(158,56): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(158,48): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(403,60): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(403,54): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(406,65): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(406,59): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(411,61): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(411,55): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(412,82): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(412,76): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(414,60): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(414,53): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(419,67): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(419,60): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(428,71): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(428,64): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(438,65): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\HUD.cpp(438,58): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+  Level3D.cpp
+  LightManager.cpp
   Map.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\Map.cpp(50,29): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+  MapChip.cpp
+  Minion.cpp
+  コンパイル中...
+  NameKey.cpp
+  NaviMesh.cpp
+  Path.cpp
+  PathFinding.cpp
+D:\MuscleDefense\GameTemplate\Game\PathFinding.cpp(87,41): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  PhysicsGhostObject.cpp
   Player.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
   PlayerAnimation.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+  PlayerVoice.cpp
+  PointLight.cpp
+D:\MuscleDefense\GameTemplate\Game\PointLight.cpp(12,76): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  PostEffectManager.cpp
+D:\MuscleDefense\GameTemplate\Game\PostEffectManager.cpp(160,38): warning C4244: '=': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\PostEffectManager.cpp(161,39): warning C4244: '=': 'float' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\PostEffectManager.cpp(352,59): warning C4244: '=': 'const btScalar' から 'UINT' への変換です。データが失われる可能性があります。
+D:\MuscleDefense\GameTemplate\Game\PostEffectManager.cpp(353,60): warning C4244: '=': 'const btScalar' から 'UINT' への変換です。データが失われる可能性があります。
+  ProteinBeam.cpp
+  ResourceBankManager.cpp
   ResultScene.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
   SkinModelRender.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Sky.cpp
+  SoundEngine.cpp
+  SoundSource.cpp
+  SpotLight.cpp
+  SpriteRender.cpp
   TestEnemy.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+  コンパイル中...
   TestScene.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
   TitleScene.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\TitleScene.cpp(16,60): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\TitleScene.cpp(16,51): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\TitleScene.cpp(18,56): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\TitleScene.cpp(18,47): warning C4244: '引数': 'float' から 'UINT' への変換です。データが失われる可能性があります。
 D:\MuscleDefense\GameTemplate\Game\TitleScene.cpp(41,21): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  TknFile.cpp
+  WaveFile.cpp
+  WaveFileBank.cpp
   WipeCamera.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
   main.cpp
-D:\MuscleDefense\GameTemplate\Game\Player.h(223,38): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+  system.cpp
   コード生成しています。
-  333 of 9881 functions ( 3.4%) were compiled, the rest were copied from previous compilation.
-    123 functions were new in current compilation
-    459 functions had inline decision re-evaluated but remain unchanged
+  437 of 9929 functions ( 4.4%) were compiled, the rest were copied from previous compilation.
+    24 functions were new in current compilation
+    154 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
   Game.vcxproj -> D:\MuscleDefense\GameTemplate\x64\Preview\Game.exe

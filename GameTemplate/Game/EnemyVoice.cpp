@@ -173,7 +173,7 @@ namespace nsMuscle {
 				m_ssKnockBack->Release();//è¡Ç∑
 			}
 		}
-	}	
+	}
 	void EnemyVoice::DieVoice()
 	{
 		if (EnemySEManager::GetInstance()->GetDieSENum() < m_dieSENum) {//nå¬Ç‹Ç≈ìØéûÇ…çƒê∂
@@ -190,7 +190,6 @@ namespace nsMuscle {
 			}
 			if (m_isDieCreate == true && m_ssDie->IsPlaying() == false)
 			{
-
 				EnemySEManager::GetInstance()->MinusDieSENum();
 				m_isDieCreate = false;				
 				m_ssDie->Release();//è¡Ç∑

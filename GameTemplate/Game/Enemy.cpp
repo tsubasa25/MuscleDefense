@@ -43,15 +43,7 @@ namespace nsMuscle {
 		m_charaCon.Init(m_radius, m_position);
 
 		m_backGround = FindGO<BackGround>("backGround");
-		//コリジョン作成。		
-		//m_CapsuleCollider.Init(m_radius, m_height);
-
-		//剛体を初期化。
-		//RigidBodyInitData rbInfo;
-		//rbInfo.collider = &m_CapsuleCollider;
-		//rbInfo.mass = 0.0f;
-		//m_rigidBody.Init(rbInfo);
-
+		
 		PositionUpdate();
 		for (int i = 0; i++; i < 4) {
 			m_skinModelRender->SetIsWipeModel(false, i);
@@ -62,8 +54,7 @@ namespace nsMuscle {
 			m_map = FindGO<Map>("map");
 			m_map->CreateEnemySprite();
 			m_map->UpdateEnemySpritePos(m_position, m_enemyNum);
-		}
-		
+		}		
 		return true;
 	}
 	void Enemy::Update()
@@ -137,7 +128,8 @@ namespace nsMuscle {
 			m_hp = -1;
 		}
 		if (m_gameScene->GetEnGameStatus() == GameScene::enGameStatus_Confirmation|| 
-			m_gameScene->GetEnGameStatus() == GameScene::enGameStatus_Clear)
+			m_gameScene->GetEnGameStatus() == GameScene::enGameStatus_Clear||
+			m_gameScene->GetEnGameStatus() == GameScene::enGameStatus_Lose)
 		{
 			DeleteGO(this);
 		}
@@ -147,12 +139,10 @@ namespace nsMuscle {
 	void Enemy::EnemyMove()
 	{
 		m_moveSpeed = Vector3::Zero;
-		
 		EnemyMoveToPlayer();
 		if (m_isGymAttack) {
 			EnemyMoveToGym();
-		}
-
+		}		
 		//進行方向に向きを合わせる
 		Vector3 Dir = m_playerDir;
 		Dir.y = 0.f;
@@ -180,10 +170,10 @@ namespace nsMuscle {
 		if (m_isGymAttack&& m_isPlayerDamage)
 		{
 			if (m_isWaveEnemy) {
-				GymAnyDamage(1.0f);
+				GymAnyDamage(nsEnemyConstant::ENEMY_ATTACK_DAMAGE/3);
 			}
 			else{
-				GymAnyDamage(3.0f);
+				GymAnyDamage(nsEnemyConstant::ENEMY_ATTACK_DAMAGE);
 			}
 			m_isPlayerDamage = false;
 		}
@@ -233,49 +223,27 @@ namespace nsMuscle {
 		}
 	}
 	void Enemy::PositionUpdate()
-	{
-		//btRigidBody* btBody = m_rigidBody.GetBody();
-		////剛体を動かす。
-		//btBody->setActivationState(DISABLE_DEACTIVATION);
-		//btTransform& trans = btBody->getWorldTransform();
-		////剛体の位置を更新。
-		//trans.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+	{		
 		m_position=m_charaCon.Execute(m_moveSpeed, g_gameTime->GetFrameDeltaTime());
 	}
 	void Enemy::EnemyMoveToPlayer()
 	{
-		//if (m_diffPlayerPos.Length() < 1000.0f) //プレイヤーが近くにいれば
-		//	//追いかける数が上限に達していなければ
-		//{
-		//	if (EnemyFindManager::GetInstance()->GetMoveEnemyNum() < MAX_FIND_ENEMY_NUM) {
-		//		m_isToPlayerMove = true;
-		//		EnemyFindManager::GetInstance()->PlusMoveEnemyNum();
-		//	}
-		//}
-		//else if (m_isToPlayerMove == true)
-		//{
-		//	m_isToPlayerMove = false;
-		//	EnemyFindManager::GetInstance()->MinusMoveEnemyNum();
-		//}
-
+		
 		//NotDisplayでm_diffPlayerPosは計算済み
-		if (m_diffPlayerPos.Length() < 1000.0f)//&&//プレイヤーが近くにいれば
-			//m_isToPlayerMove == true)//追いかける数が上限に達していなければ
+		if (m_diffPlayerPos.Length() < 1000.0f)//&&//プレイヤーが近くにいれば			
 		{
 			m_isGymAttack = false;//ジムが近くにあってもプレイヤーに来る（本当は逆のやつもほしい）
 			m_playerDir = m_diffPlayerPos;
 			m_playerDir.Normalize();
-			m_moveSpeed += m_playerDir * m_velocity;
-			//m_position = m_charaCon.Execute(m_moveSpeed, g_gameTime->GetFrameDeltaTime());
-			//m_position += m_moveSpeed;
-			//m_moveSpeed.y -= 980.0f * g_gameTime->GetFrameDeltaTime();
+			m_moveSpeed += m_playerDir * m_velocity;			
 			if (m_diffPlayerPos.Length() < nsEnemyConstant::PLATER_ATTACK_LENGE) {
 				m_enemyStatus = enEnemyStatus_War;
 				m_isAttack = true;
 			}
 			m_enemyVoice->SetIsVoice(true);//敵は声を出す
+			m_isToPlayerMove = true;
 		}
-		else// if(m_isToPlayerMove == false)
+		else
 		{			
 			m_isToPlayerMove = false;
 			m_enemyVoice->SetIsVoice(false);//敵は声を出さない
@@ -296,10 +264,7 @@ namespace nsMuscle {
 				m_playerDir = m_diffGoldGym;
 				m_playerDir.Normalize();
 				m_moveSpeed += m_playerDir * m_velocity;
-				//m_position = m_charaCon.Execute(m_moveSpeed, g_gameTime->GetFrameDeltaTime());
-				//m_position += m_moveSpeed;
-				//m_moveSpeed.y -= 980.0f * g_gameTime->GetFrameDeltaTime();
-
+				
 				if (m_diffGoldGym.Length() < 400) {
 					m_enemyVoice->SetIsVoice(false);
 					m_enemyStatus = enEnemyStatus_War;
@@ -316,8 +281,7 @@ namespace nsMuscle {
 		{
 			m_gameScene->GetNowWarPlayer().AnyDamage(damage);
 			m_gameScene->GetNowWarPlayer().SetIsRePlay(true);//リアクションを最初から再生させる
-		}
-		//m_isAttackOn = false;//敵は一定時間無敵
+		}		
 	}
 	void Enemy::GymAnyDamage(float damage)
 	{		
@@ -346,5 +310,5 @@ namespace nsMuscle {
 		if (m_gameScene->GetEnGameStatus()==GameScene::enGameStatus_WaveEnemyPop&&m_isWaveEnemy) {//強制表示
 			m_skinModelRender->Activate();//表示する
 		}
-	}
+	}	
 }

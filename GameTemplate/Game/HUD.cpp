@@ -24,7 +24,7 @@ namespace nsMuscle {
 	}
 	bool HUD::Start()
 	{
-		m_gameScene = FindGO<GameScene>("gameScene");
+		//m_gameScene = FindGO<GameScene>("gameScene");
 		/// <summary>
 		/// 事前に作っておく
 		/// </summary>
@@ -40,8 +40,11 @@ namespace nsMuscle {
 	{
 		switch (m_gameScene->GetEnGameStatus())
 		{
+		case nsMuscle::GameScene::enGameStatus_Waiting:
+			//タイトルシーン			
+			break;
 		case GameScene::EnGameStatus::enGameStatus_Opening:
-			Opening();			
+			Opening();
 			break;
 		case GameScene::EnGameStatus::enGameStatus_Preparation:
 			Preparation();//準備
@@ -73,10 +76,10 @@ namespace nsMuscle {
 			//KilledNumberDisplay();
 			break;
 		case nsMuscle::GameScene::enGameStatus_Lose:
-			Lose();
+			//Lose();
 			break;
 		case nsMuscle::GameScene::enGameStatus_Clear:
-			Clear();
+			//Clear();
 			break;
 		default:
 			break;
@@ -157,14 +160,14 @@ namespace nsMuscle {
 			m_sentence = NewGO<FontRender>(2);
 			m_sentence->SetPosition({ wcslen(sourceText)*-22.0f,-260.0f });
 			m_textNum = 0;
-			m_sentenceTimer = 0;	
+			m_sentenceTimer = 0;
 			for (int i = 0; i < 255; i++) {
 				m_drawText[i] = L' ';
 			}
-			m_isFirstSentece = true;			
+			m_isFirstSentece = true;
 		}		
-		m_delayTimer++;
-		if (g_pad[0]->IsTrigger(enButtonA)&&m_delayTimer>5) {//5フレームたっていてAボタンを押されたら消す
+		if (g_pad[0]->IsTrigger(enButtonA)) {//5フレームたっていてAボタンを押されたら消す
+			//m_delayTimer = 0;
 			DeleteGO(m_sentence);
 			DeleteGO(m_textBox);
 			m_muscleFont->Deactivate();
@@ -487,7 +490,8 @@ namespace nsMuscle {
 		}
 		if (g_pad[0]->IsTrigger(enButtonA)) {
 			NewGO<ResultScene>(0, "resultScene");
-			m_gameScene->Delete();
+			//m_gameScene->Delete();
+			m_gameScene->EnemySpriteDataReset();
 			DeleteGO(m_lose);
 			DeleteGO(this);
 		}
@@ -502,10 +506,9 @@ namespace nsMuscle {
 		}
 		if (g_pad[0]->IsTrigger(enButtonA)) {
 			NewGO<ResultScene>(0, "resultScene");
-			m_gameScene->Delete();
+			//m_gameScene->Delete();
 			m_gameScene->EnemySpriteDataReset();
-			DeleteGO(m_waveWin);
-			DeleteGO(m_lose);
+			DeleteGO(m_waveWin);			
 			DeleteGO(this);			
 		}
 	}

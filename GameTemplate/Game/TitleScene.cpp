@@ -11,7 +11,7 @@ namespace nsMuscle {
 	}
 	bool TitleScene::Start()
 	{
-		m_backGround=NewGO<BackGround>(0, "backGround");
+		m_backGround = NewGO<BackGround>(0, "backGround");
 		m_titleLogo=NewGO<SpriteRender>(1);
 		m_titleLogo->Init("Assets/image/TitleLogo.DDS", 1280.0f, 720.0f);
 		m_startLogo = NewGO<SpriteRender>(1);

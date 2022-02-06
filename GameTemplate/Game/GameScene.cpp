@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "Enemy.h"
-
 #include "HUD.h"
 #include "GoldGym.h"
 #include "NaviMesh.h"
@@ -93,26 +92,19 @@ namespace nsMuscle {
 			DeleteGO(go);
 			return true;
 			});
-		for (int i = 0; i < m_player.size(); i++)
+		for (int i = 0; i < PLAYER_MAX_NUM; i++)
 		{
 			DeleteGO(m_player[i]);
 		}
 		m_player.clear();
-		for (int i = 0; i < m_enemy.size(); i++)
-		{
-			DeleteGO(m_enemy[i]);
-		}
 		m_enemy.clear();
 		DeleteGO(m_hud);
-		DeleteGO(m_ssInGameBGM);
-		DeleteGO(m_ssZombieBGM);
-		DeleteGO(m_ssZombieVoice);
 	}
 	bool GameScene::Start()
 	{
 		m_hud = NewGO<HUD>(0, "hUD");
-
-		for (int i = 0; i < nsGameSceneConstant::MAX_PLAYER_NUM; i++)
+		m_hud->SetGameScene(*this);
+		for (int i = 0; i < PLAYER_MAX_NUM; i++)
 		{
 			m_player.push_back(NewGO<Player>(0, "player"));
 			m_player[i]->SetPlayerNum(i);
@@ -164,7 +156,7 @@ namespace nsMuscle {
 		{
 		case nsMuscle::GameScene::enGameStatus_Waiting:
 			//タイトルシーン
-			for (int i = 0; i < nsGameSceneConstant::MAX_PLAYER_NUM; i++)
+			for (int i = 0; i < PLAYER_MAX_NUM; i++)
 			{
 				m_player[i]->GetSkinModelRender()->SetShadowCasterFlag(false);
 			}
@@ -236,9 +228,11 @@ namespace nsMuscle {
 			}
 			m_player[m_nowWarNum]->SetMoveSpeed(Vector3::Zero);
 			break;
-		case nsMuscle::GameScene::enGameStatus_Clear:			
+		case nsMuscle::GameScene::enGameStatus_Clear:		
+			GameEnd(true);
 			break;
 		case nsMuscle::GameScene::enGameStatus_Lose:
+			GameEnd(false);
 			break;
 		default:
 			break;
@@ -657,7 +651,7 @@ namespace nsMuscle {
 		SetIsDeathPlayer(num);//プレイヤーが死んだことを伝える
 		DeleteGO(m_player[num]);//最後のデータを削除		
 		m_playerTotalNumber--;//プレイヤーの数を減らす
-		//for (int i = 0; i < nsGameSceneConstant::MAX_PLAYER_NUM ; i++)
+		//for (int i = 0; i < MAX_PLAYER_NUM ; i++)
 		//{
 		//	if (m_isDeathPlayer[i]==false)//死んでいないプレイヤーを探す
 		//	{
@@ -782,7 +776,7 @@ namespace nsMuscle {
 		if (m_isInGameBGMCreate == false&&IS_BGM)
 		{
 			m_isInGameBGMCreate = true;
-			m_ssInGameBGM = NewGO<SoundSource>(0);			
+			m_ssInGameBGM = NewGO<SoundSource>(0);
 			m_ssInGameBGM->Init(L"Assets/sound/BGM/InGameBGM.wav", enSE);
 			m_ssInGameBGM->SetVolume(nsGameSceneConstant::INGAME_BGM_VOL);
 		}
@@ -804,5 +798,23 @@ namespace nsMuscle {
 		m_enemy.clear();//敵のデータをリセットする
 		m_map->ClearEnemySprite();//マップの敵のデータをリセットする
 		m_enemyNum = 0;//
+	}
+	void GameScene::GameEnd(bool flag)
+	{
+		if (m_isGameEnd == true&& m_isResultCreate==false)//1フレーム遅れてからHUDクラスを消す
+		{
+			DeleteGO(m_hud);
+			ResultScene*resultScene=NewGO<ResultScene>(0, "resultScene");
+			resultScene->SetIsClear(flag);
+			m_isResultCreate = true;//何回もNewGOさせない
+		}
+		if (m_isGameEnd==false) {
+			PostEffectManager::GetInstance()->SetIsWipeRender(false);//どっちをfalseにしてもいい
+			GameObjectManager::GetInstance()->SetWipeScreenMode(false);//なんで2種類作ったのか
+			m_isGameEnd = true;
+			DeleteGO(m_ssInGameBGM);
+			DeleteGO(m_ssZombieBGM);
+			DeleteGO(m_ssZombieVoice);
+		}
 	}
 }

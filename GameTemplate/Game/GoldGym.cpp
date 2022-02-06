@@ -4,13 +4,11 @@
 #include "GameScene.h"
 #include "WipeCamera.h"
 #include "HUD.h"
-namespace nsMuscle {
-	
+namespace nsMuscle {	
 	GoldGym::~GoldGym()
 	{
 		DeleteGO(m_modelRender);
 	}
-
 	bool GoldGym::Start()
 	{
 		m_modelRender = NewGO<SkinModelRender>(0);
@@ -35,7 +33,6 @@ namespace nsMuscle {
 			GameScene*gameScene=FindGO<GameScene>("gameScene");
 			gameScene->SetIsBreakGym(m_goldGymSpawnNum);
 		}
-		
 		if (m_goldGymOldHP == m_goldGymHP)
 		{	
 			m_goldGymOldHP = m_goldGymHP;

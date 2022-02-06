@@ -8,15 +8,13 @@ namespace nsMuscle {
 	BackGround::~BackGround()
 	{
 		DeleteGO(m_sky);
-		DeleteGO(m_skinModelRender);
-		for (int i = 0; i < 4; i++){
-			DeleteGO(m_gymModelRender[i]);
-		}
+		DeleteGO(m_skinModelRender);		
 		DeleteGO(m_skinModelRenderBuilding);
 		DeleteGO(m_directionLight);
-		for (int i = 0; i < m_goldGym.size(); i++)
+		for (int i = 0; i < WIPE_MAX_NUM; i++)
 		{
 			DeleteGO(m_goldGym[i]);
+			DeleteGO(m_gymModelRender[i]);
 		}
 		m_goldGym.clear();
 		DeleteGO(m_wipeCamera);
@@ -49,7 +47,7 @@ namespace nsMuscle {
 		//ステージのモデルの静的物理モデルを作成
 		m_physicsStaticObject.CreateFromModel(m_skinModelRender->GetModel(), m_skinModelRender->GetModel().GetWorldMatrix());
 		m_physicsStaticObjectBuilding.CreateFromModel(m_skinModelRenderBuildingCollider->GetModel(), m_skinModelRenderBuildingCollider->GetModel().GetWorldMatrix());
-		//レベルを構築する。		
+		//レベルを構築する。
 		m_level3D.Init("Assets/levelData/level00.tkl", [&](LevelObjectData& objData) {
 			if (objData.EqualObjectName(L"GoldGym") == true) {
 				m_goldGym.push_back(NewGO<GoldGym>(0, "goldGym"));
@@ -125,5 +123,5 @@ namespace nsMuscle {
 				return;
 			}
 		}
-	}
+	}	
 }

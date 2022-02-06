@@ -28,7 +28,7 @@ struct ModelInitData {
 	Skeleton* m_skeleton = nullptr;									//スケルトン。
 	EnModelUpAxis m_modelUpAxis = enModelUpAxisZ;					//モデルの上方向。
 	DXGI_FORMAT m_colorBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;	//レンダリングするカラーバッファのフォーマット。
-	StructuredBuffer* m_muscleRateArraySB = nullptr;
+	StructuredBuffer* m_muscleRateArraySB = nullptr;				//筋肉量
 };
 
 /// <summary>
@@ -98,7 +98,6 @@ public:
 		return *m_tkmFile;
 	}
 private:
-
 	Matrix m_world;														//ワールド行列。
 	TkmFile* m_tkmFile;													//tkmファイル。
 	Skeleton m_skeleton;												//スケルトン。

@@ -135,6 +135,8 @@ public:
 	{
 		m_isWipeScreenMode = isFlag;
 	}
+	void SetIsEnd(bool flag) { m_isEnd = flag; }
+	bool GetIsEnd() { return m_isEnd; }
 private:
 	enum { GAME_OBJECT_PRIO_MAX = 255 };		//!<ゲームオブジェクトの優先度の最大値。
 	typedef std::list<IGameObject*>	 GameObjectList;
@@ -142,6 +144,7 @@ private:
 	static GameObjectManager* m_instance;		//唯一のインスタンスのアドレスを記録する変数。
 	RenderContext* m_rc = nullptr;
 	bool m_isWipeScreenMode = false;
+	bool m_isEnd = false;
 };
 
 

@@ -13,11 +13,11 @@ namespace nsMuscle {
 			DeleteGO(m_gymSprite[i]);
 		}
 		DeleteGO(m_playerSprite);
-		for (int i = 0; i < m_enemySprite.size(); i++)
+		/*for (int i = 0; i < m_enemySprite.size(); i++)
 		{
 			DeleteGO(m_enemySprite[i]);
 		}
-		m_enemySprite.clear();
+		m_enemySprite.clear();*/
 	}
 	bool Map::Start()
 	{

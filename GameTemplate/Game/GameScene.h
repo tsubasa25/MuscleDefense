@@ -1,15 +1,14 @@
 #pragma once
-#include "stdafx.h"
+
 #include <Camera/SpringCamera.h>
 #include "Player.h"
-
 #include "Path.h"
 #include "PathFinding.h"
 
 namespace nsMuscle {
 	namespace nsGameSceneConstant {
 		//const Vector3 BASE_POSITION = { 0.0f,0.0f,200.0f };
-		const int MAX_PLAYER_NUM = 4;
+		//const int MAX_PLAYER_NUM = 4;
 		const int WAVE_POP_NUM[4] = { 10,15,20,50 };
 		const int WAVEENEMY_POP_NUM[4] = { 20,30,40,50 };
 		const int ZOMBI_BGM_NUM = 4;
@@ -210,6 +209,8 @@ namespace nsMuscle {
 		void Delete() { DeleteGO(this); }
 
 		void EnemySpriteDataReset();
+
+		void GameEnd(bool flag);
 	private:
 		
 		HUD* m_hud = nullptr;//
@@ -230,7 +231,7 @@ namespace nsMuscle {
 		
 		Vector3 m_gymPlayerPos;//トレーニング中のプレイヤーのポジション
 
-		int m_playerTotalNumber = nsGameSceneConstant::MAX_PLAYER_NUM;
+		int m_playerTotalNumber = PLAYER_MAX_NUM;
 		int m_nowWarNum = 3;//現在戦っているプレイヤーの番号
 		int m_nextChangeNum = 0;//次交代するプレイヤーの番号
 		int m_trainingMemberNum = 3;//トレーニング中のプレイヤーの数
@@ -289,5 +290,8 @@ namespace nsMuscle {
 
 		SoundSource* m_ssTitleBGM = nullptr;
 		bool m_isTitleBGM = false;
+
+		bool m_isGameEnd = false;
+		bool m_isResultCreate = false;
 	};
 }

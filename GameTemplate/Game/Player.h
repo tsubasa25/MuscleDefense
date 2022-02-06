@@ -16,7 +16,7 @@ namespace nsMuscle {
 		const float PUNCHI_DAMAGE = 20.0f;
 		const float ARM_POSITION_Y = 60.0f;
 		const float ARM_POSITION_Z = 60.0f;
-		const float UPPER_BOX_SPEED = 15.0f;
+		const float UPPER_BOX_SPEED = 20.0f;
 		const float AMOUNT_TAKE_DAMAGE = 1.5f;
 		const float GRAVITY = 100.0f;
 		const float RUN_SPEED = 400.0f;
@@ -148,7 +148,7 @@ namespace nsMuscle {
 		void SetPosition(Vector3 pos)
 		{
 			m_position = pos;
-			m_charaCon.SetPosition(pos);
+			m_charaCon.SetPosition(pos);			
 		}
 		/// <summary>
 		/// プレイヤーの状態を取得
@@ -220,7 +220,11 @@ namespace nsMuscle {
 		/// <param name="oldLevel">前フレームの筋肉レベル</param>
 		void LevelManagement(float muscleScale,int &muscleLevel,int &oldLevel);
 
-		float GetAbdominalLevel() { return m_abdominalLevel; }
+		int GetAbdominalLevel() { return m_abdominalLevel; }
+
+		PlayerAnimation& GetPlayerAnimation() { return *m_playerAnimation; }
+
+		void SetPlayerRot(Quaternion rot) { m_playerRot = rot; }
 	private:
 		GameScene* m_gameScene = nullptr;
 		HUD* m_hud = nullptr;

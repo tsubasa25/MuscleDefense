@@ -23,6 +23,7 @@ namespace nsMuscle {
 
 		void MoveCamera();
 		void GameStart();
+		void SetIsReStart(bool flag) { m_isReStart = flag; }
 	private:
 		EnTitleStatus m_titleStatus = enStart;
 		Vector3 m_cameraPos = Vector3::Zero;
@@ -34,7 +35,7 @@ namespace nsMuscle {
 		SpriteRender* m_startLogo = nullptr;
 		BackGround* m_backGround = nullptr;
 
-		
+		bool m_isReStart = false;
 	
 	};
 }

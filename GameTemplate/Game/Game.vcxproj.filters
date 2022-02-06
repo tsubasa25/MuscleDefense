@@ -296,9 +296,6 @@
     <ClCompile Include="ResourceBankManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ProteinBeam.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -353,9 +350,6 @@
     <ClCompile Include="TestScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Minion.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -391,9 +385,6 @@
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\effect\EffectEngine.cpp">
       <Filter>ExEngine\effect</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyFindManager.cpp">
-      <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -753,9 +744,6 @@
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h">
       <Filter>ExEngine\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyFindManager.h">
-      <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

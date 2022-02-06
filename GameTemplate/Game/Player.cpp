@@ -84,11 +84,11 @@ namespace nsMuscle {
 	{
 		m_muscleRateArraySB.Update(m_muscleRateArray);//頂点モーフ用
 		m_loopCount++;
-		//int a = m_gameScene->GetEnGameStatus();
-		//if (a == GameScene::EnGameStatus::enGameStatus_Wave1
-		//	|| a == GameScene::EnGameStatus::enGameStatus_Wave2
-		//	|| a == GameScene::EnGameStatus::enGameStatus_Wave3)//戦闘状態の時
-		//{
+		int a = m_gameScene->GetEnGameStatus();
+		if (a == GameScene::EnGameStatus::enGameStatus_Wave1
+			|| a == GameScene::EnGameStatus::enGameStatus_Wave2
+			|| a == GameScene::EnGameStatus::enGameStatus_Wave3)//戦闘状態の時
+		{
 			if (m_playerStatus == EnPlayerStatus::enPlayerStatus_War)//戦闘状態の時
 			{
 				m_playerVoice->SetIsVoice(true);
@@ -116,11 +116,11 @@ namespace nsMuscle {
 					break;
 				}
 			}
-		/*}
+		}
 		else
-		{*/
+		{
 			m_playerVoice->SetIsVoice(false);
-		//}
+		}
 		PlayerDeath();
 	}
 void Player::PushUp()
